@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Single Article Page - HTML5 example">
+    <meta name="keywords" content="HTML5, CSS3, JavaScript, Article">
+
+    <title>Article</title>
+
+    <script src="xlu-include-file.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="wrapper">
+
+    <header id="main_header" xlu-include-file="header.html"></header>
+
+    <nav id="main_menu" xlu-include-file="nav.html"></nav>
+
+    <div id="wrapper2">
+        <section id="main_section">
+            <article id="article-container" xlu-include-file="article-template.html"></article>
+        </section>
+    </div>
+
+    <footer id="main_footer" xlu-include-file="footer.html"></footer>
+
+</div>
+
+<script>
+
+    function getQueryParams() {
+        let params = new URLSearchParams(window.location.search);
+        let queryData = {
+            title: params.get("title"),
+            subtitle: params.get("subtitle"),
+            date: params.get("date"),
+            displayDate: params.get("displayDate"),
+            content: params.get("content"),
+            image: params.get("image"),
+            imageCaption: params.get("imageCaption")
+        };
+
+        console.log("🔎 Parámetros obtenidos de la URL:", queryData);
+
+        return {
+            title: queryData.title ?? "No Title",
+            subtitle: queryData.subtitle ?? "No Subtitle",
+            date: queryData.date ?? "No Date",
+            displayDate: queryData.displayDate ?? "No Display Date",
+            content: queryData.content ?? "No content available",
+            image: queryData.image ?? "",
+            imageCaption: queryData.imageCaption ?? ""
+        };
+    }
+
+    function loadArticle() {
+        console.log("🔄 Intentando cargar el artículo...");
+
+        let articleElement = document.getElementById("article-container");
+
+        if (!articleElement) {
+            console.error("❌ No se encontró el contenedor del artículo.");
+            return;
+        }
+
+        let content = articleElement.innerHTML.trim();
+        console.log("🔍 Contenido inicial de article-container:", content);
+
+        if (!content.includes("{{title}}")) {
+            console.warn("⚠️ La plantilla no contiene placeholders. ");
+            return;
+        }
+
+        let articleData = getQueryParams();
+        console.log("📝 Datos obtenidos para reemplazo:", articleData);
+
+        console.log("✅ Plantilla cargada. Reemplazando datos...");
+        content = content
+            .replaceAll("{{title}}", articleData.title)
+            .replaceAll("{{subtitle}}", articleData.subtitle)
+            .replaceAll("{{date}}", articleData.date)
+            .replaceAll("{{displayDate}}", articleData.displayDate)
+            .replaceAll("{{content}}", articleData.content)
+            .replaceAll("{{image}}", articleData.image || "")
+            .replaceAll("{{imageCaption}}", articleData.imageCaption || "");
+
+        articleElement.innerHTML = content;
+    }
+
+    // Cargar includes y ejecutar `loadArticle()` después de que se haya completado
+    window.onload = function() {
+        console.log("🚀 Cargando includes...");
+        xLuIncludeFile();
+
+        setTimeout(() => {
+            let articleElement = document.getElementById("article-container");
+
+            if (articleElement && articleElement.innerHTML.trim() !== "") {
+                console.log("✅ Include cargado, inicializando artículo...");
+                loadArticle();
+            } else {
+                console.warn("⚠️ No se ha cargado `article-template.html` a tiempo.");
+            }
+        }, 500); // Tiempo de espera para asegurar que `xLuIncludeFile()` termine
+    };
+
+
+    /*
+    function getQueryParams() {
+        let params = new URLSearchParams(window.location.search);
+        let queryData = {
+            title: params.get("title"),
+            subtitle: params.get("subtitle"),
+            date: params.get("date"),
+            displayDate: params.get("displayDate"),
+            content: params.get("content"),
+            image: params.get("image"),
+            imageCaption: params.get("imageCaption")
+        };
+
+        console.log("🔎 Parámetros obtenidos de la URL:", queryData);
+
+        return {
+            title: queryData.title ?? "No Title",
+            subtitle: queryData.subtitle ?? "No Subtitle",
+            date: queryData.date ?? "No Date",
+            displayDate: queryData.displayDate ?? "No Display Date",
+            content: queryData.content ?? "No content available",
+            image: queryData.image ?? "",
+            imageCaption: queryData.imageCaption ?? ""
+        };
+    }
+
+    function loadArticle() {
+        console.log("🔄 Intentando cargar el artículo...");
+
+        let articleElement = document.getElementById("article-container");
+
+        if (!articleElement) {
+            console.error("❌ No se encontró el contenedor del artículo.");
+            return;
+        }
+
+        let articleData = getQueryParams();
+        console.log("📝 Datos obtenidos para reemplazo:", articleData);
+
+        // Esperar hasta que la plantilla tenga placeholders válidos antes de modificarla
+        let checkTemplateLoaded = setInterval(() => {
+            let content = articleElement.innerHTML.trim();
+            console.log("🔍 Contenido actual de article-container:", content);
+
+            // Si los placeholders NO han sido reemplazados aún, entonces hacemos la modificación
+            if (content.includes("{{title}}")) {
+                console.log("✅ Plantilla cargada. Reemplazando datos...");
+
+                content = content
+                    .replaceAll("{{title}}", articleData.title)
+                    .replaceAll("{{subtitle}}", articleData.subtitle)
+                    .replaceAll("{{date}}", articleData.date)
+                    .replaceAll("{{displayDate}}", articleData.displayDate)
+                    .replaceAll("{{content}}", articleData.content)
+                    .replaceAll("{{image}}", articleData.image || "")
+                    .replaceAll("{{imageCaption}}", articleData.imageCaption || "");
+
+                articleElement.innerHTML = content;
+                clearInterval(checkTemplateLoaded);
+            } else if (!content.includes("{{title}}") && content.includes("null")) {
+                console.warn("⚠️ La plantilla ya contiene valores `null`. ");
+            } else {
+                console.log("⏳ Esperando que article-template.html se cargue...");
+            }
+        }, 300);
+    }
+
+    // Cargar includes y esperar a que `article-template.html` se cargue antes de ejecutar `loadArticle()`
+    window.onload = function() {
+        console.log("🚀 Cargando includes...");
+        xLuIncludeFile();
+
+        let checkIncludeLoaded = setInterval(() => {
+            let articleElement = document.getElementById("article-container");
+
+            if (articleElement && articleElement.innerHTML.trim() !== "") {
+                console.log("✅ Include cargado, inicializando artículo...");
+                clearInterval(checkIncludeLoaded);
+                loadArticle();
+            } else {
+                console.log("⏳ Esperando que xLuIncludeFile.js termine...");
+            }
+        }, 300);
+    };
+    */
+
+
+</script>
+
+</body>
+</html>
