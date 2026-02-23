@@ -4,32 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="87d46232-cfcc-491c-8c5f-068451c8815f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Pract1-code.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/templates.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/color_theme.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/oo_mag_columns_bg.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/oo_mag_comment_bg.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/oo_mag_comment_icon.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/oo_mag_featurs_bg.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/oo_mag_footer.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/oo_mag_footerLft_bg.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/oo_mag_footerRt_bg.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/oo_mag_header.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/oo_mag_intHeader.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/oo_mag_main_nav.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/oo_mag_thisMonth_bg.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/oo_sample_sidebar2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index01.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index02.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index03.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index04.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/style01-basic.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/style02-layout.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/style03-images.css" beforeDir="false" />
+    <list default="true" id="87d46232-cfcc-491c-8c5f-068451c8815f" name="Changes" comment="Update.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,6 +45,7 @@
     "JavaScript Debug.article.html.executor": "Run",
     "JavaScript Debug.article1.html.executor": "Run",
     "JavaScript Debug.aside.html.executor": "Run",
+    "JavaScript Debug.index.html.executor": "Run",
     "JavaScript Debug.main.html.executor": "Run",
     "JavaScript Debug.nav.html.executor": "Run",
     "RunOnceActivity.CodyProjectSettingsMigration": "true",
@@ -129,9 +106,30 @@
       <workItem from="1740674509611" duration="230000" />
       <workItem from="1740682322240" duration="5349000" />
     </task>
+    <task id="LOCAL-00001" summary="Update.">
+      <option name="closed" value="true" />
+      <created>1771875230981</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1771875230981</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Update.">
+      <option name="closed" value="true" />
+      <created>1771875267161</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1771875267161</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Update." />
+    <option name="LAST_COMMIT_MESSAGE" value="Update." />
   </component>
 </project>
