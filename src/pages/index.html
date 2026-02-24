@@ -10,18 +10,127 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 
     <script src="../xlu-include-file.js"></script>
+
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+        body { color: #333; }
+
+        /* El wrapper va a pelo, sin límites, para que el header inyectado ocupe toda la pantalla */
+        #wrapper { width: 100%; }
+
+        /* Contenedor para que el resto del contenido no se estire al infinito en pantallas grandes */
+        .main-content { max-width: 1200px; margin: 0 auto; padding: 20px; }
+
+        .cross-box {
+            border: 1px solid #666;
+            background:
+                    linear-gradient(to bottom right, transparent calc(50% - 0.5px), #666 50%, transparent calc(50% + 0.5px)),
+                    linear-gradient(to top right, transparent calc(50% - 0.5px), #666 50%, transparent calc(50% + 0.5px));
+        }
+
+        .search-row { display: flex; justify-content: flex-end; gap: 10px; margin: 20px 0; }
+        .search-row input { width: 300px; border: 1px solid #666; padding: 5px; }
+        .search-row button { border: 1px solid #666; padding: 5px 20px; background: #e0e0e0; cursor: pointer; font-size: 16px; }
+
+        /* Contenido Superior (Sidebar + Hero) */
+        .top-section { display: flex; gap: 20px; margin-bottom: 20px; }
+
+        /* Barra lateral de acceso rápido */
+        .sidebar { width: 250px; display: flex; flex-direction: column; }
+        .sidebar a {
+            border: 1px solid #666;
+            padding: 10px;
+            margin-top: -1px;
+            font-size: 14px;
+            text-decoration: none;
+            color: #333;
+            background-color: #fff;
+            transition: background 0.2s;
+        }
+        .sidebar a:hover {
+            background-color: #e0e0e0;
+        }
+
+        .hero { flex-grow: 1; height: 250px; }
+
+        .middle-banner { border: 1px solid #666; padding: 30px; text-align: center; margin-bottom: 20px; font-size: 14px; }
+
+        .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 20px; }
+        .card { border: 1px solid #666; padding: 15px; display: flex; gap: 15px; }
+        .card-left { display: flex; flex-direction: column; gap: 10px; width: 100px; }
+        .card-left .cross-box { width: 100%; height: 80px; }
+        .card-left button { border: 1px solid #666; padding: 5px; background: #e0e0e0; cursor: pointer; font-size: 16px; }
+        .card-right { flex-grow: 1; display: flex; flex-direction: column; gap: 10px; }
+        .card-right h3 { font-size: 18px; font-weight: normal; }
+        .card-right h4 { font-size: 14px; font-weight: normal; }
+        .card-right p { font-size: 12px; color: #555; line-height: 1.4; }
+
+        footer { border-top: 1px solid #ccc; padding-top: 20px; display: flex; gap: 300px; align-items: center; margin-top: 40px; }
+        .footer-logo { width: 150px; height: 80px; }
+        .footer-links { display: flex; flex-direction: column; gap: 5px; font-size: 14px; text-align: center;}
+    </style>
 </head>
 <body>
+
 <div id="wrapper">
-    <header id="main_header" xlu-include-file="../templates/header.html">
-    </header>
+    <header id="main_header" xlu-include-file="../templates/header.html"></header>
+
+    <main class="main-content">
+        <div class="search-row">
+            <input type="text" placeholder="Buscar productos...">
+            <button>Buscar</button>
+        </div>
+
+        <div class="top-section">
+            <aside class="sidebar">
+                <a href="#jardineria">Jardinería</a>
+                <a href="#carpinteria">Carpintería</a>
+                <a href="#fontaneria">Fontanería</a>
+                <a href="#albanileria">Albañilería</a>
+                <a href="#electricidad">Electricidad</a>
+                <a href="#tornilleria">Tornillería</a>
+                <a href="#cerrajeria">Cerrajería</a>
+            </aside>
+            <div class="cross-box hero"></div>
+        </div>
+
+        <div class="middle-banner">lorem ipsum</div>
+
+        <div class="cards-grid">
+            <script>
+                for(let i=0; i<9; i++) {
+                    document.write(`
+                    <div class="card">
+                        <div class="card-left">
+                            <div class="cross-box"></div>
+                            <button>button</button>
+                        </div>
+                        <div class="card-right">
+                            <h3>lorem ipsum</h3>
+                            <h4>lorem ipsum</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor in</p>
+                        </div>
+                    </div>
+                    `);
+                }
+            </script>
+        </div>
+
+        <footer>
+            <div class="cross-box footer-logo"></div>
+            <div class="footer-links">
+                <span>lorem ipsum</span>
+                <span>lorem ipsum</span>
+                <span>lorem ipsum</span>
+                <span>lorem ipsum</span>
+            </div>
+        </footer>
+    </main>
 </div>
 
 <script>
     xLuIncludeFile();
 </script>
 
-
 </body>
 </html>
-
