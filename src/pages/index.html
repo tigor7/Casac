@@ -2,123 +2,67 @@
 <html lang="es">
 <head>
     <meta charset="utf-8">
-    <meta name="description" content="This is an HTML5 example">
-    <meta name="keywords" content="HTML5, CSS3, JavaScript">
-    <title>Casac ferretería</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <title>Inicio - CASAC</title>
+
+    <link rel="stylesheet" href="../styles/styles.css">
+    <link rel="stylesheet" href="../styles/index.css">
 
     <script src="../xlu-include-file.js"></script>
-
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
-        body { color: #333; }
-
-        #wrapper { width: 100%; }
-
-        .main-content { max-width: 1200px; margin: 0 auto; padding: 20px; }
-
-        .cross-box {
-            border: 1px solid #666;
-            background:
-                    linear-gradient(to bottom right, transparent calc(50% - 0.5px), #666 50%, transparent calc(50% + 0.5px)),
-                    linear-gradient(to top right, transparent calc(50% - 0.5px), #666 50%, transparent calc(50% + 0.5px));
-        }
-
-        .search-row { display: flex; justify-content: flex-end; gap: 10px; margin: 20px 0; }
-        .search-row input { width: 300px; border: 1px solid #666; padding: 5px; }
-        .search-row button { border: 1px solid #666; padding: 5px 20px; background: #e0e0e0; cursor: pointer; font-size: 16px; }
-
-        .top-section { display: flex; gap: 20px; margin-bottom: 20px; }
-
-        .sidebar { width: 250px; display: flex; flex-direction: column; }
-        .sidebar a {
-            border: 1px solid #666;
-            padding: 10px;
-            margin-top: -1px;
-            font-size: 14px;
-            text-decoration: none;
-            color: #333;
-            background-color: #fff;
-            transition: background 0.2s;
-        }
-        .sidebar a:hover {
-            background-color: #e0e0e0;
-        }
-
-        /* Ajuste para la imagen en el hero */
-        .hero { flex-grow: 1; height: 250px; border: 1px solid #666; overflow: hidden; }
-        .hero img { width: 100%; height: 100%; object-fit: cover; }
-
-        .middle-banner { border: 1px solid #666; padding: 30px; text-align: center; margin-bottom: 20px; font-size: 14px; }
-
-        .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 20px; }
-        .card { border: 1px solid #666; padding: 15px; display: flex; gap: 15px; }
-        .card-left { display: flex; flex-direction: column; gap: 10px; width: 100px; }
-        .card-left .cross-box { width: 100%; height: 80px; }
-        .card-left button { border: 1px solid #666; padding: 5px; background: #e0e0e0; cursor: pointer; font-size: 16px; }
-        .card-right { flex-grow: 1; display: flex; flex-direction: column; gap: 10px; }
-        .card-right h3 { font-size: 18px; font-weight: normal; }
-        .card-right h4 { font-size: 14px; font-weight: normal; }
-        .card-right p { font-size: 12px; color: #555; line-height: 1.4; }
-
-    </style>
 </head>
 <body>
 
-<div id="wrapper">
-    <header id="main_header" xlu-include-file="../templates/header.html"></header>
+<header xlu-include-file="../templates/header.html"></header>
 
-    <main class="main-content">
-        <div class="search-row">
-            <input type="text" placeholder="Buscar productos...">
-            <button>Buscar</button>
+<main class="main-content">
+    <div class="search-row">
+        <input type="text" placeholder="Buscar productos...">
+        <button>Buscar</button>
+    </div>
+
+    <div class="top-section">
+        <aside class="sidebar">
+            <a href="#jardineria">Jardinería</a>
+            <a href="#carpinteria">Carpintería</a>
+            <a href="#fontaneria">Fontanería</a>
+            <a href="#albanileria">Albañilería</a>
+            <a href="#electricidad">Electricidad</a>
+            <a href="#tornilleria">Tornillería</a>
+            <a href="#cerrajeria">Cerrajería</a>
+        </aside>
+        <div class="hero">
+            <img src="../../img/imgHome.jpg" alt="Ferretería">
         </div>
+    </div>
 
-        <div class="top-section">
-            <aside class="sidebar">
-                <a href="#jardineria">Jardinería</a>
-                <a href="#carpinteria">Carpintería</a>
-                <a href="#fontaneria">Fontanería</a>
-                <a href="#albanileria">Albañilería</a>
-                <a href="#electricidad">Electricidad</a>
-                <a href="#tornilleria">Tornillería</a>
-                <a href="#cerrajeria">Cerrajería</a>
-            </aside>
-            <div class="hero">
-                <img src="../../img/imgHome.jpg" alt="Electricista trabajando">
-            </div>
-        </div>
+    <div class="cards-grid" id="grid-productos"></div>
+</main>
 
-        <div class="middle-banner">lorem ipsum</div>
-
-        <div class="cards-grid">
-            <script>
-                for(let i=0; i<9; i++) {
-                    document.write(`
-                    <div class="card">
-                        <div class="card-left">
-                            <div class="cross-box"></div>
-                            <button>button</button>
-                        </div>
-                        <div class="card-right">
-                            <h3>lorem ipsum</h3>
-                            <h4>lorem ipsum</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor in</p>
-                        </div>
-                    </div>
-                    `);
-                }
-            </script>
-        </div>
-    </main>
-
-    <footer id="main_footer" xlu-include-file="../templates/footer.html"></footer>
-</div>
+<footer xlu-include-file="../templates/footer.html"></footer>
 
 <script>
+    // Inyectamos Header y Footer
     xLuIncludeFile();
+
+    // Creamos los 9 productos
+    const grid = document.getElementById('grid-productos');
+    let tarjetasHTML = '';
+    for(let i=0; i<9; i++) {
+        tarjetasHTML += `
+            <div class="card">
+                <div class="card-img">
+                    <span style="font-size: 12px; color: #aaa;">Foto</span>
+                </div>
+                <div class="card-info">
+                    <div>
+                        <h3>Producto ${i+1}</h3>
+                        <p>Descripción minimalista y elegante.</p>
+                    </div>
+                    <button>Añadir al carro</button>
+                </div>
+            </div>
+            `;
+    }
+    grid.innerHTML = tarjetasHTML;
 </script>
 
 </body>

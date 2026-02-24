@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Producto - CASAC</title>
+
+    <link rel="stylesheet" href="../styles/styles.css" />
+    <link rel="stylesheet" href="../styles/product.css" />
+
+    <script src="../xlu-include-file.js"></script>
+</head>
+<body>
+
+<header xlu-include-file="../templates/header.html"></header>
+
+<main class="main-content product-center-layout">
+    <div class="product-card">
+        <div class="img-box">
+            <img src="../../img/tornillo.png" alt="Tornillo">
+        </div>
+
+        <div class="info">
+            <h1>Tornillos</h1>
+            <p class="subtitle">Tornillo Philips</p>
+
+            <div class="buy-row">
+                <div class="pack">Caja 100 uds.</div>
+
+                <div class="qty">
+                    <button type="button" class="qty-btn">-</button>
+                    <span class="qty-num">1</span>
+                    <button type="button" class="qty-btn">+</button>
+                </div>
+            </div>
+
+            <button class="add-btn" type="button">
+                Agregrar al carrito
+            </button>
+        </div>
+    </div>
+</main>
+
+<footer xlu-include-file="../templates/footer.html"></footer>
+
+<script>
+    xLuIncludeFile();
+</script>
+
+</body>
+</html>

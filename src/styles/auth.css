@@ -1,0 +1,210 @@
+/* styles/auth.css */
+
+/* Eliminamos cualquier margen del body para el Full Screen */
+body {
+    margin: 0;
+    overflow: hidden;
+}
+
+.frame {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+/* --- LADO IZQUIERDO (FORMULARIO) MÁS GRANDE --- */
+.left {
+    flex: 1.2;
+    display: flex;
+    flex-direction: column; /* Asegura que el contenido se apile verticalmente */
+    align-items: center;
+    justify-content: center; /* Esto debería centrarlo, pero vamos a darle un empujón */
+    padding: 80px;
+    height: 100%;
+}
+
+/* Modifica la clase .login para que sea un bloque estable */
+.login {
+    width: 100%;
+    max-width: 650px;
+    text-align: center;
+    /* Añadimos un display flex interno para forzar el equilibrio */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 600px; /* Al darle una altura mínima fija a ambas, el centro será el mismo */
+}
+
+/* Ajuste fino para el H1 */
+.login h1 {
+    font-size: 84px;
+    font-weight: 900;
+    letter-spacing: -5px;
+    margin-top: 0; /* Quitamos cualquier margen superior que pueda mover el bloque */
+    margin-bottom: 50px;
+    color: #111;
+}
+
+/* Inputs más grandes y espaciosos */
+.login input {
+    width: 100%;
+    padding: 24px 30px; /* Más padding para que se vean XL */
+    margin-bottom: 20px;
+    border: 2px solid #f0f0f0;
+    border-radius: 14px;
+    font-size: 18px; /* Texto más grande dentro del input */
+    outline: none;
+    transition: all 0.2s;
+    background-color: #fafafa;
+}
+
+.login input:focus {
+    border-color: #EDC421;
+    background-color: #fff;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.02);
+}
+
+/* Fila Usuario/Teléfono */
+.row {
+    display: flex;
+    gap: 20px;
+}
+
+.row .half {
+    width: 50%;
+}
+
+/* Botón CREAR XL */
+.login-btn {
+    width: 100%;
+    padding: 24px;
+    background: #EDC421;
+    border: none;
+    border-radius: 14px;
+    font-weight: 800;
+    font-size: 20px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: transform 0.1s, background 0.2s;
+}
+
+.login-btn:hover { background: #dcb31c; }
+.login-btn:active { transform: translateY(2px); }
+
+/* Enlace inferior */
+.forgot {
+    display: inline-block;
+    margin-top: 40px;
+    font-size: 17px;
+    color: #888;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.forgot:hover { color: #111; text-decoration: underline; }
+
+/* --- LADO DERECHO (IMAGEN) --- */
+.right {
+    flex: 1; /* La imagen ahora ocupa un poco menos de espacio que el formulario */
+    height: 100%;
+}
+
+.right img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Responsive para que no se rompa en pantallas pequeñas */
+@media (max-width: 1100px) {
+    .right { display: none; }
+    .left { flex: 1; padding: 40px; }
+}
+
+/* --- ESTILOS ESPECÍFICOS PARA SIGN-IN (Añadir al final de auth.css) --- */
+
+/* Divisor "o" */
+.divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 30px 0;
+    gap: 15px;
+}
+
+.line {
+    flex: 1;
+    height: 1px;
+    background-color: #eee;
+}
+
+.or {
+    color: #aaa;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Botón de Google Minimalista */
+.google-btn {
+    width: 100%;
+    padding: 18px;
+    background: #fff;
+    border: 2px solid #eee;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 16px;
+    color: #444;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    transition: all 0.2s;
+}
+
+.google-btn:hover {
+    background: #fcfcfc;
+    border-color: #ddd;
+}
+
+.g-icon {
+    font-weight: 900;
+    color: #4285F4; /* Azul Google */
+}
+
+/* Footer del login */
+.footer-auth {
+    margin-top: 40px;
+}
+
+.small {
+    color: #888;
+    margin-bottom: 5px;
+    font-size: 15px;
+}
+
+.create {
+    color: #111;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 16px;
+}
+
+.create:hover {
+    text-decoration: underline;
+}
+
+/* Ajuste de márgenes para que la posición sea idéntica a los registros */
+.login .forgot {
+    margin-top: 15px;
+}
