@@ -15,10 +15,8 @@
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
         body { color: #333; }
 
-        /* El wrapper va a pelo, sin límites, para que el header inyectado ocupe toda la pantalla */
         #wrapper { width: 100%; }
 
-        /* Contenedor para que el resto del contenido no se estire al infinito en pantallas grandes */
         .main-content { max-width: 1200px; margin: 0 auto; padding: 20px; }
 
         .cross-box {
@@ -32,10 +30,8 @@
         .search-row input { width: 300px; border: 1px solid #666; padding: 5px; }
         .search-row button { border: 1px solid #666; padding: 5px 20px; background: #e0e0e0; cursor: pointer; font-size: 16px; }
 
-        /* Contenido Superior (Sidebar + Hero) */
         .top-section { display: flex; gap: 20px; margin-bottom: 20px; }
 
-        /* Barra lateral de acceso rápido */
         .sidebar { width: 250px; display: flex; flex-direction: column; }
         .sidebar a {
             border: 1px solid #666;
@@ -51,7 +47,9 @@
             background-color: #e0e0e0;
         }
 
-        .hero { flex-grow: 1; height: 250px; }
+        /* Ajuste para la imagen en el hero */
+        .hero { flex-grow: 1; height: 250px; border: 1px solid #666; overflow: hidden; }
+        .hero img { width: 100%; height: 100%; object-fit: cover; }
 
         .middle-banner { border: 1px solid #666; padding: 30px; text-align: center; margin-bottom: 20px; font-size: 14px; }
 
@@ -91,7 +89,9 @@
                 <a href="#tornilleria">Tornillería</a>
                 <a href="#cerrajeria">Cerrajería</a>
             </aside>
-            <div class="cross-box hero"></div>
+            <div class="hero">
+                <img src="../../img/imgHome.jpg" alt="Electricista trabajando">
+            </div>
         </div>
 
         <div class="middle-banner">lorem ipsum</div>
