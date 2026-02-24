@@ -5,31 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="87d46232-cfcc-491c-8c5f-068451c8815f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Pract1-code.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/templates.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/color_theme.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/oo_mag_columns_bg.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/oo_mag_comment_bg.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/oo_mag_comment_icon.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/oo_mag_featurs_bg.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/oo_mag_footer.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/oo_mag_footerLft_bg.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/oo_mag_footerRt_bg.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/oo_mag_header.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/oo_mag_intHeader.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/oo_mag_main_nav.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/oo_mag_thisMonth_bg.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/oo_sample_sidebar2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index01.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index02.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index03.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index04.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/style01-basic.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/style02-layout.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/style03-images.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,6 +22,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -62,31 +39,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "JavaScript Debug.article-template.html.executor": "Run",
-    "JavaScript Debug.article.html.executor": "Run",
-    "JavaScript Debug.article1.html.executor": "Run",
-    "JavaScript Debug.aside.html.executor": "Run",
-    "JavaScript Debug.main.html.executor": "Run",
-    "JavaScript Debug.nav.html.executor": "Run",
-    "RunOnceActivity.CodyProjectSettingsMigration": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "master",
-    "javascript.preferred.runtime.type.id": "node",
-    "last_opened_file_path": "/Users/Luis/Documents/Web-EII/example_templates_HTML5/.idea",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;JavaScript Debug.article-template.html.executor&quot;: &quot;Run&quot;,
+    &quot;JavaScript Debug.article.html.executor&quot;: &quot;Run&quot;,
+    &quot;JavaScript Debug.article1.html.executor&quot;: &quot;Run&quot;,
+    &quot;JavaScript Debug.aside.html.executor&quot;: &quot;Run&quot;,
+    &quot;JavaScript Debug.home.html.executor&quot;: &quot;Run&quot;,
+    &quot;JavaScript Debug.index.html.executor&quot;: &quot;Run&quot;,
+    &quot;JavaScript Debug.main.html.executor&quot;: &quot;Run&quot;,
+    &quot;JavaScript Debug.nav.html.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.CodyProjectSettingsMigration&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;javascript.preferred.runtime.type.id&quot;: &quot;node&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/Luis/Documents/Web-EII/example_templates_HTML5/.idea&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/.idea" />
