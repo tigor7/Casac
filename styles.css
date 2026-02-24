@@ -250,3 +250,120 @@ body{
 }
 
 /*--------------------------------------------------Fin crear cuenta--------------------------------------------------*/
+/*--------------------------------------------------Producto--------------------------------------------------*/
+
+body{
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #efefef;
+}
+
+/* Si usas iframe */
+.header-frame{
+    width: 100%;
+    height: 70px;
+    border: 0;
+    display: block;
+}
+
+/* Contenido principal */
+.page{
+    padding: 22px;
+}
+
+/* “tarjeta” blanca donde va todo */
+.card{
+    background: white;
+    border-radius: 6px;
+    padding: 20px;
+    display: flex;
+    gap: 40px;
+    align-items: center;
+}
+
+/* Caja de imagen */
+.img-box{
+    width: 360px;
+    height: 330px;
+    border: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+}
+
+.img-box img{
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* Info */
+.info{
+    flex: 1;
+    text-align: center;
+}
+
+.info h1{
+    margin: 0;
+    font-size: 28px;
+}
+
+.subtitle{
+    margin-top: 10px;
+    color: #222;
+}
+
+/* fila 100cts + cantidad */
+.buy-row{
+    margin-top: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.pack{
+    font-weight: bold;
+}
+
+/* selector cantidad */
+.qty{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 6px 10px;
+}
+
+.qty-btn{
+    width: 28px;
+    height: 24px;
+    cursor: pointer;
+    border: 1px solid #aaa;
+    background: white;
+    border-radius: 4px;
+}
+
+.qty-num{
+    font-weight: bold;
+}
+
+/* botón carrito */
+.add-btn{
+    margin-top: 10px;
+    width: 100%;
+    max-width: 420px;
+    height: 44px;
+    border: 2px solid #111;
+    border-radius: 4px;
+    background: #f0c52a;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.bag{
+    margin-right: 10px;
+}
+/*--------------------------------------------------Fin Producto--------------------------------------------------*/
