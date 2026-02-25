@@ -2,10 +2,12 @@
 <html lang="es">
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio - CASAC</title>
 
     <link rel="stylesheet" href="../styles/styles.css">
     <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/shop.css">
 
     <script src="../xlu-include-file.js"></script>
 </head>
@@ -15,8 +17,8 @@
 
 <main class="main-content">
     <div class="search-row">
-        <input type="text" placeholder="Buscar productos...">
-        <button>Buscar</button>
+        <input type="text" placeholder="Buscar en la ferretería...">
+        <button>BUSCAR</button>
     </div>
 
     <div class="top-section">
@@ -30,39 +32,27 @@
             <a href="#cerrajeria">Cerrajería</a>
         </aside>
         <div class="hero">
-            <img src="../../img/imgHome.jpg" alt="Ferretería">
+            <img src="../../img/imgHome.jpg" alt="Ferretería CASAC">
         </div>
     </div>
 
-    <div class="cards-grid" id="grid-productos"></div>
+    <h2 class="section-title">Productos más destacados</h2>
+
+    <div class="cards-grid" id="grid-productos">
+        <div xlu-include-file="../templates/article-template.html"></div>
+        <div xlu-include-file="../templates/article-template.html"></div>
+        <div xlu-include-file="../templates/article-template.html"></div>
+        <div xlu-include-file="../templates/article-template.html"></div>
+        <div xlu-include-file="../templates/article-template.html"></div>
+        <div xlu-include-file="../templates/article-template.html"></div>
+    </div>
 </main>
 
 <footer xlu-include-file="../templates/footer.html"></footer>
 
 <script>
-    // Inyectamos Header y Footer
+    // Inyectamos todos los fragmentos (Header, Footer y los 6 Artículos)
     xLuIncludeFile();
-
-    // Creamos los 9 productos
-    const grid = document.getElementById('grid-productos');
-    let tarjetasHTML = '';
-    for(let i=0; i<9; i++) {
-        tarjetasHTML += `
-            <div class="card">
-                <div class="card-img">
-                    <span style="font-size: 12px; color: #aaa;">Foto</span>
-                </div>
-                <div class="card-info">
-                    <div>
-                        <h3>Producto ${i+1}</h3>
-                        <p>Descripción minimalista y elegante.</p>
-                    </div>
-                    <button>Añadir al carro</button>
-                </div>
-            </div>
-            `;
-    }
-    grid.innerHTML = tarjetasHTML;
 </script>
 
 </body>

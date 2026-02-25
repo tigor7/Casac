@@ -1,0 +1,71 @@
+.shop-layout {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    padding: 60px 40px;
+}
+
+.shop-container-xl {
+    width: 100%;
+    max-width: 1500px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+/* Buscador estilo Shop.png */
+.shop-search-bar {
+    display: flex;
+    max-width: 800px;
+    margin: 0 auto 20px;
+    width: 100%;
+}
+
+.shop-search-bar input {
+    flex: 1;
+    padding: 15px 20px;
+    border: 2px solid #eee;
+    border-radius: 10px 0 0 10px;
+    outline: none;
+}
+
+.shop-search-bar button {
+    padding: 0 30px;
+    background: #111;
+    color: #fff;
+    border: none;
+    border-radius: 0 10px 10px 0;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+/* El Grid de 4 que soluciona tu error visual */
+.products-grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+}
+
+/* Estilo del Artículo Inyectado */
+.shop-card {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.2s;
+}
+
+.shop-card:hover { transform: translateY(-5px); }
+
+.shop-card-img {
+    aspect-ratio: 1/1;
+    background: #fafafa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.shop-card-info { padding: 20px; }
+.shop-desc { font-size: 14px; color: #555; margin-bottom: 10px; height: 40px; }
+.shop-price { font-size: 22px; font-weight: 900; display: block; margin-bottom: 15px; }
+.add-btn { width: 100%; padding: 10px; background: #EDC421; border: none; border-radius: 6px; font-weight: 700; cursor: pointer; }
