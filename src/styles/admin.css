@@ -123,92 +123,141 @@
 /* --- EDITOR DE PRODUCTO (AdminProduct.png) --- */
 .admin-editor-layout {
     display: grid;
-    grid-template-columns: 1fr 1.2fr;
+    grid-template-columns: 1fr 1fr; /* Mitad y mitad exactas */
     gap: 60px;
     background: #fff;
-    padding: 50px;
-    border: 1px solid #111;
-    border-radius: 4px;
+    padding: 60px;
+    border-radius: 24px;
+    box-shadow: 0 15px 50px rgba(0,0,0,0.03);
+    align-items: start; /* Alinea el inicio de ambas columnas arriba */
+}
+
+/* Columna Izquierda: Imagen centrada */
+.editor-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra el contenido horizontalmente */
+    justify-content: center;
+}
+
+.image-upload-container {
+    width: 100%;
+    max-width: 450px; /* Tamaño controlado para que no se desmadre */
+    text-align: center;
 }
 
 .upload-placeholder {
     width: 100%;
-    aspect-ratio: 4 / 3;
-    border: 1px solid #111;
-    background: #fdfdfd;
-    position: relative;
-    margin-bottom: 20px;
+    aspect-ratio: 1 / 1;
+    background: #fafafa;
+    border: 2px dashed #ddd;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+    font-size: 50px;
+    color: #ccc;
+    transition: 0.3s;
 }
 
-/* Dibujo de la "X" del mockup */
-.upload-placeholder::before, .upload-placeholder::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 1px;
-    background: #333;
-    top: 50%;
-    left: 0;
-}
-.upload-placeholder::before { transform: rotate(33deg); }
-.upload-placeholder::after { transform: rotate(-33deg); }
-
+/* Columna Derecha: Formulario centrado */
 .editor-right {
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 30px;
 }
 
+/* Alineación de Inputs con sus botones al lado */
 .input-inline {
     display: flex;
+    align-items: center; /* Centra verticalmente el input con el botón */
     gap: 15px;
 }
 
-.full-input, .editor-textarea {
-    width: 100%;
-    padding: 15px;
-    border: 1px solid #111;
-    font-family: inherit;
+.full-input {
+    flex: 1; /* El input ocupa el máximo espacio posible */
+    padding: 18px 25px;
+    border: 2px solid #f5f5f5;
+    background: #fafafa;
+    border-radius: 12px;
     font-size: 16px;
+    outline: none;
+}
+
+.btn-mini {
+    height: 55px; /* Altura igualada al input para que no baile */
+    padding: 0 25px;
+    background: #111;
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap; /* Evita que el texto del botón se parta */
 }
 
 .editor-textarea {
-    height: 180px;
+    width: 100%;
+    height: 150px;
+    padding: 20px;
+    border: 2px solid #f5f5f5;
+    background: #fafafa;
+    border-radius: 12px;
     resize: none;
+    font-family: inherit;
+    outline: none;
 }
 
+/* Fila de Stats: Precio y Descuento */
 .editor-stats-row {
-    display: flex;
-    gap: 30px;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Dos columnas iguales */
+    gap: 20px;
 }
 
 .stat-item {
     display: flex;
-    align-items: center;
-    gap: 15px;
-    border: 1px solid #111;
-    padding: 10px 20px;
-    flex: 1;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: 10px;
 }
 
+.stat-item .inner-input {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.stat-item input {
+    flex: 1;
+    padding: 15px;
+    border: 2px solid #f5f5f5;
+    background: #fafafa;
+    border-radius: 10px;
+    font-weight: 800;
+    text-align: center;
+}
+
+/* Botón Guardar principal */
 .main-admin-save {
     width: 100%;
-    padding: 20px;
-    background: #eee;
-    border: 1px solid #111;
+    padding: 22px;
+    background: #EDC421;
+    color: #111;
+    border: none;
+    border-radius: 15px;
     font-weight: 900;
     font-size: 18px;
     cursor: pointer;
-    text-transform: uppercase;
     transition: 0.2s;
+    margin-top: 10px;
 }
 
 .main-admin-save:hover {
     background: #111;
-    color: #fff;
+    color: #EDC421;
+    transform: translateY(-3px);
 }
-
 /* --- GESTIÓN DE PEDIDOS ADMIN (Orders.png) --- */
 .admin-orders-grid {
     margin-top: 40px;
