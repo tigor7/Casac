@@ -1,32 +1,34 @@
 <div class="admin-editor-layout">
     <div class="editor-left">
         <div class="image-upload-container">
-            <div class="upload-placeholder">
-                <span class="cross-line"></span>
-            </div>
-            <button class="btn-mini">Subir imagen</button>
+            <div class="upload-placeholder">＋</div>
+            <button class="btn-mini">Subir Imagen</button>
         </div>
     </div>
 
     <div class="editor-right">
         <div class="input-inline">
-            <input type="text" placeholder="lorem ipsum (Título)" class="full-input">
-            <button class="btn-mini">button</button>
+            <input type="text" placeholder="Título del producto" class="full-input">
+            <button class="btn-mini">Editar</button>
         </div>
 
-        <textarea placeholder="lorem ipsum (Descripción larga del producto...)" class="editor-textarea"></textarea>
+        <textarea placeholder="Descripción del producto..." class="editor-textarea"></textarea>
 
         <div class="editor-stats-row">
             <div class="stat-item">
-                <span>0,00</span>
-                <button class="btn-mini">Precio</button>
+                <div class="inner-input">
+                    <input type="text" value="0.00€">
+                    <button class="btn-mini">Precio</button>
+                </div>
             </div>
             <div class="stat-item">
-                <span>0%</span>
-                <button class="btn-mini">Descuento</button>
+                <div class="inner-input">
+                    <input type="text" value="0%">
+                    <button class="btn-mini">Descuento</button>
+                </div>
             </div>
         </div>
 
-        <button class="main-admin-save">GUARDAR CAMBIOS</button>
+        <button class="main-admin-save">GUARDAR PRODUCTO</button>
     </div>
 </div>
