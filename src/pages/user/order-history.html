@@ -1,44 +1,34 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Mis Pedidos - CASAC</title>
-  <link rel="stylesheet" href="../../styles/styles.css">
-  <link rel="stylesheet" href="../../styles/user/profile.css">
-  <link rel="stylesheet" href="../../styles/user/order-history.css">
-  <script src="../../xlu-include-file.js"></script>
+    <meta charset="UTF-8">
+    <title>Mis Pedidos - CASAC</title>
+    <link rel="stylesheet" href="../../styles/styles.css">
+    <link rel="stylesheet" href="../../styles/user/profile.css">
+    <link rel="stylesheet" href="../../styles/user/order-history.css">
+    <script src="../../xlu-include-file.js"></script>
 </head>
 <body>
 <header xlu-include-file="../../templates/user/header.html"></header>
 
 <main class="main-content profile-layout">
-  <div class="profile-container-xl">
-    <aside class="profile-sidebar">
-      <nav class="profile-nav">
-        <a href="profile.html">Información Personal</a>
-        <a href="security.html">Seguridad</a>
-        <a href="order-history.html" class="active">Mis Pedidos</a>
-        <a href="addresses.html">Direcciones</a>
-      </nav>
-    </aside>
-    <section class="profile-main-content">
-      <h1 class="history-title">Mis Compras</h1>
-      <div class="user-orders-list">
-        <div class="user-order-card">
-          <div class="u-order-header">
-            <div class="u-info"><span>PEDIDO #CAS-2290</span><strong>24 Feb, 2026</strong></div>
-            <div class="u-status-badge shipping">En camino</div>
-          </div>
-          <div class="u-order-body">
-            <div class="u-items-preview">
-              <img src="../../../img/tornillo.png" alt="Producto">
-              <div class="u-item-text"><p>Tornillería Pro + 2 artículos más</p><span class="u-total">Total: 34,20€</span></div>
+    <div class="profile-container-xl">
+        <aside class="profile-sidebar">
+            <nav class="profile-nav">
+                <a href="profile.html">Información Personal</a>
+                <a href="security.html">Seguridad</a>
+                <a href="order-history.html" class="active">Mis Pedidos</a>
+                <a href="addresses.html">Direcciones</a>
+            </nav>
+        </aside>
+
+        <section class="profile-main-content">
+            <h1 class="history-title">Mis Compras</h1>
+            <div class="user-orders-list">
+                <div xlu-include-file="../../templates/user/order-history-item.html"></div>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
+        </section>
+    </div>
 </main>
 
 <footer xlu-include-file="../../templates/user/footer.html"></footer>
