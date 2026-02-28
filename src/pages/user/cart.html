@@ -23,49 +23,8 @@
                 <span class="head-price">Precio</span>
             </div>
 
-            <div class="cart-product-row">
-                <div class="cell-product">
-                    <div class="product-img-box">
-                        <img src="../../../img/tornillo.png" alt="Producto">
-                    </div>
-                    <span class="product-title">Tornillo Philips</span>
-                </div>
-                <div class="cell-delete">
-                    <button class="icon-del">✕</button>
-                </div>
-                <div class="cell-qty">
-                    <div class="qty-selector">
-                        <button>-</button>
-                        <span>1</span>
-                        <button>+</button>
-                    </div>
-                </div>
-                <div class="cell-price">
-                    <span class="price-value">0,00€</span>
-                </div>
-            </div>
-
-            <div class="cart-product-row">
-                <div class="cell-product">
-                    <div class="product-img-box">
-                        <img src="../../../img/tornillo.png" alt="Producto">
-                    </div>
-                    <span class="product-title">Tornillo Philips</span>
-                </div>
-                <div class="cell-delete">
-                    <button class="icon-del">✕</button>
-                </div>
-                <div class="cell-qty">
-                    <div class="qty-selector">
-                        <button>-</button>
-                        <span>1</span>
-                        <button>+</button>
-                    </div>
-                </div>
-                <div class="cell-price">
-                    <span class="price-value">0,00€</span>
-                </div>
-            </div>
+            <div xlu-include-file="../../templates/user/cart-item.html"></div>
+            <div xlu-include-file="../../templates/user/cart-item.html"></div>
         </div>
 
         <aside class="cart-summary-panel">
@@ -95,7 +54,7 @@
             </div>
 
             <div class="checkout-footer">
-                <button class="main-pay-btn">FINALIZAR COMPRA</button>
+                <button class="main-pay-btn" onclick="window.location.href='order-history.html'">FINALIZAR COMPRA</button>
             </div>
         </aside>
 
