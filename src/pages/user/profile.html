@@ -1,63 +1,63 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mi Perfil - CASAC</title>
-  <link rel="stylesheet" href="../../styles/styles.css">
-  <link rel="stylesheet" href="../../styles/user/profile.css">
-  <script src="../../xlu-include-file.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Perfil - CASAC</title>
+    <link rel="stylesheet" href="../../styles/styles.css">
+    <link rel="stylesheet" href="../../styles/user/profile.css">
+    <script src="../../xlu-include-file.js"></script>
 </head>
 <body>
 
-<header xlu-include-file="../templates/header.html"></header>
+<header xlu-include-file="../../templates/user/header.html"></header>
 
 <main class="main-content profile-layout">
-  <div class="profile-container-xl">
+    <div class="profile-container-xl">
 
-    <aside class="profile-sidebar">
-      <nav class="profile-nav">
-        <a href="#" class="active">Información Personal</a>
-        <a href="#">Seguridad y Contraseña</a>
-        <a href="#">Historial de Pedidos</a>
-        <a href="#">Direcciones de Envío</a>
-      </nav>
-    </aside>
+        <aside class="profile-sidebar">
+            <nav class="profile-nav">
+                <a href="profile.html" class="active">Información Personal</a>
+                <a href="security.html">Seguridad y Contraseña</a>
+                <a href="order-history.html">Historial de Pedidos</a>
+                <a href="addresses.html">Direcciones de Envío</a>
+            </nav>
+        </aside>
 
-    <section class="profile-main-content">
-      <h1>Configuración del Perfil</h1>
+        <section class="profile-main-content">
+            <h1>Configuración del Perfil</h1>
 
-      <form class="profile-form">
-        <div class="form-group">
-          <label>Nombre Completo</label>
-          <input type="text" value="Juan Pérez" placeholder="Escribe tu nombre">
-        </div>
+            <form class="profile-form">
+                <div class="form-group">
+                    <label>Nombre Completo</label>
+                    <input type="text" value="Juan Pérez" placeholder="Escribe tu nombre">
+                </div>
 
-        <div class="form-group">
-          <label>Correo Electrónico</label>
-          <input type="email" value="juan.perez@email.com" placeholder="tu@email.com">
-        </div>
+                <div class="form-group">
+                    <label>Correo Electrónico</label>
+                    <input type="email" value="juan.perez@email.com" placeholder="tu@email.com">
+                </div>
 
-        <div class="form-group">
-          <label>Teléfono de Contacto</label>
-          <input type="tel" value="+34 600 000 000" placeholder="+34...">
-        </div>
+                <div class="form-group">
+                    <label>Teléfono de Contacto</label>
+                    <input type="tel" value="+34 600 000 000" placeholder="+34...">
+                </div>
 
-        <div class="form-group">
-          <label>Ciudad / Provincia</label>
-          <input type="text" value="Madrid" placeholder="Tu ciudad">
-        </div>
+                <div class="form-group">
+                    <label>Ciudad / Provincia</label>
+                    <input type="text" value="Madrid" placeholder="Tu ciudad">
+                </div>
 
-        <div class="form-footer">
-          <button type="submit" class="save-btn">GUARDAR CAMBIOS</button>
-        </div>
-      </form>
-    </section>
+                <div class="form-footer">
+                    <button type="submit" class="save-btn">GUARDAR CAMBIOS</button>
+                </div>
+            </form>
+        </section>
 
-  </div>
+    </div>
 </main>
 
-<footer xlu-include-file="../templates/footer.html"></footer>
+<footer xlu-include-file="../../templates/user/footer.html"></footer>
 
 <script>xLuIncludeFile();</script>
 </body>

@@ -1,0 +1,77 @@
+/* --- CONTENEDOR Y TÍTULOS --- */
+.history-title {
+    font-size: 32px;
+    font-weight: 900;
+    margin-bottom: 40px;
+    letter-spacing: -1px;
+}
+
+.user-orders-list {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+/* --- TARJETA DE PEDIDO --- */
+.user-order-card {
+    background: #fff;
+    border-radius: 20px;
+    border: 2px solid #f5f5f5;
+    overflow: hidden;
+    transition: 0.3s ease;
+}
+
+.user-order-card:hover {
+    border-color: #EDC421;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+}
+
+/* --- CABECERA GRIS (ID y Fecha) --- */
+.u-order-header {
+    background: #fafafa;
+    padding: 20px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #f5f5f5;
+}
+
+.u-info span {
+    display: block;
+    font-size: 11px;
+    font-weight: 800;
+    color: #999;
+    text-transform: uppercase;
+}
+
+.u-info strong { font-size: 16px; color: #111; }
+
+/* --- BADGES DE ESTADO --- */
+.u-status-badge {
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.u-status-badge.shipping { background: #fff3cd; color: #856404; } /* Amarillo */
+.u-status-badge.delivered { background: #d4edda; color: #155724; } /* Verde */
+
+/* --- CUERPO Y BOTONES --- */
+.u-order-body {
+    padding: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.u-items-preview { display: flex; align-items: center; gap: 20px; }
+.u-items-preview img {
+    width: 70px;
+    height: 70px;
+    background: #fafafa;
+    border-radius: 12px;
+    padding: 10px;
+    object-fit: contain;
+}

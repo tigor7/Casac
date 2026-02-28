@@ -1,0 +1,19 @@
+/* --- ESPECÍFICO PARA FORMULARIO DE SEGURIDAD --- */
+
+/* Estilizamos los inputs de password para que los puntos se vean bien */
+input[type="password"] {
+    letter-spacing: 3px;
+    font-family: 'Courier New', Courier, monospace; /* Para que los puntos de password sean uniformes */
+}
+
+/* Espaciado extra para el footer del formulario de seguridad */
+.profile-form .form-footer {
+    margin-top: 20px;
+    padding-top: 30px;
+    border-top: 1px solid #f0f0f0;
+}
+
+/* Botón de actualización con hover de aviso */
+.save-btn:active {
+    transform: scale(0.98);
+}

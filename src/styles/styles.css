@@ -58,6 +58,16 @@ header nav a {
 
 header nav a:hover { opacity: 0.6; }
 
+.logo-link {
+    text-decoration: none; /* Quita el subrayado */
+    color: inherit;        /* Mantiene el color original que le diste al h1 */
+}
+
+/* Opcional: que cambie un poco de color al pasar el ratón para que se note que es clicable */
+.logo-link:hover {
+    color: #555555;
+}
+
 .footer-links {
     position: absolute;
     left: 50%;

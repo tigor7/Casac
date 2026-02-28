@@ -1,0 +1,164 @@
+/* ================================================= */
+/* NUEVO CSS DE DIRECCIONES - FILOSOFÍA CASAC   */
+/* ================================================= */
+
+.addresses-section {
+    padding: 60px; /* Más aire en el panel principal */
+}
+
+.addresses-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.addresses-header h1 {
+    font-size: 36px;
+    font-weight: 900;
+    letter-spacing: -1px;
+}
+
+.section-subtitle {
+    font-size: 16px;
+    color: #888;
+    margin-bottom: 50px;
+    font-weight: 500;
+}
+
+/* Botón de añadir con el amarillo corporativo */
+.add-address-btn {
+    padding: 15px 30px;
+    background: #111;
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.add-address-btn:hover {
+    background: #EDC421;
+    color: #111;
+    transform: translateY(-2px);
+}
+
+/* --- GRID DE TARJETAS VISUALES --- */
+.address-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); /* Tarjetas más anchas y potentes */
+    gap: 30px;
+}
+
+/* --- ESTILO DE LA TARJETA PREMIUM --- */
+.address-visual-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 35px;
+    border: 2px solid #f5f5f5;
+    position: relative;
+    display: flex;
+    gap: 25px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.address-visual-card:hover {
+    border-color: #EDC421;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.03);
+    transform: translateY(-5px);
+}
+
+/* Efecto para la tarjeta principal */
+.address-visual-card.active {
+    border-color: #EDC421;
+    background: #fffef7;
+}
+
+/* Icono visual (Casa, Obra, etc.) */
+.card-icon {
+    font-size: 32px;
+    padding-top: 5px;
+}
+
+/* Contenido de la dirección */
+.card-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.card-header h3 {
+    font-size: 20px;
+    font-weight: 900;
+    color: #111;
+    letter-spacing: -0.5px;
+}
+
+/* Badge de Principal */
+.status-badge {
+    background: #EDC421;
+    color: #111;
+    font-size: 10px;
+    font-weight: 900;
+    padding: 5px 10px;
+    border-radius: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.recipient {
+    font-weight: 700;
+    color: #111;
+    margin-bottom: 10px;
+}
+
+.street, .city, .phone {
+    font-size: 15px;
+    color: #555;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+/* --- ACCIONES DE LA TARJETA (Iconos grises) --- */
+.card-actions {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    display: flex;
+    gap: 10px;
+    opacity: 0; /* Ocultos por defecto */
+    transition: 0.3s;
+}
+
+.address-visual-card:hover .card-actions {
+    opacity: 1; /* Aparecen al hover */
+}
+
+/* Botón de "Hacer principal" al final de la tarjeta */
+.btn-make-primary {
+    margin-top: 20px;
+    background: none;
+    border: none;
+    color: #999;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 0;
+    text-align: left;
+}
+
+.btn-make-primary:hover {
+    color: #EDC421;
+    text-decoration: underline;
+}

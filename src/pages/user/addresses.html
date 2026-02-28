@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mis Direcciones - CASAC</title>
+    <link rel="stylesheet" href="../../styles/styles.css">
+    <link rel="stylesheet" href="../../styles/user/profile.css">
+    <link rel="stylesheet" href="../../styles/user/addresses.css">
+    <script src="../../xlu-include-file.js"></script>
+</head>
+<body>
+<header xlu-include-file="../../templates/user/header.html"></header>
+
+<main class="main-content profile-layout">
+    <div class="profile-container-xl">
+        <aside class="profile-sidebar">
+            <nav class="profile-nav">
+                <a href="profile.html">Información Personal</a>
+                <a href="security.html">Seguridad</a>
+                <a href="order-history.html">Mis Pedidos</a>
+                <a href="addresses.html" class="active">Direcciones</a>
+            </nav>
+        </aside>
+
+        <section class="profile-main-content addresses-section">
+            <div class="addresses-header">
+                <h1>Libreta de Direcciones</h1>
+                <button class="add-address-btn">＋ Añadir Nueva</button>
+            </div>
+
+            <p class="section-subtitle">Gestiona tus lugares de entrega frecuentes para una compra más rápida.</p>
+
+            <div class="address-cards-grid">
+                <div class="address-visual-card active">
+                    <div class="card-icon">🏠</div>
+                    <div class="card-content">
+                        <div class="card-header">
+                            <h3>Hogar</h3>
+                            <span class="status-badge">PRINCIPAL</span>
+                        </div>
+                        <p class="recipient">Juan Pérez Martínez</p>
+                        <p class="street">Calle de la Ferretería, 42, 2ºB</p>
+                        <p class="city">28001, Madrid</p>
+                        <p class="phone">📞 +34 600 123 456</p>
+                    </div>
+                    <div class="card-actions">
+                        <button class="action-icon edit" title="Editar"></button>
+                        <button class="action-icon delete" title="Eliminar"></button>
+                    </div>
+                </div>
+
+                <div class="address-visual-card">
+                    <div class="card-icon">🚧</div>
+                    <div class="card-content">
+                        <div class="card-header">
+                            <h3>Obra Centro</h3>
+                        </div>
+                        <p class="recipient">Constructora CASAC (Ref: Juan P.)</p>
+                        <p class="street">Avenida de los Martillos, 15</p>
+                        <p class="city">28010, Madrid</p>
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn-make-primary">Hacer principal</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+
+<footer xlu-include-file="../../templates/user/footer.html"></footer>
+<script>xLuIncludeFile();</script>
+</body>
+</html>
