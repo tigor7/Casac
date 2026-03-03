@@ -16,16 +16,22 @@
             <div class="login">
                 <h1>CASAC</h1>
 
-                <div class="row">
-                    <input class="half" type="text" placeholder="Usuario">
-                    <input class="half" type="tel" placeholder="Teléfono">
-                </div>
+                <form id="register-form" action="profile.html">
+                    <div class="row">
+                        <input class="half" type="text" id="username" name="username" placeholder="Usuario" required minlength="4" title="El usuario debe tener al menos 4 caracteres">
 
-                <input type="text" placeholder="Nombre y apellidos">
-                <input type="email" placeholder="Email">
-                <input type="password" placeholder="Contraseña">
+                        <input class="half" type="tel" id="phone" name="phone" placeholder="Teléfono" required pattern="[0-9]{9}" title="Introduce un número de teléfono válido de 9 dígitos">
+                    </div>
 
-                <button class="login-btn" onclick="window.location.href='profile.html'">CREAR</button>
+                    <input type="text" id="fullname" name="fullname" placeholder="Nombre y apellidos" required>
+
+                    <input type="email" id="email" name="email" placeholder="Email" required>
+
+                    <input type="password" id="password" name="password" placeholder="Contraseña" required minlength="6" title="La contraseña debe tener al menos 6 caracteres">
+
+                    <button class="login-btn" type="submit">CREAR</button>
+                </form>
+
                 <br>
                 <a class="forgot" href="create-company-account.html">¿Eres una empresa?</a>
             </div>
