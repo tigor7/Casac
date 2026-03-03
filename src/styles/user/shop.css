@@ -69,3 +69,84 @@
 .shop-desc { font-size: 14px; color: #555; margin-bottom: 10px; height: 40px; }
 .shop-price { font-size: 22px; font-weight: 900; display: block; margin-bottom: 15px; }
 .add-btn { width: 100%; padding: 10px; background: #EDC421; border: none; border-radius: 6px; font-weight: 700; cursor: pointer; }
+
+/* ============================================================
+   RESPONSIVE DESIGN (RWD) - SHOP
+   ============================================================ */
+
+/* 1. DISPOSITIVOS MEDIOS (Tablet / Laptop pequeño) - Hasta 1100px */
+@media (max-width: 1100px) {
+    .shop-layout {
+        padding: 40px 25px;
+    }
+
+    /* Pasamos de 4 columnas a 3 para no apretar el contenido */
+    .products-grid-4 {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+
+    .shop-search-bar {
+        max-width: 90%; /* El buscador se expande un poco más */
+    }
+}
+
+/* 2. TABLET PORTRAIT - Hasta 900px */
+@media (max-width: 900px) {
+    /* Reducimos a 2 columnas para que las fotos se vean grandes */
+    .products-grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .shop-card-info {
+        padding: 15px;
+    }
+
+    .shop-price {
+        font-size: 20px;
+    }
+}
+
+/* 3. DISPOSITIVOS PEQUEÑOS (Móvil) - Hasta 600px */
+@media (max-width: 600px) {
+    .shop-layout {
+        padding: 20px 15px;
+    }
+
+    /* Buscador: Convertimos en vertical para que sea más fácil de usar */
+    .shop-search-bar {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .shop-search-bar input {
+        border-radius: 10px; /* Bordes redondeados completos en móvil */
+        width: 100%;
+    }
+
+    .shop-search-bar button {
+        border-radius: 10px;
+        padding: 15px;
+        width: 100%;
+    }
+
+    /* Grid de 1 sola columna: Estilo "Full Width" */
+    .products-grid-4 {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .shop-card {
+        border-radius: 15px;
+    }
+
+    .shop-desc {
+        height: auto; /* Permitimos que la descripción crezca si es necesario */
+        margin-bottom: 15px;
+    }
+
+    .add-btn {
+        padding: 15px; /* Botón más grande para facilitar el clic táctil */
+        font-size: 16px;
+    }
+}

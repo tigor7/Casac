@@ -139,3 +139,85 @@
 }
 
 .main-pay-btn:hover { background: #dcb31c; transform: translateY(-2px); }
+
+/* ============================================================
+   RESPONSIVE DESIGN (RWD)
+   ============================================================ */
+
+/* 1. TABLET (Medio): Hasta 1024px */
+@media (max-width: 1024px) {
+    .cart-container-xl {
+        flex-direction: column; /* Apilamos panel izquierdo y derecho */
+        align-items: stretch;
+    }
+
+    .cart-layout {
+        padding: 30px 20px;
+    }
+
+    .cart-main-panel, .cart-summary-panel {
+        flex: none;
+        width: 100%;
+    }
+}
+
+/* 2. MÓVIL (Pequeño): Hasta 768px */
+@media (max-width: 768px) {
+    /* Ocultamos la cabecera de la tabla ya que no cabe en móvil */
+    .cart-table-header {
+        display: none;
+    }
+
+    /* Convertimos cada fila de producto en una "tarjeta" vertical */
+    .cart-product-row {
+        grid-template-columns: 1fr; /* Una sola columna */
+        gap: 20px;
+        position: relative;
+        padding: 25px 0;
+        text-align: center;
+    }
+
+    .cell-product {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .product-img-box {
+        width: 120px;
+        height: 120px;
+        margin: 0 auto;
+    }
+
+    /* Reubicamos el botón de eliminar arriba a la derecha */
+    .cell-delete {
+        position: absolute;
+        top: 10px;
+        right: 0;
+    }
+
+    /* Ajustamos selectores y precios para que se vean bien en móvil */
+    .qty-selector {
+        margin: 0 auto;
+    }
+
+    .price-value {
+        font-size: 24px;
+    }
+
+    /* Ajustes del panel de resumen */
+    .cart-summary-panel {
+        padding: 30px 20px;
+    }
+
+    .total-box {
+        font-size: 24px;
+    }
+
+    .coupon-section {
+        flex-direction: column;
+    }
+
+    .apply-btn {
+        padding: 15px;
+    }
+}

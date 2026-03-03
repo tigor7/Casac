@@ -142,3 +142,94 @@
         width: 100%;
     }
 }
+
+/* ============================================================
+   RESPONSIVE DESIGN (RWD) - PROFILE
+   ============================================================ */
+
+/* 1. DISPOSITIVOS GRANDES (Desktop) */
+/* (Ya cubierto por tu CSS base: 1500px max-width y 2 columnas) */
+
+
+/* 2. DISPOSITIVOS MEDIOS (Tablet) - Hasta 1024px */
+@media (max-width: 1024px) {
+    .profile-layout {
+        padding: 40px 25px;
+    }
+
+    .profile-container-xl {
+        flex-direction: column; /* Apilamos sidebar y contenido */
+        gap: 30px;
+    }
+
+    .profile-sidebar {
+        width: 100%;
+        padding: 20px;
+    }
+
+    /* Convertimos el menú vertical en una fila horizontal para ahorrar espacio */
+    .profile-nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .profile-nav a {
+        padding: 12px 20px;
+        font-size: 14px;
+        flex: 1; /* Los botones crecen para ocupar el ancho */
+        text-align: center;
+        min-width: 150px;
+    }
+
+    .profile-main-content {
+        width: 100%;
+        padding: 40px;
+    }
+}
+
+/* 3. DISPOSITIVOS PEQUEÑOS (Móvil) - Hasta 768px */
+@media (max-width: 768px) {
+    .profile-layout {
+        padding: 20px 15px;
+    }
+
+    /* En móvil, el menú vuelve a ser vertical pero más compacto */
+    .profile-nav {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .profile-nav a {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .profile-main-content {
+        padding: 30px 20px;
+        border-radius: 15px;
+    }
+
+    .profile-main-content h1 {
+        font-size: 28px;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    /* Ajuste de los inputs para facilitar el toque táctil */
+    .form-group input {
+        padding: 18px;
+        font-size: 16px; /* Evita el zoom automático en iOS al hacer focus */
+    }
+
+    .save-btn {
+        width: 100%; /* Botón de guardado a ancho completo */
+        padding: 18px;
+        font-size: 18px;
+    }
+
+    .form-footer {
+        padding-top: 25px;
+        text-align: center;
+    }
+}

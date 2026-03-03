@@ -172,3 +172,106 @@
     letter-spacing: -2px;   /* Efecto moderno de letras juntas */
     width: 100%;
 }
+
+/* ============================================================
+   RESPONSIVE DESIGN (RWD) - INDEX
+   ============================================================ */
+
+/* 1. DISPOSITIVOS MEDIOS (Tablet / Laptop pequeño) - Hasta 1024px */
+@media (max-width: 1024px) {
+    .main-content {
+        margin: 30px auto;
+        padding: 0 25px;
+    }
+
+    /* El buscador ocupa un poco más de espacio */
+    .search-row input {
+        width: 100%;
+    }
+
+    /* Apilamos Sidebar y Hero */
+    .top-section {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .sidebar {
+        width: 100%;
+        flex-direction: row; /* En tablet, el menú se vuelve horizontal */
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .sidebar a {
+        padding: 10px 15px;
+        font-size: 16px;
+    }
+
+    /* Reducimos el grid a 2 columnas */
+    .cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
+    }
+
+    .section-title {
+        font-size: 36px;
+        margin-top: 50px;
+    }
+}
+
+/* 2. DISPOSITIVOS PEQUEÑOS (Móvil) - Hasta 768px */
+@media (max-width: 768px) {
+    /* Buscador: Botón y input uno debajo del otro */
+    .search-row {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .search-row button {
+        width: 100%;
+    }
+
+    /* Sidebar: Menú tipo lista compacta */
+    .sidebar {
+        padding: 15px;
+    }
+
+    .sidebar a {
+        width: 100%;
+        text-align: center;
+    }
+
+    /* Hero: Ajustamos altura para que no ocupe toda la pantalla */
+    .hero {
+        height: 250px;
+    }
+
+    /* Título de sección */
+    .section-title {
+        font-size: 28px;
+        margin-top: 40px;
+        letter-spacing: -1px;
+    }
+
+    /* Grid: 1 sola columna y tarjetas verticales */
+    .cards-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .card {
+        flex-direction: column; /* Imagen arriba, info abajo */
+        align-items: center;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .card-img {
+        width: 100%;
+        height: 180px;
+    }
+
+    .card-info h3 {
+        font-size: 20px;
+    }
+}
