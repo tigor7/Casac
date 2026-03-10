@@ -14,5 +14,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 function createProduct(template, product) {
     return template.replace(/{{name}}/g, product.name)
         .replace(/{{price}}/g, product.price / 100)
+        .replace(/{{id}}/g, product.id)
         .replace(/{{img}}/g, product.img)
 }
