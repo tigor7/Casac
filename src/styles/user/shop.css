@@ -113,14 +113,13 @@
         padding: 20px 15px;
     }
 
-    /* Buscador: Convertimos en vertical para que sea más fácil de usar */
     .shop-search-bar {
         flex-direction: column;
         gap: 10px;
     }
 
     .shop-search-bar input {
-        border-radius: 10px; /* Bordes redondeados completos en móvil */
+        border-radius: 10px;
         width: 100%;
     }
 
@@ -130,23 +129,170 @@
         width: 100%;
     }
 
-    /* Grid de 1 sola columna: Estilo "Full Width" */
     .products-grid-4 {
-        grid-template-columns: 1fr;
-        gap: 25px;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
     }
 
     .shop-card {
-        border-radius: 15px;
+        border-radius: 14px;
     }
 
     .shop-desc {
-        height: auto; /* Permitimos que la descripción crezca si es necesario */
-        margin-bottom: 15px;
+        height: auto;
+        margin-bottom: 0;
     }
 
     .add-btn {
-        padding: 15px; /* Botón más grande para facilitar el clic táctil */
-        font-size: 16px;
+        padding: 8px;
+        font-size: 11px;
+    }
+}
+
+/* ===== AJUSTES FINALES SHOP ===== */
+
+/* Si los productos vienen inyectados dentro de un div intermedio */
+.products-grid-4 > div[xlu-include-file] {
+    display: contents;
+}
+
+/* Tarjeta */
+.shop-card {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+/* Imagen del producto */
+.shop-card-img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    max-height: 240px;
+    background: #fafafa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* Imagen interna */
+.prod-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+/* Info */
+.shop-card-info {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.shop-desc {
+    font-size: 14px;
+    color: #555;
+    margin: 0;
+    min-height: 36px;
+    line-height: 1.25;
+}
+
+.shop-price {
+    font-size: 22px;
+    font-weight: 900;
+    display: block;
+    margin: 0;
+}
+
+.shop-card-info a {
+    display: block;
+    width: 100%;
+    text-decoration: none;
+}
+
+.add-btn {
+    width: 100%;
+    padding: 10px;
+    background: #EDC421;
+    border: none;
+    border-radius: 6px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* TABLET */
+@media (max-width: 1100px) {
+    .shop-card-img {
+        max-height: 210px;
+    }
+}
+
+@media (max-width: 900px) {
+    .shop-card-img {
+        max-height: 180px;
+    }
+}
+
+/* MÓVIL */
+@media (max-width: 600px) {
+    .products-grid-4 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .shop-card {
+        border-radius: 14px;
+    }
+
+    .shop-card-img {
+        max-height: 105px;
+    }
+
+    .shop-card-info {
+        padding: 10px;
+        gap: 8px;
+    }
+
+    .shop-desc {
+        font-size: 11px;
+        min-height: auto;
+    }
+
+    .shop-price {
+        font-size: 15px;
+    }
+
+    .add-btn {
+        padding: 8px;
+        font-size: 11px;
+    }
+}
+
+/* Móviles muy estrechos */
+@media (max-width: 420px) {
+    .products-grid-4 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .shop-card-img {
+        max-height: 95px;
+    }
+
+    .shop-desc {
+        font-size: 10px;
+    }
+
+    .shop-price {
+        font-size: 14px;
+    }
+
+    .add-btn {
+        font-size: 10px;
+        padding: 7px;
     }
 }
