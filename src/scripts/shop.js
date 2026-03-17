@@ -1,6 +1,13 @@
 document.addEventListener('DOMContentLoaded', async () => {
+    const searchParams = new URLSearchParams(window.location.search);
+
     let response = await fetch("http://localhost:3000/products/")
     let products = await response.json();
+
+    if (searchParams.has('id')) {
+        const id = searchParams.get('id');
+        products = products.filter(product => product.categories.includes(parseInt(id)))
+    }
 
     let response2 = await fetch("../../templates/user/article-template.html");
     const template = await response2.text();
