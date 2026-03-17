@@ -140,14 +140,12 @@
 
 .main-pay-btn:hover { background: #dcb31c; transform: translateY(-2px); }
 
-/* ============================================================
-   RESPONSIVE DESIGN (RWD)
-   ============================================================ */
+/* RESPONSIVE DESIGN (RWD) */
 
-/* 1. TABLET (Medio): Hasta 1024px */
+/* 1. TABLET (Medio) */
 @media (max-width: 1024px) {
     .cart-container-xl {
-        flex-direction: column; /* Apilamos panel izquierdo y derecho */
+        flex-direction: column;
         align-items: stretch;
     }
 
@@ -161,16 +159,14 @@
     }
 }
 
-/* 2. MÓVIL (Pequeño): Hasta 768px */
+/* 2. MÓVIL (Pequeño) */
 @media (max-width: 768px) {
-    /* Ocultamos la cabecera de la tabla ya que no cabe en móvil */
     .cart-table-header {
         display: none;
     }
 
-    /* Convertimos cada fila de producto en una "tarjeta" vertical */
     .cart-product-row {
-        grid-template-columns: 1fr; /* Una sola columna */
+        grid-template-columns: 1fr;
         gap: 20px;
         position: relative;
         padding: 25px 0;
@@ -188,14 +184,12 @@
         margin: 0 auto;
     }
 
-    /* Reubicamos el botón de eliminar arriba a la derecha */
     .cell-delete {
         position: absolute;
         top: 10px;
         right: 0;
     }
 
-    /* Ajustamos selectores y precios para que se vean bien en móvil */
     .qty-selector {
         margin: 0 auto;
     }
@@ -204,7 +198,6 @@
         font-size: 24px;
     }
 
-    /* Ajustes del panel de resumen */
     .cart-summary-panel {
         padding: 30px 20px;
     }
