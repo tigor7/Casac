@@ -133,25 +133,14 @@
     transform: translateY(-2px);
 }
 
-/* RESPONSIVE */
-@media (max-width: 1000px) {
-    .profile-container-xl {
-        flex-direction: column;
-    }
-    .profile-sidebar {
-        width: 100%;
-    }
-}
-
 /* ============================================================
    RESPONSIVE DESIGN (RWD) - PROFILE
+   Desktop: estilos base (sin media query)
+   Tablet: <= 1024px
+   Móvil: <= 768px
    ============================================================ */
 
-/* 1. DISPOSITIVOS GRANDES (Desktop) */
-/* (Ya cubierto por tu CSS base: 1500px max-width y 2 columnas) */
-
-
-/* 2. DISPOSITIVOS MEDIOS (Tablet) - Hasta 1024px */
+/* Tablet */
 @media (max-width: 1024px) {
     .profile-layout {
         padding: 40px 25px;
@@ -188,7 +177,7 @@
     }
 }
 
-/* 3. DISPOSITIVOS PEQUEÑOS (Móvil) - Hasta 768px */
+/* Móvil */
 @media (max-width: 768px) {
     .profile-layout {
         padding: 20px 15px;

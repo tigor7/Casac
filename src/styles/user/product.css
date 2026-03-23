@@ -138,9 +138,12 @@
 
 /* ============================================================
    RESPONSIVE DESIGN (RWD) - PRODUCT DETAIL
+   Desktop: estilos base (sin media query)
+   Tablet: <= 1200px y <= 1024px
+   Móvil: <= 768px
    ============================================================ */
 
-/* 1. DISPOSITIVOS MEDIOS (Tablet / Laptop pequeño) - Hasta 1200px */
+/* Tablet (hasta 1200px) */
 @media (max-width: 1200px) {
     .product-card {
         padding: 50px;
@@ -157,7 +160,7 @@
     }
 }
 
-/* 2. TABLET PORTRAIT - Hasta 1024px */
+/* Tablet */
 @media (max-width: 1024px) {
     .product-card {
         flex-direction: column; /* Apilamos foto arriba y texto abajo */
@@ -182,7 +185,7 @@
     }
 }
 
-/* 3. DISPOSITIVOS PEQUEÑOS (Móvil) - Hasta 768px */
+/* Móvil */
 @media (max-width: 768px) {
     .product-center-layout {
         padding: 20px; /* Quitamos el exceso de margen exterior */

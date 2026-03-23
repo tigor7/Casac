@@ -103,7 +103,14 @@ footer {
     color: #333;
 }
 
-/* Solo si en escritorio quieres centrarlo de forma especial */
+/* ============================================================
+   RESPONSIVE DESIGN (RWD) - GLOBAL
+   Desktop: estilos base (sin media query) + ajuste >= 769px
+   Tablet: 600px - 1024px
+   Móvil: <= 768px (header <= 599px y ajuste <= 400px)
+   ============================================================ */
+
+/* Escritorio */
 @media (min-width: 769px) {
     .footer-links {
         position: absolute;
@@ -112,58 +119,18 @@ footer {
     }
 }
 
-/* En móvil quitamos el absolute para que no se monte */
-@media (max-width: 768px) {
-    .footer-links {
-        position: static;
-        transform: none;
-        left: auto;
-        width: 100%;
-        padding: 10px 15px;
-        box-sizing: border-box;
-    }
-}
-
-/* =========================
-   HEADER RESPONSIVE
-   ========================= */
-
-/* --- Vista móvil pura (smartphones) --- */
-@media (max-width: 599px) {
-  .header-container {
-    padding: 18px 5%;
-    position: relative; /* para posicionar hamburguesa sin mover el logo */
-  }
-
-  /* Logo centrado visualmente */
-  header h1 {
-    font-size: 26px;
-    letter-spacing: -1px;
-    line-height: 1;
-    text-align: center;
-    margin: 0 auto;
-  }
-
-  /* Icono hamburguesa fijo a la izquierda en móvil */
-  .hamburger {
-    position: absolute;
-    left: 5%;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-}
-
-/* Móviles muy estrechos */
-@media (max-width: 400px) {
-    header h1 {
-        font-size: 24px;
+/* Tablet */
+@media (max-width: 1024px) and (min-width: 600px) {
+    .header-nav {
+        display: block;
     }
 
     .hamburger {
-        left: 3%;
+        display: none;
     }
 }
 
+/* Móvil (hasta 768px) */
 @media (max-width: 768px) {
     .footer-container {
         display: flex;
@@ -198,6 +165,45 @@ footer {
         font-size: 28px;
         letter-spacing: -1px;
         line-height: 1;
+    }
+}
+
+/* Móvil (hasta 599px) */
+@media (max-width: 599px) {
+  .header-container {
+    padding: 18px 5%;
+    position: relative; /* para posicionar hamburguesa sin mover el logo */
+  }
+
+  header h1 {
+    font-size: 26px;
+    letter-spacing: -1px;
+    line-height: 1;
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  .header-nav {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+    position: absolute;
+    left: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+/* Móvil estrecho (hasta 400px) */
+@media (max-width: 400px) {
+    header h1 {
+        font-size: 24px;
+    }
+
+    .hamburger {
+        left: 3%;
     }
 }
 
@@ -264,17 +270,5 @@ footer {
 .mobile-menu a:hover {
   background-color: #fff7cf; /* Amarillo suave, mantiene la identidad CASAC */
   color: #111;
-}
-
-/* Ocultar navegación en móvil */
-/* Ocultar navegación solo en móviles (hasta 599px) */
-@media (max-width: 599px) {
-    .header-nav {
-        display: none;
-    }
-
-    .hamburger {
-        display: flex;
-    }
 }
 

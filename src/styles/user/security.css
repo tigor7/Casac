@@ -18,11 +18,21 @@ input[type="password"] {
     transform: scale(0.98);
 }
 
-/* =========================
-   RESPONSIVE - SEGURIDAD
-   ========================= */
+/* ============================================================
+   RESPONSIVE DESIGN (RWD) - SECURITY
+   Desktop: estilos base (sin media query)
+   Tablet: <= 1024px
+   Móvil: <= 768px
+   ============================================================ */
 
-/* Ajustes específicos para móvil, coherentes con profile.css */
+/* Tablet */
+@media (max-width: 1024px) {
+  .profile-form .form-footer {
+    margin-top: 20px;
+  }
+}
+
+/* Móvil */
 @media (max-width: 768px) {
   /* Aseguramos que el título se vea como en perfil */
   .profile-main-content h1 {

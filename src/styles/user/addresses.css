@@ -165,17 +165,19 @@
 
 /* ============================================================
    RESPONSIVE DESIGN (RWD) - DIRECCIONES
+   Desktop: estilos base (sin media query) + ajuste >= 1025px
+   Tablet: <= 1024px
+   Móvil: <= 768px
    ============================================================ */
 
-/* 1. DISPOSITIVOS GRANDES (Desktop/Portátil) */
-/* Tu código actual ya cubre esto, pero aseguramos el layout */
+/* Escritorio ancho */
 @media (min-width: 1025px) {
     .address-cards-grid {
         grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
     }
 }
 
-/* 2. DISPOSITIVOS MEDIOS (Tablet / iPad Landscape) */
+/* Tablet */
 @media (max-width: 1024px) {
     .addresses-section {
         padding: 40px; /* Reducimos el padding exterior */
@@ -200,7 +202,7 @@
     }
 }
 
-/* 3. DISPOSITIVOS PEQUEÑOS (Móvil / Smartphone) */
+/* Móvil */
 @media (max-width: 768px) {
     .addresses-section {
         padding: 25px 15px;

@@ -134,7 +134,14 @@ body {
     display: block;
 }
 
-/* Responsive para que no se rompa en pantallas pequeñas */
+/* ============================================================
+   RESPONSIVE DESIGN (RWD) - AUTH
+   Desktop: estilos base (sin media query)
+   Tablet: <= 1100px
+   Móvil: <= 768px (y ajuste <= 560px)
+   ============================================================ */
+
+/* Tablet */
 @media (max-width: 1100px) {
     .right { display: none; }
     .left { flex: 1; padding: 40px; }
@@ -289,14 +296,14 @@ body {
     display: block;
 }
 
-/* Mostrar hamburguesa en tablet y móvil */
+/* Móvil */
 @media (max-width: 768px) {
     .hamburger-mobile {
         display: flex;
     }
 }
 
-/* Asegurar que el hamburguesa se vea bien en pantallas pequeñas */
+/* Móvil estrecho */
 @media (max-width: 560px) {
     .hamburger-mobile {
         display: flex;

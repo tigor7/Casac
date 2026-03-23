@@ -216,9 +216,14 @@
     background: #dcb31c;
 }
 
-/* =========================
-   TABLET
-   ========================= */
+/* ============================================================
+   RESPONSIVE DESIGN (RWD) - HOME
+   Desktop: estilos base (sin media query)
+   Tablet: <= 1024px
+   Móvil: <= 768px (y ajuste <= 480px)
+   ============================================================ */
+
+/* Tablet */
 @media (max-width: 1024px) {
     .main-content {
         margin: 30px auto;
@@ -258,9 +263,7 @@
     }
 }
 
-/* =========================
-   MÓVIL
-   ========================= */
+/* Móvil */
 @media (max-width: 768px) {
     .main-content {
         padding: 0 14px;
@@ -298,7 +301,7 @@
         letter-spacing: -1px;
     }
 
-    /* 2 productos por fila en móvil */
+    /* Mantenemos 3 columnas en móvil amplio para conservar densidad visual actual */
     .cards-grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 10px;
@@ -328,7 +331,7 @@
     }
 }
 
-/* Móviles muy estrechos */
+/* Móvil estrecho */
 @media (max-width: 480px) {
     .cards-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));

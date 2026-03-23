@@ -140,9 +140,14 @@
 
 .main-pay-btn:hover { background: #dcb31c; transform: translateY(-2px); }
 
-/* RESPONSIVE DESIGN (RWD) */
+/* ============================================================
+   RESPONSIVE DESIGN (RWD) - CART
+   Desktop: estilos base (sin media query)
+   Tablet: <= 1024px
+   Móvil: <= 768px
+   ============================================================ */
 
-/* 1. TABLET (Medio) */
+/* Tablet */
 @media (max-width: 1024px) {
     .cart-container-xl {
         flex-direction: column;
@@ -159,7 +164,7 @@
     }
 }
 
-/* 2. MÓVIL (Pequeño) */
+/* Móvil */
 @media (max-width: 768px) {
     .cart-table-header {
         display: none;

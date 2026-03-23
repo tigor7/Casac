@@ -76,11 +76,30 @@
     object-fit: contain;
 }
 
-/* =========================
-   RESPONSIVE - HISTORIAL
-   ========================= */
+/* ============================================================
+   RESPONSIVE DESIGN (RWD) - ORDER HISTORY
+   Desktop: estilos base (sin media query)
+   Tablet: <= 1024px
+   Móvil: <= 768px
+   ============================================================ */
 
-/* Móvil y pantallas pequeñas */
+/* Tablet */
+@media (max-width: 1024px) {
+    .history-title {
+        font-size: 30px;
+        margin-bottom: 34px;
+    }
+
+    .u-order-header {
+        padding: 18px 24px;
+    }
+
+    .u-order-body {
+        padding: 24px;
+    }
+}
+
+/* Móvil */
 @media (max-width: 768px) {
     .history-title {
         font-size: 26px;

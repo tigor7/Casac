@@ -378,9 +378,12 @@
 
 /* ============================================================
    RESPONSIVE DESIGN (RWD) - ADMIN
+   Desktop: estilos base (sin media query)
+   Tablet: <= 1024px
+   Móvil: <= 768px
    ============================================================ */
 
-/* Tablet horizontal/vertical */
+/* Tablet */
 @media (max-width: 1024px) {
     .admin-layout {
         padding: 40px 25px;
