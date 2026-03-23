@@ -140,6 +140,12 @@
 
 .main-pay-btn:hover { background: #dcb31c; transform: translateY(-2px); }
 
+.cart-empty {
+    padding: 30px 0;
+    color: #777;
+    font-weight: 600;
+}
+
 /* ============================================================
    RESPONSIVE DESIGN (RWD) - CART
    Desktop: estilos base (sin media query)

@@ -4,15 +4,26 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 async function loadCartItems() {
     let cartItems = JSON.parse(localStorage.getItem('cartItems'))
+    if (!Array.isArray(cartItems)) {
+        cartItems = []
+    }
 
     let response = await fetch("../../templates/user/cart-item.html");
     const template = await response.text();
 
-    const container = document.getElementById('cart-box');
+    const container = document.getElementById('cart-items-list');
+    container.innerHTML = ""
+
+    if (cartItems.length === 0) {
+        container.innerHTML = '<p class="cart-empty">Tu carrito está vacío.</p>'
+        return
+    }
 
     for (let cartItem of cartItems) {
         let res = await fetch("http://localhost:3000/products/" + cartItem.id)
-        console.log(res)
+        if (!res.ok) {
+            continue
+        }
         const product = await res.json()
         container.innerHTML += createCartItem(template, product, cartItem)
     }
@@ -30,15 +41,28 @@ function createCartItem(template, product, cartItem) {
 
 function removeCartItem(id) {
     let cartItems = JSON.parse(localStorage.getItem('cartItems'))
+    if (!Array.isArray(cartItems)) {
+        cartItems = []
+    }
+
     for (let i = 0; i < cartItems.length; i++) {
         if (cartItems[i].id === id) {
-            console.log(cartItems[i])
             cartItems.splice(i, 1);
             break
         }
     }
 
-    document.getElementById(id).outerHTML = ""
+    const row = document.getElementById(id)
+    if (row) {
+        row.outerHTML = ""
+    }
+
+    if (cartItems.length === 0) {
+        const container = document.getElementById('cart-items-list')
+        if (container) {
+            container.innerHTML = '<p class="cart-empty">Tu carrito está vacío.</p>'
+        }
+    }
 
     localStorage.setItem('cartItems', JSON.stringify(cartItems));
 
