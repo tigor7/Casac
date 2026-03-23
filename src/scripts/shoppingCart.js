@@ -6,7 +6,7 @@ function addToCart() {
     if (cartItems == null) {
         cartItems = []
     }
-    addToCartById(cartItems, id);
+    addToCartById(cartItems, parseInt(id));
     localStorage.setItem('cartItems', JSON.stringify(cartItems));
 }
 

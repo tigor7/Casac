@@ -28,3 +28,18 @@ function createCartItem(template, product, cartItem) {
         .replace(/{{quantity}}/g, cartItem.quantity)
 }
 
+function removeCartItem(id) {
+    let cartItems = JSON.parse(localStorage.getItem('cartItems'))
+    for (let i = 0; i < cartItems.length; i++) {
+        if (cartItems[i].id === id) {
+            console.log(cartItems[i])
+            cartItems.splice(i, 1);
+            break
+        }
+    }
+
+    document.getElementById(id).outerHTML = ""
+
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+
+}
