@@ -19,7 +19,8 @@ El sistema cuenta con un panel de usuario completo donde se puede gestionar la i
 - **Panel de Administración (Admin):** Interfaz restringida donde los gestores de la ferretería pueden ver el catálogo en modo edición y acceder a un editor visual para modificar imágenes, títulos, descripciones, precios y descuentos de los productos.
 
 ## Página de inicio de la aplicación web
-- `src/pages/user/index.html` (Punto de entrada principal de la tienda).
+- `index.html` (Punto de entrada principal de la tienda).
+- `src/pages/user/home.html` (Vista Home de usuario).
 
 ## Nombre y ubicación de Mockups y StoryBoard
 - **Mockups:** Ubicados en el directorio correspondiente. Se componen de wireframes estructurales planos que definen las vistas de usuario y las vistas de administración.
@@ -27,7 +28,7 @@ El sistema cuenta con un panel de usuario completo donde se puede gestionar la i
 
 ## Listado de páginas HTML del proyecto
 La estructura está dividida modularmente en carpetas (`user` y `admin`):
-- `src/pages/user/index.html`: Implementa el Mockup "Home".
+- `src/pages/user/home.html`: Implementa el Mockup "Home".
 - `src/pages/user/shop.html`: Catálogo principal de la ferretería.
 - `src/pages/user/product.html`: Implementa el Mockup "Product".
 - `src/pages/user/cart.html`: Implementa el Mockup "Cart".
