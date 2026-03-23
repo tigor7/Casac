@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../../styles/styles.css">
     <link rel="stylesheet" href="../../styles/user/cart.css">
     <script src="../../xlu-include-file.js"></script>
+    <script src="../../scripts/cart.js"></script>
 </head>
 <body>
 
@@ -15,16 +16,13 @@
 <main class="main-content cart-layout">
     <div class="cart-container-xl">
 
-        <div class="cart-main-panel">
+        <div class="cart-main-panel" id="cart-box">
             <div class="cart-table-header">
                 <span class="head-prod">Producto</span>
                 <span class="head-del">Eliminar</span>
                 <span class="head-qty">Cantidad</span>
                 <span class="head-price">Precio</span>
             </div>
-
-            <div xlu-include-file="../../templates/user/cart-item.html"></div>
-            <div xlu-include-file="../../templates/user/cart-item.html"></div>
         </div>
 
         <aside class="cart-summary-panel">

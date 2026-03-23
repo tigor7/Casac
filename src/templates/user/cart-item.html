@@ -1,9 +1,9 @@
 <div class="cart-product-row">
     <div class="cell-product">
         <div class="product-img-box">
-            <img src="../../../img/tornillo.png" alt="Producto">
+            <img src="{{img}}" alt="Producto">
         </div>
-        <span class="product-title">Tornillo Philips</span>
+        <span class="product-title">{{name}}</span>
     </div>
     <div class="cell-delete">
         <button class="icon-del">✕</button>
@@ -11,11 +11,11 @@
     <div class="cell-qty">
         <div class="qty-selector">
             <button>-</button>
-            <span>1</span>
+            <span>{{quantity}}</span>
             <button>+</button>
         </div>
     </div>
     <div class="cell-price">
-        <span class="price-value">0,00€</span>
+        <span class="price-value">{{price}}€</span>
     </div>
 </div>
