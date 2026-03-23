@@ -11,13 +11,13 @@
             <div class="pack">Caja 100 uds. - {{price}}€</div>
 
             <div class="qty">
-                <button type="button" class="qty-btn">-</button>
-                <span class="qty-num">1</span>
-                <button type="button" class="qty-btn">+</button>
+                <button type="button" class="qty-btn" data-qty-action="decrease">-</button>
+                <span class="qty-num" id="product-qty-num">1</span>
+                <button type="button" class="qty-btn" data-qty-action="increase">+</button>
             </div>
         </div>
 
-        <button class="add-btn" type="button" onclick="addToCart()">
+        <button class="add-btn" type="button" id="add-to-cart-btn">
             Agregar al carrito
         </button>
     </div>

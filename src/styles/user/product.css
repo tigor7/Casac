@@ -136,6 +136,28 @@
 .add-btn:hover { background: #dcb31c; }
 .add-btn:active { transform: translateY(2px); }
 
+.cart-add-toast {
+    position: fixed;
+    top: 88px;
+    right: 20px;
+    z-index: 1200;
+    background: #111;
+    color: #fff;
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 13px;
+    font-weight: 700;
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    pointer-events: none;
+}
+
+.cart-add-toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 /* ============================================================
    RESPONSIVE DESIGN (RWD) - PRODUCT DETAIL
    Desktop: estilos base (sin media query)
@@ -221,5 +243,12 @@
     .add-btn {
         padding: 18px;
         font-size: 18px;
+    }
+
+    .cart-add-toast {
+        top: 72px;
+        right: 12px;
+        left: 12px;
+        text-align: center;
     }
 }

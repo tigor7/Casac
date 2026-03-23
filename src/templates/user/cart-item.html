@@ -10,9 +10,9 @@
     </div>
     <div class="cell-qty">
         <div class="qty-selector">
-            <button>-</button>
+            <button type="button" onclick="changeCartItemQuantity({{id}}, -1)">-</button>
             <span>{{quantity}}</span>
-            <button>+</button>
+            <button type="button" onclick="changeCartItemQuantity({{id}}, 1)">+</button>
         </div>
     </div>
     <div class="cell-price">

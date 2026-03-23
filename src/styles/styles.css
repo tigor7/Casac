@@ -53,6 +53,42 @@ header nav a:hover {
     opacity: 0.6;
 }
 
+.cart-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.cart-badge {
+    display: none;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 6px;
+    border-radius: 999px;
+    background: #111;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 800;
+    line-height: 20px;
+    text-align: center;
+}
+
+.cart-badge.visible {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cart-badge.bump {
+    animation: cartBadgeBump 0.25s ease;
+}
+
+@keyframes cartBadgeBump {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+    100% { transform: scale(1); }
+}
+
 .footer-container {
     width: 100%;
     padding: 50px 5%;
