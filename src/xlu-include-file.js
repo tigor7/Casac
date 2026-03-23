@@ -83,6 +83,12 @@ async function xLuIncludeFile() {
                     //a.innerHTML = await response.text();
                     a.innerHTML = content;
                     z[i].parentNode.replaceChild(a, z[i]);
+
+                    // Re-inicializamos el menú hamburguesa por si el include ha insertado el header
+                    if (typeof initHamburgerMenu === 'function') {
+                        initHamburgerMenu();
+                    }
+
                     xLuIncludeFile();
                 }
             } catch (error) {

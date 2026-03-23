@@ -8,38 +8,31 @@
 }
 
 body {
-    background-color: #FAFAFA;
-    color: #333333;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+  background-color: #FAFAFA;
+  color: #333333;
+  min-height: 100vh;
+}
+
+/* En la mayoría de páginas con header/footer usamos un layout de columna.
+  La página de login tiene su propio layout full-screen en auth.css,
+  así que no forzamos display:flex aquí para no deformarla. */
+body.has-layout-header-footer {
+  display: flex;
+  flex-direction: column;
 }
 
 header, footer {
     background-color: #EDC421;
     width: 100%;
+    position: relative;
 }
 
-.header-container {
-    width: 100%;
-    padding: 40px 5%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.footer-container {
-    width: 100%;
-    padding: 50px 5%;
-    display: flex;
-    align-items: center;
-    position: relative; /* ¡Esta es la clave para que el texto sepa dónde está el centro! */
-}
 header h1, footer h1 {
     font-size: 36px;
     font-weight: 800;
     letter-spacing: -2px;
     color: #111;
+    text-align: center;
 }
 
 header nav ul {
@@ -56,7 +49,34 @@ header nav a {
     transition: opacity 0.2s;
 }
 
-header nav a:hover { opacity: 0.6; }
+header nav a:hover {
+    opacity: 0.6;
+}
+
+.footer-container {
+    width: 100%;
+    padding: 50px 5%;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+/* Layout base del header: logo a la izquierda, menú a la derecha */
+.header-container {
+  width: 100%;
+  padding: 40px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.hamburger {
+  display: none; /* Solo se muestra en móvil por media query */
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+}
 
 .logo-link {
     text-decoration: none; /* Quita el subrayado */
@@ -67,6 +87,7 @@ header nav a:hover { opacity: 0.6; }
 .logo-link:hover {
     color: #555555;
 }
+
 footer {
     margin-top: auto;
     position: relative;
@@ -107,66 +128,29 @@ footer {
    HEADER RESPONSIVE
    ========================= */
 
-/* Tablet y móvil */
-@media (max-width: 768px) {
-    .header-container {
-        padding: 20px 16px;
-        gap: 16px;
-        align-items: center;
-    }
+/* --- Vista móvil pura (smartphones) --- */
+@media (max-width: 599px) {
+  .header-container {
+    padding: 18px 5%;
+    position: relative; /* para posicionar hamburguesa sin mover el logo */
+  }
 
-    header h1 {
-        font-size: 28px;
-        letter-spacing: -1px;
-        line-height: 1;
-        flex-shrink: 0;
-    }
+  /* Logo centrado visualmente */
+  header h1 {
+    font-size: 26px;
+    letter-spacing: -1px;
+    line-height: 1;
+    text-align: center;
+    margin: 0 auto;
+  }
 
-    header nav {
-        flex: 1;
-    }
-
-    header nav ul {
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        gap: 18px;
-        flex-wrap: wrap;
-    }
-
-    header nav a {
-        font-size: 15px;
-        line-height: 1.2;
-        text-align: center;
-    }
-}
-
-/* Móvil pequeño */
-@media (max-width: 560px) {
-    .header-container {
-        flex-direction: column;
-        justify-content: center;
-        padding: 18px 14px;
-        gap: 14px;
-    }
-
-    header h1 {
-        font-size: 26px;
-        text-align: center;
-    }
-
-    header nav {
-        width: 100%;
-    }
-
-    header nav ul {
-        justify-content: center;
-        gap: 20px;
-    }
-
-    header nav a {
-        font-size: 15px;
-    }
+  /* Icono hamburguesa fijo a la izquierda en móvil */
+  .hamburger {
+    position: absolute;
+    left: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+  }
 }
 
 /* Móviles muy estrechos */
@@ -175,12 +159,8 @@ footer {
         font-size: 24px;
     }
 
-    header nav ul {
-        gap: 14px;
-    }
-
-    header nav a {
-        font-size: 14px;
+    .hamburger {
+        left: 3%;
     }
 }
 
@@ -220,3 +200,81 @@ footer {
         line-height: 1;
     }
 }
+
+/* =========================
+   HAMBURGER MENU - MOBILE
+   ========================= */
+
+
+.hamburger span {
+    width: 24px;
+    height: 2.5px;
+    background-color: #111;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+/* Menú móvil desplegable - estilo blanco y minimalista */
+.mobile-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  width: 100%;
+  background-color: #ffffff;
+  border-top: 1px solid #e4e4e4;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.mobile-menu.active {
+  display: block !important;
+}
+
+.mobile-menu ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 4px 0;
+  margin: 0;
+}
+
+.mobile-menu li {
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.mobile-menu li:last-child {
+  border-bottom: none;
+}
+
+.mobile-menu a {
+  display: block;
+  padding: 14px 20px;
+  text-decoration: none;
+  color: #111;
+  font-weight: 600;
+  font-size: 15px;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.mobile-menu a:hover {
+  background-color: #fff7cf; /* Amarillo suave, mantiene la identidad CASAC */
+  color: #111;
+}
+
+/* Ocultar navegación en móvil */
+/* Ocultar navegación solo en móviles (hasta 599px) */
+@media (max-width: 599px) {
+    .header-nav {
+        display: none;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+}
+

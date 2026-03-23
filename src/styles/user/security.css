@@ -17,3 +17,37 @@ input[type="password"] {
 .save-btn:active {
     transform: scale(0.98);
 }
+
+/* =========================
+   RESPONSIVE - SEGURIDAD
+   ========================= */
+
+/* Ajustes específicos para móvil, coherentes con profile.css */
+@media (max-width: 768px) {
+  /* Aseguramos que el título se vea como en perfil */
+  .profile-main-content h1 {
+    font-size: 28px;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  /* Campos de contraseña con un poco más de aire en móvil */
+  .profile-form .form-group input[type="password"] {
+    padding: 18px 20px;
+    font-size: 16px;
+    letter-spacing: 3px;
+  }
+
+  /* Footer y botón en móvil: igual de protagonista que en perfil */
+  .profile-form .form-footer {
+    padding-top: 25px;
+    border-top: 1px solid #f0f0f0;
+    text-align: center;
+  }
+
+  .profile-form .save-btn {
+    width: 100%;
+    padding: 18px;
+    font-size: 18px;
+  }
+}
