@@ -1,9 +1,11 @@
 document.addEventListener('DOMContentLoaded', async () => {
+    bindCheckoutButton()
     await loadCartItems()
 })
 
 const TAX_RATE = 0.21
 const SHIPPING_CENTS = 0
+const ORDERS_STORAGE_KEY = 'orders'
 
 function getStoredCartItems() {
     const cartItems = JSON.parse(localStorage.getItem('cartItems'))
@@ -15,6 +17,15 @@ function saveCartItems(cartItems) {
     if (typeof updateCartBadge === 'function') {
         updateCartBadge();
     }
+}
+
+function getStoredOrders() {
+    const orders = JSON.parse(localStorage.getItem(ORDERS_STORAGE_KEY))
+    return Array.isArray(orders) ? orders : []
+}
+
+function saveOrders(orders) {
+    localStorage.setItem(ORDERS_STORAGE_KEY, JSON.stringify(orders))
 }
 
 async function loadCartItems() {
@@ -32,19 +43,13 @@ async function loadCartItems() {
         return
     }
 
-    let subtotalCents = 0
+    const snapshot = await getCartSnapshot(cartItems)
 
-    for (let cartItem of cartItems) {
-        let res = await fetch("http://localhost:3000/products/" + cartItem.id)
-        if (!res.ok) {
-            continue
-        }
-        const product = await res.json()
-        subtotalCents += product.price * cartItem.quantity
-        container.innerHTML += createCartItem(template, product, cartItem)
+    for (const item of snapshot.items) {
+        container.innerHTML += createCartItem(template, item.product, item.cartItem)
     }
 
-    setSummaryValues(subtotalCents)
+    setSummaryValues(snapshot.subtotalCents)
 
 
 }
@@ -84,6 +89,12 @@ async function refreshCartSummary() {
         return
     }
 
+    const snapshot = await getCartSnapshot(cartItems)
+    setSummaryValues(snapshot.subtotalCents)
+}
+
+async function getCartSnapshot(cartItems) {
+    const items = []
     let subtotalCents = 0
 
     for (const cartItem of cartItems) {
@@ -94,9 +105,70 @@ async function refreshCartSummary() {
 
         const product = await res.json()
         subtotalCents += product.price * cartItem.quantity
+        items.push({
+            cartItem,
+            product
+        })
     }
 
-    setSummaryValues(subtotalCents)
+    return {
+        items,
+        subtotalCents
+    }
+}
+
+function buildOrderFromSnapshot(snapshot) {
+    const subtotalCents = snapshot.subtotalCents
+    const taxesCents = Math.round(subtotalCents * TAX_RATE)
+    const totalCents = subtotalCents + SHIPPING_CENTS + taxesCents
+
+    return {
+        id: `CAS-${Date.now().toString().slice(-6)}`,
+        createdAt: new Date().toISOString(),
+        status: 'shipping',
+        items: snapshot.items.map(({ cartItem, product }) => ({
+            id: product.id,
+            name: product.name,
+            img: product.img,
+            priceCents: product.price,
+            quantity: cartItem.quantity,
+            lineTotalCents: product.price * cartItem.quantity
+        })),
+        subtotalCents,
+        taxesCents,
+        shippingCents: SHIPPING_CENTS,
+        totalCents
+    }
+}
+
+async function handleCheckout() {
+    const cartItems = getStoredCartItems()
+    if (cartItems.length === 0) {
+        return
+    }
+
+    const snapshot = await getCartSnapshot(cartItems)
+    if (snapshot.items.length === 0) {
+        return
+    }
+
+    const order = buildOrderFromSnapshot(snapshot)
+    const orders = getStoredOrders()
+    orders.unshift(order)
+    saveOrders(orders)
+
+    saveCartItems([])
+    window.location.href = 'order-history.html'
+}
+
+function bindCheckoutButton() {
+    const checkoutButton = document.getElementById('checkout-btn')
+    if (!checkoutButton || checkoutButton._checkoutBound) {
+        return
+    }
+
+    checkoutButton._checkoutBound = true
+    checkoutButton.addEventListener('click', handleCheckout)
 }
 
 async function removeCartItem(id) {
