@@ -1,5 +1,12 @@
 // Menú hamburguesa - Header y página de auth
 
+const AUTH_STORAGE_KEY = 'casacAuthSession';
+const DEMO_ACCOUNT = {
+    email: 'demo@casac.com',
+    password: 'casac123',
+    name: 'Usuario de prueba'
+};
+
 function getCartCount() {
     const cartItems = JSON.parse(localStorage.getItem('cartItems'));
     if (!Array.isArray(cartItems)) {
@@ -29,9 +36,116 @@ function updateCartBadge(animate = false) {
     });
 }
 
+function getAuthSession() {
+    const authData = JSON.parse(localStorage.getItem(AUTH_STORAGE_KEY));
+    if (authData?.loggedIn) {
+        return authData;
+    }
+
+    return null;
+}
+
+function setAuthSession(session) {
+    localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(session));
+    sessionStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(session));
+}
+
+function isUserLoggedIn() {
+    return Boolean(getAuthSession());
+}
+
+function updateAuthLinks() {
+    const loggedIn = isUserLoggedIn();
+    const authLinks = document.querySelectorAll('[data-auth-link]');
+
+    authLinks.forEach((link) => {
+        link.textContent = loggedIn ? 'Perfil' : 'Iniciar sesión';
+        link.setAttribute('href', loggedIn ? 'profile.html' : 'sign-in.html');
+    });
+}
+
+function validateDemoCredentials(email, password) {
+    const normalizedEmail = String(email || '').trim().toLowerCase();
+    const normalizedPassword = String(password || '').trim();
+
+    return normalizedEmail === DEMO_ACCOUNT.email && normalizedPassword === DEMO_ACCOUNT.password;
+}
+
+function showLoginFeedback(message, isError = false) {
+    const form = document.getElementById('login-form');
+    if (!form) {
+        return;
+    }
+
+    let feedback = document.getElementById('login-feedback');
+    if (!feedback) {
+        feedback = document.createElement('p');
+        feedback.id = 'login-feedback';
+        feedback.className = 'small';
+        form.insertAdjacentElement('afterend', feedback);
+    }
+
+    feedback.textContent = message;
+    feedback.style.color = isError ? '#b42318' : '#0a7d34';
+}
+
+function handleSuccessfulLogin() {
+    const session = {
+        loggedIn: true,
+        email: DEMO_ACCOUNT.email,
+        name: DEMO_ACCOUNT.name,
+        loginAt: new Date().toISOString()
+    };
+
+    setAuthSession(session);
+    updateAuthLinks();
+    showLoginFeedback('Sesion iniciada correctamente. Redirigiendo...');
+    window.location.href = 'profile.html';
+}
+
+function initLoginForm() {
+    const loginForm = document.getElementById('login-form');
+    if (!loginForm || loginForm._loginBound) {
+        return;
+    }
+
+    loginForm._loginBound = true;
+    loginForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+
+        const email = emailInput?.value;
+        const password = passwordInput?.value;
+
+        if (validateDemoCredentials(email, password)) {
+            handleSuccessfulLogin();
+            return;
+        }
+
+        showLoginFeedback('Credenciales incorrectas. Usa la cuenta de prueba.', true);
+    });
+
+    const googleButton = document.querySelector('.google-btn');
+    if (googleButton && !googleButton._googleBound) {
+        googleButton._googleBound = true;
+        googleButton.addEventListener('click', function () {
+            handleSuccessfulLogin();
+        });
+    }
+}
+
 // Hacemos la función global para poder llamarla también desde xLuIncludeFile
 function initHamburgerMenu() {
     updateCartBadge();
+    updateAuthLinks();
+    initLoginForm();
+
+    if (window.location.pathname.endsWith('/sign-in.html') && isUserLoggedIn()) {
+        window.location.href = 'profile.html';
+        return;
+    }
 
     // ----- HEADER GENERAL -----
     const hamburger = document.getElementById('hamburger-toggle');
@@ -105,6 +219,10 @@ if (document.readyState === 'loading') {
 window.addEventListener('storage', function (event) {
     if (event.key === 'cartItems') {
         updateCartBadge();
+    }
+
+    if (event.key === AUTH_STORAGE_KEY) {
+        updateAuthLinks();
     }
 });
 
