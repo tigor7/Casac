@@ -1,7 +1,38 @@
 document.addEventListener('DOMContentLoaded', async () => {
+    bindHomeSearchControls()
     await loadCategories()
     await loadProducts()
 });
+
+function runHomeSearch() {
+    const input = document.getElementById('home-search-input')
+    const query = input ? input.value.trim() : ''
+
+    if (!query) {
+        window.location.href = 'shop.html'
+        return
+    }
+
+    window.location.href = `shop.html?q=${encodeURIComponent(query)}`
+}
+
+function bindHomeSearchControls() {
+    const input = document.getElementById('home-search-input')
+    const button = document.getElementById('home-search-btn')
+
+    if (input) {
+        input.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                event.preventDefault()
+                runHomeSearch()
+            }
+        })
+    }
+
+    if (button) {
+        button.addEventListener('click', runHomeSearch)
+    }
+}
 
 
 async function loadCategories() {
