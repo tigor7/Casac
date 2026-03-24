@@ -46,8 +46,11 @@ function initProductQuantityControls() {
 }
 
 function createProduct(template, product) {
+    const description = product.description || product.name
+
     return template.replace(/{{name}}/g, product.name)
         .replace(/{{id}}/g, product.id)
         .replace(/{{price}}/g, product.price / 100)
+        .replace(/{{description}}/g, description)
         .replace(/{{img}}/g, product.img)
 }

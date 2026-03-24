@@ -20,7 +20,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 function createProduct(template, product) {
+    const shortDescription = product.shortDescription || product.name
+
     return template.replace(/{{name}}/g, product.name)
+        .replace(/{{shortDescription}}/g, shortDescription)
         .replace(/{{id}}/g, product.id)
         .replace(/{{price}}/g, product.price / 100)
         .replace(/{{img}}/g, product.img)
