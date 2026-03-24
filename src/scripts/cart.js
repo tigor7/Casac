@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 const TAX_RATE = 0.21
 const SHIPPING_CENTS = 0
 const ORDERS_STORAGE_KEY = 'orders'
+const AUTH_STORAGE_KEY = 'casacAuthSession'
 
 function getStoredCartItems() {
     const cartItems = JSON.parse(localStorage.getItem('cartItems'))
@@ -26,6 +27,16 @@ function getStoredOrders() {
 
 function saveOrders(orders) {
     localStorage.setItem(ORDERS_STORAGE_KEY, JSON.stringify(orders))
+}
+
+function isUserLoggedIn() {
+    const authData = JSON.parse(localStorage.getItem(AUTH_STORAGE_KEY))
+    return Boolean(authData?.loggedIn)
+}
+
+function redirectToSignIn() {
+    const next = encodeURIComponent('cart.html')
+    window.location.href = `sign-in.html?next=${next}`
 }
 
 async function loadCartItems() {
@@ -142,6 +153,11 @@ function buildOrderFromSnapshot(snapshot) {
 }
 
 async function handleCheckout() {
+    if (!isUserLoggedIn()) {
+        redirectToSignIn()
+        return
+    }
+
     const cartItems = getStoredCartItems()
     if (cartItems.length === 0) {
         return

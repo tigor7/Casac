@@ -1,4 +1,21 @@
+const AUTH_STORAGE_KEY = 'casacAuthSession';
+
+function isUserLoggedIn() {
+    const authData = JSON.parse(localStorage.getItem(AUTH_STORAGE_KEY));
+    return Boolean(authData?.loggedIn);
+}
+
+function redirectToSignIn() {
+    const currentPage = `${window.location.pathname.split('/').pop() || 'home.html'}${window.location.search}`;
+    window.location.href = `sign-in.html?next=${encodeURIComponent(currentPage)}`;
+}
+
 function addToCart(quantityToAdd = 1) {
+    if (!isUserLoggedIn()) {
+        redirectToSignIn();
+        return;
+    }
+
     const searchParams = new URLSearchParams(window.location.search);
     const id = searchParams.get('id');
     const quantity = Math.max(1, Number(quantityToAdd) || 1);

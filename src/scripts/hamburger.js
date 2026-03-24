@@ -50,6 +50,11 @@ function setAuthSession(session) {
     sessionStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(session));
 }
 
+function clearAuthSession() {
+    localStorage.removeItem(AUTH_STORAGE_KEY);
+    sessionStorage.removeItem(AUTH_STORAGE_KEY);
+}
+
 function isUserLoggedIn() {
     return Boolean(getAuthSession());
 }
@@ -57,10 +62,44 @@ function isUserLoggedIn() {
 function updateAuthLinks() {
     const loggedIn = isUserLoggedIn();
     const authLinks = document.querySelectorAll('[data-auth-link]');
+    const logoutLinks = document.querySelectorAll('[data-logout-link]');
 
     authLinks.forEach((link) => {
         link.textContent = loggedIn ? 'Perfil' : 'Iniciar sesión';
         link.setAttribute('href', loggedIn ? 'profile.html' : 'sign-in.html');
+    });
+
+    logoutLinks.forEach((link) => {
+        link.hidden = !loggedIn;
+    });
+}
+
+function bindLogoutActions() {
+    const logoutLinks = document.querySelectorAll('[data-logout-link]');
+
+    logoutLinks.forEach((link) => {
+        if (link._logoutBound) {
+            return;
+        }
+
+        link._logoutBound = true;
+        link.addEventListener('click', function (event) {
+            event.preventDefault();
+
+            clearAuthSession();
+            updateAuthLinks();
+
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileMenuAuth = document.getElementById('mobile-menu-auth');
+            if (mobileMenu) {
+                mobileMenu.classList.remove('active');
+            }
+            if (mobileMenuAuth) {
+                mobileMenuAuth.classList.remove('active');
+            }
+
+            window.location.href = 'sign-in.html';
+        });
     });
 }
 
@@ -100,6 +139,15 @@ function handleSuccessfulLogin() {
     setAuthSession(session);
     updateAuthLinks();
     showLoginFeedback('Sesion iniciada correctamente. Redirigiendo...');
+
+    const searchParams = new URLSearchParams(window.location.search);
+    const next = (searchParams.get('next') || '').trim();
+
+    if (next && !next.startsWith('http')) {
+        window.location.href = next;
+        return;
+    }
+
     window.location.href = 'profile.html';
 }
 
@@ -140,6 +188,7 @@ function initLoginForm() {
 function initHamburgerMenu() {
     updateCartBadge();
     updateAuthLinks();
+    bindLogoutActions();
     initLoginForm();
 
     if (window.location.pathname.endsWith('/sign-in.html') && isUserLoggedIn()) {
