@@ -71,6 +71,7 @@ function updateAuthLinks() {
 
     logoutLinks.forEach((link) => {
         link.hidden = !loggedIn;
+        link.style.display = loggedIn ? '' : 'none';
     });
 }
 
@@ -151,6 +152,22 @@ function handleSuccessfulLogin() {
     window.location.href = 'profile.html';
 }
 
+function createSessionFromEmail(email, name) {
+    return {
+        loggedIn: true,
+        email: String(email || DEMO_ACCOUNT.email).trim().toLowerCase(),
+        name: String(name || 'Usuario CASAC').trim(),
+        loginAt: new Date().toISOString()
+    };
+}
+
+function handleSuccessfulRegister(email, name) {
+    const session = createSessionFromEmail(email, name);
+    setAuthSession(session);
+    updateAuthLinks();
+    window.location.href = 'profile.html';
+}
+
 function initLoginForm() {
     const loginForm = document.getElementById('login-form');
     if (!loginForm || loginForm._loginBound) {
@@ -184,12 +201,57 @@ function initLoginForm() {
     }
 }
 
+function bindRegisterForm(formId, emailId, nameId) {
+    const form = document.getElementById(formId);
+    if (!form || form._registerBound) {
+        return;
+    }
+
+    form._registerBound = true;
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        const email = document.getElementById(emailId)?.value;
+        const name = document.getElementById(nameId)?.value;
+        handleSuccessfulRegister(email, name);
+    });
+}
+
+function initRegisterForms() {
+    bindRegisterForm('register-form', 'email', 'fullname');
+    bindRegisterForm('company-register-form', 'email', 'company-name');
+}
+
+function showAuthRequiredPopupIfNeeded() {
+    if (!window.location.pathname.endsWith('/sign-in.html')) {
+        return;
+    }
+
+    if (isUserLoggedIn()) {
+        return;
+    }
+
+    const searchParams = new URLSearchParams(window.location.search);
+    if (searchParams.get('reason') !== 'auth-required') {
+        return;
+    }
+
+    window.alert('Debes iniciar sesion para continuar con la compra.');
+
+    searchParams.delete('reason');
+    const nextQuery = searchParams.toString();
+    const cleanUrl = `${window.location.pathname}${nextQuery ? `?${nextQuery}` : ''}`;
+    window.history.replaceState({}, '', cleanUrl);
+}
+
 // Hacemos la función global para poder llamarla también desde xLuIncludeFile
 function initHamburgerMenu() {
     updateCartBadge();
     updateAuthLinks();
     bindLogoutActions();
     initLoginForm();
+    initRegisterForms();
+    showAuthRequiredPopupIfNeeded();
 
     if (window.location.pathname.endsWith('/sign-in.html') && isUserLoggedIn()) {
         window.location.href = 'profile.html';
