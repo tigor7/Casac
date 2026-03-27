@@ -2,13 +2,16 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mis Pedidos - CASAC</title>
     <link rel="stylesheet" href="../../styles/styles.css">
     <link rel="stylesheet" href="../../styles/user/profile.css">
     <link rel="stylesheet" href="../../styles/user/order-history.css">
     <script src="../../xlu-include-file.js"></script>
+    <script src="../../scripts/hamburger.js"></script>
+    <script src="../../scripts/order-history.js"></script>
 </head>
-<body>
+<body class="has-layout-header-footer">
 <header xlu-include-file="../../templates/user/header.html"></header>
 
 <main class="main-content profile-layout">
@@ -24,9 +27,7 @@
 
         <section class="profile-main-content">
             <h1 class="history-title">Mis Compras</h1>
-            <div class="user-orders-list">
-                <div xlu-include-file="../../templates/user/order-history-item.html"></div>
-            </div>
+            <div class="user-orders-list"></div>
         </section>
     </div>
 </main>

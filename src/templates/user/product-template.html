@@ -1,0 +1,25 @@
+<div class="product-card">
+    <div class="img-box">
+        <img src="{{img}}" alt="Tornillo">
+    </div>
+
+    <div class="info">
+        <h1>{{name}}</h1>
+        <p class="subtitle">{{description}}</p>
+
+        <div class="buy-row">
+            <div class="pack">{{price}}€</div>
+
+            <div class="qty">
+                <button type="button" class="qty-btn" data-qty-action="decrease">-</button>
+                <span class="qty-num" id="product-qty-num">1</span>
+                <button type="button" class="qty-btn" data-qty-action="increase">+</button>
+            </div>
+        </div>
+
+        <button class="add-btn" type="button" id="add-to-cart-btn">
+            Agregar al carrito
+        </button>
+    </div>
+</div>
+

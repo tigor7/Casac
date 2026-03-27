@@ -375,3 +375,146 @@
 .status-check-box:hover::after {
     color: #EDC421;
 }
+
+/* ============================================================
+   RESPONSIVE DESIGN (RWD) - ADMIN
+   Desktop: estilos base (sin media query)
+   Tablet: <= 1024px
+   Móvil: <= 768px
+   ============================================================ */
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .admin-layout {
+        padding: 40px 25px;
+    }
+
+    .admin-top-header {
+        gap: 20px;
+        margin-bottom: 30px;
+    }
+
+    .admin-top-header h1,
+    .admin-container-xl > h1 {
+        font-size: 30px;
+    }
+
+    .admin-editor-layout {
+        grid-template-columns: 1fr;
+        gap: 35px;
+        padding: 40px;
+    }
+
+    .image-upload-container {
+        max-width: 360px;
+    }
+
+    .order-info-main {
+        padding: 28px;
+    }
+
+    .order-info-main h3 {
+        font-size: 22px;
+    }
+
+    .order-status-side {
+        min-width: 160px;
+    }
+}
+
+/* Móvil */
+@media (max-width: 768px) {
+    .admin-layout {
+        padding: 20px 15px;
+    }
+
+    .admin-top-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .admin-top-header h1,
+    .admin-container-xl > h1 {
+        font-size: 28px;
+        line-height: 1.1;
+    }
+
+    .add-new-btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .admin-actions-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .admin-editor-layout {
+        padding: 24px 18px;
+        gap: 24px;
+        border-radius: 18px;
+    }
+
+    .image-upload-container {
+        max-width: 100%;
+    }
+
+    .input-inline,
+    .stat-item .inner-input {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .btn-mini {
+        width: 100%;
+        height: 50px;
+    }
+
+    .editor-stats-row {
+        grid-template-columns: 1fr;
+    }
+
+    .main-admin-save {
+        padding: 18px;
+        font-size: 16px;
+    }
+
+    .admin-orders-grid {
+        gap: 20px;
+        margin-top: 25px;
+    }
+
+    .order-admin-row {
+        flex-direction: column;
+    }
+
+    .order-info-main {
+        border-right: none;
+        border-bottom: 2px solid #f9f9f9;
+        padding: 22px;
+    }
+
+    .order-info-main h3 {
+        font-size: 20px;
+        margin-bottom: 14px;
+    }
+
+    .order-items-list li {
+        font-size: 14px;
+        padding-left: 20px;
+    }
+
+    .order-status-side {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 16px 22px;
+    }
+
+    .status-check-box {
+        width: 60px;
+        height: 60px;
+    }
+}

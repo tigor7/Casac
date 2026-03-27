@@ -1,11 +1,37 @@
 <div class="header-container">
-    <h1><a href="index.html" class="logo-link">CASAC</a></h1>
-    <nav>
+    <div class="hamburger" id="hamburger-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <h1><a href="home.html" class="logo-link">CASAC</a></h1>
+    <nav class="header-nav">
         <ul>
             <li><a href="shop.html">Tienda</a></li>
-            <li><a href="cart.html">Carrito</a></li>
-            <li><a href="sign-in.html">Iniciar sesión</a></li>
+            <li>
+                <a href="cart.html" class="cart-link">
+                    Carrito
+                    <span class="cart-badge" data-cart-badge>0</span>
+                </a>
+            </li>
+            <li><a href="sign-in.html" data-auth-link>Iniciar sesión</a></li>
+            <li><a href="../admin/admin-shop.html" data-admin-link hidden>Panel admin</a></li>
+            <li><a href="#" data-logout-link hidden>Cerrar sesión</a></li>
 
+        </ul>
+    </nav>
+    <nav class="mobile-menu" id="mobile-menu">
+        <ul>
+            <li><a href="shop.html">Tienda</a></li>
+            <li>
+                <a href="cart.html" class="cart-link">
+                    Carrito
+                    <span class="cart-badge" data-cart-badge>0</span>
+                </a>
+            </li>
+            <li><a href="sign-in.html" data-auth-link>Iniciar sesión</a></li>
+            <li><a href="../admin/admin-shop.html" data-admin-link hidden>Panel admin</a></li>
+            <li><a href="#" data-logout-link hidden>Cerrar sesión</a></li>
         </ul>
     </nav>
 </div>

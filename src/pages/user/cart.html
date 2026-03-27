@@ -7,15 +7,17 @@
     <link rel="stylesheet" href="../../styles/styles.css">
     <link rel="stylesheet" href="../../styles/user/cart.css">
     <script src="../../xlu-include-file.js"></script>
+    <script src="../../scripts/hamburger.js"></script>
+    <script src="../../scripts/cart.js"></script>
 </head>
-<body>
+<body class="has-layout-header-footer">
 
 <header xlu-include-file="../../templates/user/header.html"></header>
 
 <main class="main-content cart-layout">
     <div class="cart-container-xl">
 
-        <div class="cart-main-panel">
+        <div class="cart-main-panel" id="cart-box">
             <div class="cart-table-header">
                 <span class="head-prod">Producto</span>
                 <span class="head-del">Eliminar</span>
@@ -23,8 +25,7 @@
                 <span class="head-price">Precio</span>
             </div>
 
-            <div xlu-include-file="../../templates/user/cart-item.html"></div>
-            <div xlu-include-file="../../templates/user/cart-item.html"></div>
+            <div id="cart-items-list"></div>
         </div>
 
         <aside class="cart-summary-panel">
@@ -42,19 +43,19 @@
                     <p>Impuestos</p>
                 </div>
                 <div class="detail-values">
-                    <p>0,00€</p>
-                    <p>Gratis</p>
-                    <p>0,00€</p>
+                    <p id="summary-subtotal">0,00€</p>
+                    <p id="summary-shipping">Gratis</p>
+                    <p id="summary-taxes">0,00€</p>
                 </div>
             </div>
 
             <div class="total-box">
                 <span>Total</span>
-                <span>0,00€</span>
+                <span id="summary-total">0,00€</span>
             </div>
 
             <div class="checkout-footer">
-                <button class="main-pay-btn" onclick="window.location.href='order-history.html'">FINALIZAR COMPRA</button>
+                <button id="checkout-btn" class="main-pay-btn">FINALIZAR COMPRA</button>
             </div>
         </aside>
 

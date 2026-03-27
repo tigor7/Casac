@@ -139,3 +139,89 @@
 }
 
 .main-pay-btn:hover { background: #dcb31c; transform: translateY(-2px); }
+
+.cart-empty {
+    padding: 30px 0;
+    color: #777;
+    font-weight: 600;
+}
+
+/* ============================================================
+   RESPONSIVE DESIGN (RWD) - CART
+   Desktop: estilos base (sin media query)
+   Tablet: <= 1024px
+   Móvil: <= 768px
+   ============================================================ */
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .cart-container-xl {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .cart-layout {
+        padding: 30px 20px;
+    }
+
+    .cart-main-panel, .cart-summary-panel {
+        flex: none;
+        width: 100%;
+    }
+}
+
+/* Móvil */
+@media (max-width: 768px) {
+    .cart-table-header {
+        display: none;
+    }
+
+    .cart-product-row {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        position: relative;
+        padding: 25px 0;
+        text-align: center;
+    }
+
+    .cell-product {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .product-img-box {
+        width: 120px;
+        height: 120px;
+        margin: 0 auto;
+    }
+
+    .cell-delete {
+        position: absolute;
+        top: 10px;
+        right: 0;
+    }
+
+    .qty-selector {
+        margin: 0 auto;
+    }
+
+    .price-value {
+        font-size: 24px;
+    }
+
+    .cart-summary-panel {
+        padding: 30px 20px;
+    }
+
+    .total-box {
+        font-size: 24px;
+    }
+
+    .coupon-section {
+        flex-direction: column;
+    }
+
+    .apply-btn {
+        padding: 15px;
+    }
+}
