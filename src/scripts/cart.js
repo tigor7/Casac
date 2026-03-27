@@ -7,9 +7,42 @@ const TAX_RATE = 0.21
 const SHIPPING_CENTS = 0
 const ORDERS_STORAGE_KEY = 'orders'
 
+function normalizeCartItems(rawItems) {
+    if (!Array.isArray(rawItems)) {
+        return []
+    }
+
+    const normalized = []
+
+    for (const rawItem of rawItems) {
+        const id = Number(rawItem?.id ?? rawItem?.productId)
+        const quantity = Math.max(1, Number(rawItem?.quantity) || 1)
+
+        if (!Number.isFinite(id) || id <= 0) {
+            continue
+        }
+
+        const existing = normalized.find((item) => item.id === id)
+        if (existing) {
+            existing.quantity += quantity
+            continue
+        }
+
+        normalized.push({ id, quantity })
+    }
+
+    return normalized
+}
+
 function getStoredCartItems() {
-    const cartItems = JSON.parse(localStorage.getItem('cartItems'))
-    return Array.isArray(cartItems) ? cartItems : []
+    const rawCartItems = JSON.parse(localStorage.getItem('cartItems'))
+    const normalized = normalizeCartItems(rawCartItems)
+
+    if (!Array.isArray(rawCartItems) || rawCartItems.length !== normalized.length) {
+        localStorage.setItem('cartItems', JSON.stringify(normalized))
+    }
+
+    return normalized
 }
 
 function saveCartItems(cartItems) {
@@ -44,6 +77,13 @@ async function loadCartItems() {
     }
 
     const snapshot = await getCartSnapshot(cartItems)
+
+    if (snapshot.items.length === 0) {
+        container.innerHTML = '<p class="cart-empty">Tu carrito está vacío.</p>'
+        saveCartItems([])
+        setSummaryValues(0)
+        return
+    }
 
     for (const item of snapshot.items) {
         container.innerHTML += createCartItem(template, item.product, item.cartItem)
@@ -142,6 +182,15 @@ function buildOrderFromSnapshot(snapshot) {
 }
 
 async function handleCheckout() {
+
+    if (typeof isUserLoggedIn === 'function' && !isUserLoggedIn()) {
+        const next = `${window.location.pathname}${window.location.search || ''}`
+        const params = new URLSearchParams()
+        params.set('reason', 'auth-required')
+        params.set('next', next)
+        window.location.href = `sign-in.html?${params.toString()}`
+        return
+    }
 
     const cartItems = getStoredCartItems()
     if (cartItems.length === 0) {

@@ -1,11 +1,156 @@
-// Menú hamburguesa - Header y página de auth
+// Menú hamburguesa + autenticación/sesión/roles
 
 const AUTH_STORAGE_KEY = 'casacAuthSession';
-const DEMO_ACCOUNT = {
-    email: 'demo@casac.com',
-    password: 'casac123',
-    name: 'Usuario de prueba'
-};
+const USERS_STORAGE_KEY = 'casacUsers';
+const USERS_SYNCED_STORAGE_KEY = 'casacUsersSeededFromJson';
+const ORDERS_STORAGE_KEY = 'orders';
+
+const PROTECTED_USER_PAGES = new Set([
+    'profile.html',
+    'security.html',
+    'addresses.html',
+    'order-history.html'
+]);
+
+let usersInitPromise = null;
+
+function isAdminSection() {
+    return window.location.pathname.includes('/pages/admin/');
+}
+
+function toUserPageHref(fileName) {
+    return isAdminSection() ? `../user/${fileName}` : fileName;
+}
+
+function toAdminPageHref(fileName) {
+    return isAdminSection() ? fileName : `../admin/${fileName}`;
+}
+
+function currentPageName() {
+    const segments = window.location.pathname.split('/').filter(Boolean);
+    return segments[segments.length - 1] || '';
+}
+
+function getStoredUsers() {
+    const users = JSON.parse(localStorage.getItem(USERS_STORAGE_KEY));
+    return Array.isArray(users) ? users : [];
+}
+
+function saveUsers(users) {
+    localStorage.setItem(USERS_STORAGE_KEY, JSON.stringify(users));
+}
+
+function normalizeEmail(email) {
+    return String(email || '').trim().toLowerCase();
+}
+
+function normalizeUser(user, fallbackId = Date.now()) {
+    return {
+        id: Number(user?.id) || fallbackId,
+        email: normalizeEmail(user?.email),
+        password: String(user?.password || '').trim(),
+        name: String(user?.name || 'Usuario CASAC').trim(),
+        role: String(user?.role || 'customer').trim().toLowerCase()
+    };
+}
+
+function mergeUsers(baseUsers, incomingUsers) {
+    const byEmail = new Map();
+
+    baseUsers.forEach((user, index) => {
+        const normalized = normalizeUser(user, index + 1);
+        if (normalized.email) {
+            byEmail.set(normalized.email, normalized);
+        }
+    });
+
+    incomingUsers.forEach((user, index) => {
+        const normalized = normalizeUser(user, Date.now() + index);
+        if (normalized.email) {
+            byEmail.set(normalized.email, normalized);
+        }
+    });
+
+    return [...byEmail.values()];
+}
+
+async function fetchUsersSeed() {
+    const endpoints = [
+        'http://localhost:3000/users',
+        '/database/db.json',
+        '../../../database/db.json'
+    ];
+
+    for (const endpoint of endpoints) {
+        try {
+            const response = await fetch(endpoint);
+            if (!response.ok) {
+                continue;
+            }
+
+            const payload = await response.json();
+            if (Array.isArray(payload)) {
+                return payload;
+            }
+
+            if (Array.isArray(payload?.users)) {
+                return payload.users;
+            }
+        } catch (error) {
+            // Probamos siguiente endpoint
+        }
+    }
+
+    return [];
+}
+
+async function ensureUsersReady() {
+    if (!usersInitPromise) {
+        usersInitPromise = (async () => {
+            const localUsers = getStoredUsers();
+            const wasSeeded = localStorage.getItem(USERS_SYNCED_STORAGE_KEY) === 'true';
+
+            if (localUsers.length > 0 && wasSeeded) {
+                return localUsers;
+            }
+
+            const seedUsers = await fetchUsersSeed();
+            const merged = mergeUsers(localUsers, seedUsers);
+
+            if (merged.length > 0) {
+                saveUsers(merged);
+                localStorage.setItem(USERS_SYNCED_STORAGE_KEY, 'true');
+                return merged;
+            }
+
+            if (localUsers.length > 0) {
+                return localUsers;
+            }
+
+            const fallbackUsers = [
+                normalizeUser({
+                    id: 1,
+                    email: 'demo@casac.com',
+                    password: 'casac123',
+                    name: 'Usuario de prueba',
+                    role: 'customer'
+                }),
+                normalizeUser({
+                    id: 2,
+                    email: 'admin@casac.com',
+                    password: 'admin123',
+                    name: 'Administrador CASAC',
+                    role: 'admin'
+                })
+            ];
+
+            saveUsers(fallbackUsers);
+            return fallbackUsers;
+        })();
+    }
+
+    return usersInitPromise;
+}
 
 function getCartCount() {
     const cartItems = JSON.parse(localStorage.getItem('cartItems'));
@@ -37,9 +182,15 @@ function updateCartBadge(animate = false) {
 }
 
 function getAuthSession() {
-    const authData = JSON.parse(localStorage.getItem(AUTH_STORAGE_KEY));
-    if (authData?.loggedIn) {
-        return authData;
+    const localAuthData = JSON.parse(localStorage.getItem(AUTH_STORAGE_KEY));
+    if (localAuthData?.loggedIn) {
+        return localAuthData;
+    }
+
+    const sessionAuthData = JSON.parse(sessionStorage.getItem(AUTH_STORAGE_KEY));
+    if (sessionAuthData?.loggedIn) {
+        localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(sessionAuthData));
+        return sessionAuthData;
     }
 
     return null;
@@ -59,19 +210,33 @@ function isUserLoggedIn() {
     return Boolean(getAuthSession());
 }
 
+function isAdminLoggedIn() {
+    const auth = getAuthSession();
+    return Boolean(auth?.loggedIn && auth?.role === 'admin');
+}
+
 function updateAuthLinks() {
-    const loggedIn = isUserLoggedIn();
+    const session = getAuthSession();
+    const loggedIn = Boolean(session);
     const authLinks = document.querySelectorAll('[data-auth-link]');
     const logoutLinks = document.querySelectorAll('[data-logout-link]');
+    const adminLinks = document.querySelectorAll('[data-admin-link]');
 
     authLinks.forEach((link) => {
         link.textContent = loggedIn ? 'Perfil' : 'Iniciar sesión';
-        link.setAttribute('href', loggedIn ? 'profile.html' : 'sign-in.html');
+        link.setAttribute('href', loggedIn ? toUserPageHref('profile.html') : toUserPageHref('sign-in.html'));
     });
 
     logoutLinks.forEach((link) => {
         link.hidden = !loggedIn;
         link.style.display = loggedIn ? '' : 'none';
+    });
+
+    const showAdmin = Boolean(session?.role === 'admin');
+    adminLinks.forEach((link) => {
+        link.hidden = !showAdmin;
+        link.style.display = showAdmin ? '' : 'none';
+        link.setAttribute('href', toAdminPageHref('admin-shop.html'));
     });
 }
 
@@ -99,16 +264,19 @@ function bindLogoutActions() {
                 mobileMenuAuth.classList.remove('active');
             }
 
-            window.location.href = 'sign-in.html';
+            window.location.href = toUserPageHref('sign-in.html');
         });
     });
 }
 
-function validateDemoCredentials(email, password) {
-    const normalizedEmail = String(email || '').trim().toLowerCase();
+function findUserByCredentials(email, password) {
+    const users = getStoredUsers();
+    const normalizedEmail = normalizeEmail(email);
     const normalizedPassword = String(password || '').trim();
 
-    return normalizedEmail === DEMO_ACCOUNT.email && normalizedPassword === DEMO_ACCOUNT.password;
+    return users.find((user) => {
+        return normalizeEmail(user.email) === normalizedEmail && String(user.password).trim() === normalizedPassword;
+    }) || null;
 }
 
 function showLoginFeedback(message, isError = false) {
@@ -129,11 +297,13 @@ function showLoginFeedback(message, isError = false) {
     feedback.style.color = isError ? '#b42318' : '#0a7d34';
 }
 
-function handleSuccessfulLogin() {
+function handleSuccessfulLogin(user) {
     const session = {
         loggedIn: true,
-        email: DEMO_ACCOUNT.email,
-        name: DEMO_ACCOUNT.name,
+        userId: user.id,
+        email: normalizeEmail(user.email),
+        name: String(user.name || 'Usuario CASAC').trim(),
+        role: String(user.role || 'customer').trim().toLowerCase(),
         loginAt: new Date().toISOString()
     };
 
@@ -149,23 +319,40 @@ function handleSuccessfulLogin() {
         return;
     }
 
-    window.location.href = 'profile.html';
+    if (session.role === 'admin') {
+        window.location.href = toAdminPageHref('admin-shop.html');
+        return;
+    }
+
+    window.location.href = toUserPageHref('profile.html');
 }
 
-function createSessionFromEmail(email, name) {
+function createSessionFromUser(user) {
     return {
         loggedIn: true,
-        email: String(email || DEMO_ACCOUNT.email).trim().toLowerCase(),
-        name: String(name || 'Usuario CASAC').trim(),
+        userId: Number(user?.id) || Date.now(),
+        email: normalizeEmail(user?.email),
+        name: String(user?.name || 'Usuario CASAC').trim(),
+        role: String(user?.role || 'customer').trim().toLowerCase(),
         loginAt: new Date().toISOString()
     };
 }
 
-function handleSuccessfulRegister(email, name) {
-    const session = createSessionFromEmail(email, name);
+function handleSuccessfulRegister(user) {
+    const session = createSessionFromUser(user);
     setAuthSession(session);
     updateAuthLinks();
-    window.location.href = 'profile.html';
+    window.location.href = toUserPageHref('profile.html');
+}
+
+function nextUserId() {
+    const users = getStoredUsers();
+    return users.reduce((maxId, user) => Math.max(maxId, Number(user.id) || 0), 0) + 1;
+}
+
+function emailAlreadyUsed(email) {
+    const target = normalizeEmail(email);
+    return getStoredUsers().some((user) => normalizeEmail(user.email) === target);
 }
 
 function initLoginForm() {
@@ -175,8 +362,10 @@ function initLoginForm() {
     }
 
     loginForm._loginBound = true;
-    loginForm.addEventListener('submit', function (event) {
+    loginForm.addEventListener('submit', async function (event) {
         event.preventDefault();
+
+        await ensureUsersReady();
 
         const emailInput = document.getElementById('email');
         const passwordInput = document.getElementById('password');
@@ -184,42 +373,76 @@ function initLoginForm() {
         const email = emailInput?.value;
         const password = passwordInput?.value;
 
-        if (validateDemoCredentials(email, password)) {
-            handleSuccessfulLogin();
+        const user = findUserByCredentials(email, password);
+        if (user) {
+            handleSuccessfulLogin(user);
             return;
         }
 
-        showLoginFeedback('Credenciales incorrectas. Usa la cuenta de prueba.', true);
+        showLoginFeedback('Credenciales incorrectas. Revisa email y contraseña.', true);
     });
 
     const googleButton = document.querySelector('.google-btn');
     if (googleButton && !googleButton._googleBound) {
         googleButton._googleBound = true;
-        googleButton.addEventListener('click', function () {
-            handleSuccessfulLogin();
+        googleButton.addEventListener('click', async function () {
+            await ensureUsersReady();
+            const users = getStoredUsers();
+            if (users.length === 0) {
+                showLoginFeedback('No se han encontrado usuarios disponibles.', true);
+                return;
+            }
+
+            handleSuccessfulLogin(users[0]);
         });
     }
 }
 
-function bindRegisterForm(formId, emailId, nameId) {
+function bindRegisterForm(formId, emailId, nameId, role = 'customer') {
     const form = document.getElementById(formId);
     if (!form || form._registerBound) {
         return;
     }
 
     form._registerBound = true;
-    form.addEventListener('submit', function (event) {
+    form.addEventListener('submit', async function (event) {
         event.preventDefault();
+
+        await ensureUsersReady();
 
         const email = document.getElementById(emailId)?.value;
         const name = document.getElementById(nameId)?.value;
-        handleSuccessfulRegister(email, name);
+        const normalizedEmail = normalizeEmail(email);
+
+        if (!normalizedEmail) {
+            return;
+        }
+
+        if (emailAlreadyUsed(normalizedEmail)) {
+            window.alert('Ese correo ya está registrado. Prueba a iniciar sesión.');
+            return;
+        }
+
+        const password = document.getElementById('password')?.value;
+        const newUser = normalizeUser({
+            id: nextUserId(),
+            email: normalizedEmail,
+            password,
+            name,
+            role
+        });
+
+        const users = getStoredUsers();
+        users.push(newUser);
+        saveUsers(users);
+
+        handleSuccessfulRegister(newUser);
     });
 }
 
 function initRegisterForms() {
-    bindRegisterForm('register-form', 'email', 'fullname');
-    bindRegisterForm('company-register-form', 'email', 'company-name');
+    bindRegisterForm('register-form', 'email', 'fullname', 'customer');
+    bindRegisterForm('company-register-form', 'email', 'company-name', 'company');
 }
 
 function showAuthRequiredPopupIfNeeded() {
@@ -244,8 +467,53 @@ function showAuthRequiredPopupIfNeeded() {
     window.history.replaceState({}, '', cleanUrl);
 }
 
+function isProtectedUserPage() {
+    if (isAdminSection()) {
+        return false;
+    }
+
+    return PROTECTED_USER_PAGES.has(currentPageName());
+}
+
+function redirectToSignInWithNext(reason = 'auth-required') {
+    const next = `${window.location.pathname}${window.location.search || ''}`;
+    const params = new URLSearchParams();
+    params.set('reason', reason);
+    params.set('next', next);
+    window.location.href = `${toUserPageHref('sign-in.html')}?${params.toString()}`;
+}
+
+function enforceRouteGuards() {
+    const loggedIn = isUserLoggedIn();
+
+    if (isProtectedUserPage() && !loggedIn) {
+        redirectToSignInWithNext('auth-required');
+        return false;
+    }
+
+    if (isAdminSection()) {
+        if (!loggedIn) {
+            redirectToSignInWithNext('auth-required');
+            return false;
+        }
+
+        if (!isAdminLoggedIn()) {
+            window.location.href = toUserPageHref('home.html');
+            return false;
+        }
+    }
+
+    return true;
+}
+
 // Hacemos la función global para poder llamarla también desde xLuIncludeFile
-function initHamburgerMenu() {
+async function initHamburgerMenu() {
+    await ensureUsersReady();
+
+    if (!enforceRouteGuards()) {
+        return;
+    }
+
     updateCartBadge();
     updateAuthLinks();
     bindLogoutActions();
@@ -254,7 +522,12 @@ function initHamburgerMenu() {
     showAuthRequiredPopupIfNeeded();
 
     if (window.location.pathname.endsWith('/sign-in.html') && isUserLoggedIn()) {
-        window.location.href = 'profile.html';
+        if (isAdminLoggedIn()) {
+            window.location.href = toAdminPageHref('admin-shop.html');
+            return;
+        }
+
+        window.location.href = toUserPageHref('profile.html');
         return;
     }
 
@@ -333,6 +606,10 @@ window.addEventListener('storage', function (event) {
     }
 
     if (event.key === AUTH_STORAGE_KEY) {
+        updateAuthLinks();
+    }
+
+    if (event.key === USERS_STORAGE_KEY) {
         updateAuthLinks();
     }
 });

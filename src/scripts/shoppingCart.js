@@ -1,14 +1,18 @@
 function addToCart(quantityToAdd = 1) {
 
     const searchParams = new URLSearchParams(window.location.search);
-    const id = searchParams.get('id');
+    const id = Number(searchParams.get('id'));
     const quantity = Math.max(1, Number(quantityToAdd) || 1);
+
+    if (!Number.isFinite(id) || id <= 0) {
+        return;
+    }
 
     let cartItems = JSON.parse(localStorage.getItem('cartItems'))
     if (cartItems == null) {
         cartItems = []
     }
-    addToCartById(cartItems, parseInt(id), quantity);
+    addToCartById(cartItems, id, quantity);
     localStorage.setItem('cartItems', JSON.stringify(cartItems));
 
     if (typeof updateCartBadge === 'function') {
@@ -20,7 +24,7 @@ function addToCart(quantityToAdd = 1) {
 
 function addToCartById(cartItems, id, quantity = 1) {
     for (let cartItem of cartItems) {
-        if (cartItem.id === id) {
+        if (Number(cartItem.id) === id) {
             cartItem.quantity += quantity
             return
         }

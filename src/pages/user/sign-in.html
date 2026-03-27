@@ -32,13 +32,14 @@
 
                 <form id="login-form" action="profile.html">
 
-                    <input type="email" id="email" name="email" placeholder="Email" required>
+                    <input type="email" id="email" name="email" placeholder="Email" required autocomplete="email">
 
-                    <input type="password" id="password" name="password" placeholder="Password" required>
+                    <input type="password" id="password" name="password" placeholder="Password" required minlength="6" autocomplete="current-password">
 
                     <button class="login-btn" type="submit">INICIAR SESIÓN</button>
                 </form>
-                <p class="small">Cuenta de prueba: demo@casac.com / casac123</p>
+                <p class="small">Cliente: demo@casac.com / casac123</p>
+                <p class="small">Admin: admin@casac.com / admin123</p>
 
                 <a class="forgot" href="#">¿Olvidaste la contraseña?</a>
 
