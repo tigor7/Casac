@@ -5,7 +5,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 const TAX_RATE = 0.21
 const SHIPPING_CENTS = 0
-const ORDERS_STORAGE_KEY = 'orders'
+const CART_ORDERS_STORAGE_KEY = 'orders'
+const PRODUCT_PLACEHOLDER_IMG = '../../../img/placeholder.png'
 
 function normalizeCartItems(rawItems) {
     if (!Array.isArray(rawItems)) {
@@ -22,20 +23,42 @@ function normalizeCartItems(rawItems) {
             continue
         }
 
+        const normalizedSnapshot = {
+            name: typeof rawItem?.name === 'string' ? rawItem.name : undefined,
+            price: Number.isFinite(Number(rawItem?.price)) ? Math.max(0, Number(rawItem.price)) : undefined,
+            img: typeof rawItem?.img === 'string' ? rawItem.img : undefined
+        }
+
         const existing = normalized.find((item) => item.id === id)
         if (existing) {
             existing.quantity += quantity
+            if (normalizedSnapshot.name) existing.name = normalizedSnapshot.name
+            if (Number.isFinite(normalizedSnapshot.price)) existing.price = normalizedSnapshot.price
+            if (normalizedSnapshot.img) existing.img = normalizedSnapshot.img
             continue
         }
 
-        normalized.push({ id, quantity })
+        const normalizedItem = { id, quantity }
+        if (normalizedSnapshot.name) normalizedItem.name = normalizedSnapshot.name
+        if (Number.isFinite(normalizedSnapshot.price)) normalizedItem.price = normalizedSnapshot.price
+        if (normalizedSnapshot.img) normalizedItem.img = normalizedSnapshot.img
+
+        normalized.push(normalizedItem)
     }
 
     return normalized
 }
 
+function safeReadCartItems() {
+    try {
+        return JSON.parse(localStorage.getItem('cartItems'))
+    } catch (error) {
+        return []
+    }
+}
+
 function getStoredCartItems() {
-    const rawCartItems = JSON.parse(localStorage.getItem('cartItems'))
+    const rawCartItems = safeReadCartItems()
     const normalized = normalizeCartItems(rawCartItems)
 
     if (!Array.isArray(rawCartItems) || rawCartItems.length !== normalized.length) {
@@ -53,19 +76,28 @@ function saveCartItems(cartItems) {
 }
 
 function getStoredOrders() {
-    const orders = JSON.parse(localStorage.getItem(ORDERS_STORAGE_KEY))
+    const orders = JSON.parse(localStorage.getItem(CART_ORDERS_STORAGE_KEY))
     return Array.isArray(orders) ? orders : []
 }
 
 function saveOrders(orders) {
-    localStorage.setItem(ORDERS_STORAGE_KEY, JSON.stringify(orders))
+    localStorage.setItem(CART_ORDERS_STORAGE_KEY, JSON.stringify(orders))
 }
 
 async function loadCartItems() {
     const cartItems = getStoredCartItems()
 
-    let response = await fetch("../../templates/user/cart-item.html");
-    const template = await response.text();
+    let template = ''
+    try {
+        const response = await fetch("../../templates/user/cart-item.html")
+        template = await response.text()
+    } catch (error) {
+        template = ''
+    }
+
+    if (!template || !template.includes('{{id}}')) {
+        template = `<div class="cart-product-row" id="{{id}}"><div class="cell-product"><div class="product-img-box"><img src="{{img}}" alt="Producto"></div><span class="product-title">{{name}}</span></div><div class="cell-delete"><button class="icon-del" onclick="removeCartItem({{id}})">✕</button></div><div class="cell-qty"><div class="qty-selector"><button type="button" onclick="changeCartItemQuantity({{id}}, -1)">-</button><span>{{quantity}}</span><button type="button" onclick="changeCartItemQuantity({{id}}, 1)">+</button></div></div><div class="cell-price"><span class="price-value">{{price}}€</span></div></div>`
+    }
 
     const container = document.getElementById('cart-items-list');
     container.innerHTML = ""
@@ -80,7 +112,6 @@ async function loadCartItems() {
 
     if (snapshot.items.length === 0) {
         container.innerHTML = '<p class="cart-empty">Tu carrito está vacío.</p>'
-        saveCartItems([])
         setSummaryValues(0)
         return
     }
@@ -134,16 +165,16 @@ async function refreshCartSummary() {
 }
 
 async function getCartSnapshot(cartItems) {
+    const catalogById = await getCatalogById()
     const items = []
     let subtotalCents = 0
 
     for (const cartItem of cartItems) {
-        const res = await fetch("http://localhost:3000/products/" + cartItem.id)
-        if (!res.ok) {
+        const product = await resolveProduct(catalogById, cartItem.id, cartItem)
+        if (!product) {
             continue
         }
 
-        const product = await res.json()
         subtotalCents += product.price * cartItem.quantity
         items.push({
             cartItem,
@@ -155,6 +186,86 @@ async function getCartSnapshot(cartItems) {
         items,
         subtotalCents
     }
+}
+
+function normalizeProduct(product, id) {
+    return {
+        id: Number(product?.id) || Number(id) || 0,
+        name: String(product?.name || `Producto #${id}`),
+        price: Math.max(0, Number(product?.price) || 0),
+        img: String(product?.img || PRODUCT_PLACEHOLDER_IMG)
+    }
+}
+
+async function getCatalogById() {
+    const endpoints = [
+        'http://localhost:3000/products',
+        '/database/db.json',
+        '../../../database/db.json'
+    ]
+
+    for (const endpoint of endpoints) {
+        try {
+            const response = await fetch(endpoint)
+            if (!response.ok) {
+                continue
+            }
+
+            const payload = await response.json()
+            const products = Array.isArray(payload) ? payload : payload?.products
+            if (!Array.isArray(products)) {
+                continue
+            }
+
+            const byId = new Map()
+            products.forEach((product) => {
+                const id = Number(product?.id)
+                if (!Number.isFinite(id) || id <= 0) {
+                    return
+                }
+                byId.set(id, normalizeProduct(product, id))
+            })
+
+            return byId
+        } catch (error) {
+            // Probamos con el siguiente endpoint
+        }
+    }
+
+    return new Map()
+}
+
+async function resolveProduct(catalogById, id, cartItem = null) {
+    const numericId = Number(id)
+    if (!Number.isFinite(numericId) || numericId <= 0) {
+        return null
+    }
+
+    const fromCatalog = catalogById.get(numericId)
+    if (fromCatalog) {
+        return fromCatalog
+    }
+
+    if (cartItem && (cartItem.name || Number.isFinite(Number(cartItem.price)) || cartItem.img)) {
+        return normalizeProduct({
+            id: numericId,
+            name: cartItem.name,
+            price: cartItem.price,
+            img: cartItem.img
+        }, numericId)
+    }
+
+    try {
+        const response = await fetch('http://localhost:3000/products/' + numericId)
+        if (response.ok) {
+            const product = await response.json()
+            return normalizeProduct(product, numericId)
+        }
+    } catch (error) {
+        // Si falla red/servidor mostramos item mínimo con placeholder
+    }
+
+    return normalizeProduct(null, numericId)
 }
 
 function buildOrderFromSnapshot(snapshot) {

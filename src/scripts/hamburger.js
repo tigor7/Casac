@@ -153,7 +153,14 @@ async function ensureUsersReady() {
 }
 
 function getCartCount() {
-    const cartItems = JSON.parse(localStorage.getItem('cartItems'));
+    let cartItems = [];
+
+    try {
+        cartItems = JSON.parse(localStorage.getItem('cartItems'));
+    } catch (error) {
+        cartItems = [];
+    }
+
     if (!Array.isArray(cartItems)) {
         return 0;
     }

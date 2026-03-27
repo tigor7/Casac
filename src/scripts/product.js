@@ -11,10 +11,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     const container = document.getElementById('product-container');
     container.innerHTML = createProduct(template, product)
 
-    initProductQuantityControls();
+    initProductQuantityControls(product);
 });
 
-function initProductQuantityControls() {
+function initProductQuantityControls(product) {
     const qtyNum = document.getElementById('product-qty-num');
     const decreaseBtn = document.querySelector('[data-qty-action="decrease"]');
     const increaseBtn = document.querySelector('[data-qty-action="increase"]');
@@ -41,7 +41,7 @@ function initProductQuantityControls() {
     });
 
     addBtn.addEventListener('click', () => {
-        addToCart(selectedQty);
+        addToCart(selectedQty, product);
     });
 }
 

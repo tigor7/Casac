@@ -2,12 +2,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     await renderOrderHistory()
 })
 
-const ORDERS_STORAGE_KEY = 'orders'
+const ORDER_HISTORY_STORAGE_KEY = 'orders'
 const ORDER_TEMPLATE_PATH = '../../templates/user/order-history-item.html'
 const ORDER_PLACEHOLDER_IMG = '../../../img/placeholder.png'
 
 function getStoredOrders() {
-    const orders = JSON.parse(localStorage.getItem(ORDERS_STORAGE_KEY))
+    const orders = JSON.parse(localStorage.getItem(ORDER_HISTORY_STORAGE_KEY))
     return Array.isArray(orders) ? orders : []
 }
 
