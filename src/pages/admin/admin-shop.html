@@ -2,13 +2,16 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - Inventario</title>
     <link rel="stylesheet" href="../../styles/styles.css">
     <link rel="stylesheet" href="../../styles/user/shop.css">
     <link rel="stylesheet" href="../../styles/admin/admin.css">
     <script src="../../xlu-include-file.js"></script>
+    <script src="../../scripts/admin-shop.js"></script>
+    <script src="../../scripts/hamburger.js"></script>
 </head>
-<body>
+<body class="has-layout-header-footer">
 <header xlu-include-file="../../templates/user/header.html"></header>
 
 <main class="main-content shop-layout">
@@ -19,19 +22,11 @@
         </div>
 
         <div class="shop-search-bar">
-            <input type="text" placeholder="Buscar por nombre, SKU o categoría...">
-            <button>FILTRAR</button>
+            <input id="admin-search-input" type="text" placeholder="Buscar por nombre, SKU o categoría...">
+            <button id="admin-search-btn">FILTRAR</button>
         </div>
 
-        <div class="products-grid-4">
-            <div xlu-include-file="../../templates/admin/article-template-admin.html"></div>
-            <div xlu-include-file="../../templates/admin/article-template-admin.html"></div>
-            <div xlu-include-file="../../templates/admin/article-template-admin.html"></div>
-            <div xlu-include-file="../../templates/admin/article-template-admin.html"></div>
-            <div xlu-include-file="../../templates/admin/article-template-admin.html"></div>
-            <div xlu-include-file="../../templates/admin/article-template-admin.html"></div>
-            <div xlu-include-file="../../templates/admin/article-template-admin.html"></div>
-            <div xlu-include-file="../../templates/admin/article-template-admin.html"></div>
+        <div class="products-grid-4" id="admin-products-grid">
         </div>
     </div>
 </main>

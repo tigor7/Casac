@@ -10,19 +10,21 @@
     <link rel="stylesheet" href="../../styles/user/shop.css">
 
     <script src="../../xlu-include-file.js"></script>
+    <script src="../../scripts/home.js"></script>
+    <script src="../../scripts/hamburger.js"></script>
 </head>
-<body>
+<body class="has-layout-header-footer">
 
 <header xlu-include-file="../../templates/user/header.html"></header>
 
 <main class="main-content">
     <div class="search-row">
-        <input type="text" placeholder="Buscar en la ferretería...">
-        <button>BUSCAR</button>
+        <input id="home-search-input" type="text" placeholder="Buscar en la ferretería...">
+        <button id="home-search-btn">BUSCAR</button>
     </div>
 
     <div class="top-section">
-        <aside class="sidebar">
+        <aside class="sidebar" id="categories-box">
             <a href="shop.html">Jardinería</a>
             <a href="shop.html">Carpintería</a>
             <a href="shop.html">Fontanería</a>
@@ -39,12 +41,6 @@
     <h2 class="section-title">Productos más destacados</h2>
 
     <div class="cards-grid" id="grid-productos">
-        <div xlu-include-file="../../templates/user/article-template.html"></div>
-        <div xlu-include-file="../../templates/user/article-template.html"></div>
-        <div xlu-include-file="../../templates/user/article-template.html"></div>
-        <div xlu-include-file="../../templates/user/article-template.html"></div>
-        <div xlu-include-file="../../templates/user/article-template.html"></div>
-        <div xlu-include-file="../../templates/user/article-template.html"></div>
     </div>
 </main>
 
@@ -56,3 +52,4 @@
 
 </body>
 </html>
+

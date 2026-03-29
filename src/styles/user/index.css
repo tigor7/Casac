@@ -5,10 +5,17 @@
     margin: 60px auto;
     padding: 0 40px;
     flex: 1;
+    box-sizing: border-box;
 }
 
-/* Buscador XL */
-.search-row { display: flex; justify-content: flex-end; gap: 15px; margin-bottom: 40px; }
+/* Buscador */
+.search-row {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-bottom: 40px;
+}
+
 .search-row input {
     width: 400px;
     border: 2px solid #ddd;
@@ -16,8 +23,13 @@
     border-radius: 10px;
     outline: none;
     font-size: 16px;
+    box-sizing: border-box;
 }
-.search-row input:focus { border-color: #EDC421; }
+
+.search-row input:focus {
+    border-color: #EDC421;
+}
+
 .search-row button {
     border: none;
     padding: 14px 32px;
@@ -29,9 +41,12 @@
     cursor: pointer;
     transition: background 0.2s;
 }
-.search-row button:hover { background: #333; }
 
-/* Sección superior (Sidebar + Foto) XL */
+.search-row button:hover {
+    background: #333;
+}
+
+/* Sección superior */
 .top-section {
     display: flex;
     gap: 50px;
@@ -39,9 +54,10 @@
     align-items: stretch;
 }
 
-/* Sidebar XL */
+/* Sidebar */
 .sidebar {
     width: 320px;
+    flex-shrink: 0;
     background: #fff;
     border-radius: 16px;
     padding: 30px;
@@ -49,6 +65,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    box-sizing: border-box;
 }
 
 .sidebar a {
@@ -68,9 +85,10 @@
     padding-left: 25px;
 }
 
-/* Foto principal (Hero) XL */
+/* Hero */
 .hero {
-    flex-grow: 1;
+    flex: 1;
+    min-width: 0;
     border-radius: 16px;
     overflow: hidden;
     box-shadow: 0 8px 30px rgba(0,0,0,0.04);
@@ -83,59 +101,101 @@
     display: block;
 }
 
-/* --- Grid de productos XL --- */
-.cards-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 40px;
+/* Título */
+.section-title {
+    font-size: 48px;
+    font-weight: 900;
+    color: #111;
+    text-align: center;
+    margin-top: 80px;
     margin-bottom: 60px;
+    letter-spacing: -2px;
+    width: 100%;
 }
 
+/* GRID DE PRODUCTOS */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 30px;
+    margin-bottom: 60px;
+    align-items: stretch;
+}
+
+/* MUY IMPORTANTE: elimina el contenedor extra del include */
+.cards-grid > div[xlu-include-file] {
+    display: contents;
+}
+
+/* Por si la plantilla mete un wrapper raro */
+.cards-grid > * {
+    min-width: 0;
+}
+
+/* Tarjeta */
 .card {
+    width: 100%;
+    height: 100%;
     background: #fff;
     border-radius: 16px;
-    padding: 30px;
+    padding: 24px;
     display: flex;
-    gap: 30px;
+    flex-direction: column;
+    gap: 18px;
     box-shadow: 0 8px 30px rgba(0,0,0,0.03);
     transition: transform 0.2s, box-shadow 0.2s;
+    box-sizing: border-box;
+    overflow: hidden;
 }
 
 .card:hover {
-    transform: translateY(-8px);
+    transform: translateY(-6px);
     box-shadow: 0 15px 40px rgba(0,0,0,0.06);
 }
 
 .card-img {
-    width: 140px;
-    height: 140px;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    max-height: 180px;
     background: #FAFAFA;
     border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
     border: 1px solid #eee;
+    overflow: hidden;
+}
+
+.card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
 }
 
 .card-info {
     flex: 1;
     display: flex;
     flex-direction: column;
+    gap: 10px;
     justify-content: space-between;
+    min-width: 0;
 }
 
 .card-info h3 {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 800;
     color: #111;
-    margin-bottom: 8px;
-    letter-spacing: -0.5px;
+    margin: 0;
+    line-height: 1.2;
+    word-break: break-word;
 }
 
 .card-info p {
     font-size: 15px;
     color: #777;
-    line-height: 1.6;
+    line-height: 1.5;
+    margin: 0;
 }
 
 .card-info button {
@@ -145,30 +205,157 @@
     padding: 12px;
     border-radius: 8px;
     font-weight: 700;
-    font-size: 16px;
+    font-size: 15px;
     cursor: pointer;
-    margin-top: 15px;
+    margin-top: auto;
     transition: background 0.2s;
-}
-
-.card-info button:hover { background: #dcb31c; }
-
-/* Asegúrate de que en index.css el grid esté así para 3 columnas */
-.cards-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 40px;
-    margin-bottom: 60px;
-}
-
-/* Estilo para el título centrado y gigante */
-.section-title {
-    font-size: 48px;         /* Tamaño mucho más grande */
-    font-weight: 900;       /* Máximo grosor */
-    color: #111;
-    text-align: center;      /* Centrado total */
-    margin-top: 80px;       /* Mucho aire con el hero de arriba */
-    margin-bottom: 60px;    /* Espacio con los productos de abajo */
-    letter-spacing: -2px;   /* Efecto moderno de letras juntas */
     width: 100%;
+}
+
+.card-info button:hover {
+    background: #dcb31c;
+}
+
+/* ============================================================
+   RESPONSIVE DESIGN (RWD) - HOME
+   Desktop: estilos base (sin media query)
+   Tablet: <= 1024px
+   Móvil: <= 768px (y ajuste <= 480px)
+   ============================================================ */
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .main-content {
+        margin: 30px auto;
+        padding: 0 25px;
+    }
+
+    .search-row input {
+        width: 100%;
+    }
+
+    .top-section {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .sidebar {
+        width: 100%;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .sidebar a {
+        padding: 10px 15px;
+        font-size: 16px;
+    }
+
+    .cards-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 24px;
+    }
+
+    .section-title {
+        font-size: 36px;
+        margin-top: 50px;
+    }
+}
+
+/* Móvil */
+@media (max-width: 768px) {
+    .main-content {
+        padding: 0 14px;
+        margin: 20px auto;
+    }
+
+    .search-row {
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+    }
+
+    .search-row input,
+    .search-row button {
+        width: 100%;
+    }
+
+    .sidebar {
+        padding: 15px;
+    }
+
+    .sidebar a {
+        width: 100%;
+        text-align: center;
+    }
+
+    .hero {
+        height: 220px;
+    }
+
+    .section-title {
+        font-size: 28px;
+        margin-top: 40px;
+        margin-bottom: 30px;
+        letter-spacing: -1px;
+    }
+
+    /* Mantenemos 3 columnas en móvil amplio para conservar densidad visual actual */
+    .cards-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .card {
+        padding: 10px;
+        gap: 10px;
+    }
+
+    .card-img {
+        aspect-ratio: 1 / 1;
+        max-height: 120px;
+    }
+
+    .card-info h3 {
+        font-size: 13px;
+    }
+
+    .card-info p {
+        font-size: 11px;
+    }
+
+    .card-info button {
+        font-size: 11px;
+        padding: 8px;
+    }
+}
+
+/* Móvil estrecho */
+@media (max-width: 480px) {
+    .cards-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .card {
+        padding: 12px;
+    }
+
+    .card-img {
+        aspect-ratio: 1 / 1;
+        max-height: 95px;
+    }
+
+    .card-info h3 {
+        font-size: 14px;
+    }
+
+    .card-info p {
+        font-size: 12px;
+    }
+
+    .card-info button {
+        font-size: 12px;
+        padding: 9px;
+    }
 }

@@ -39,9 +39,10 @@ async function xLuIncludeFile() {
     let z = document.getElementsByTagName("*");
 
     for (let i = 0; i < z.length; i++) {
-        if (z[i].getAttribute("xlu-include-file")) {
-            let a = z[i].cloneNode(false);
-            let file = z[i].getAttribute("xlu-include-file");
+        const element = z[i];
+        if (element.getAttribute("xlu-include-file")) {
+            let a = element.cloneNode(false);
+            let file = element.getAttribute("xlu-include-file");
 
             try {
                 let response = await fetch(file);
@@ -53,7 +54,7 @@ async function xLuIncludeFile() {
                     // Si el archivo es una plantilla, reemplazamos los placeholders
                     if (file === "article-template.html") {
 
-                        content = replaceArticleTemplatePlaceholders(content, z[i]);
+                        content = replaceArticleTemplatePlaceholders(content, element);
 
                         /*
                         let articleData = {
@@ -82,8 +83,18 @@ async function xLuIncludeFile() {
                     a.removeAttribute("xlu-include-file");
                     //a.innerHTML = await response.text();
                     a.innerHTML = content;
-                    z[i].parentNode.replaceChild(a, z[i]);
-                    xLuIncludeFile();
+                    if (!element.parentNode) {
+                        return;
+                    }
+
+                    element.parentNode.replaceChild(a, element);
+
+                    // Re-inicializamos el menú hamburguesa por si el include ha insertado el header
+                    if (typeof initHamburgerMenu === 'function') {
+                        initHamburgerMenu();
+                    }
+
+                    await xLuIncludeFile();
                 }
             } catch (error) {
                 console.error("Error fetching file:", error);

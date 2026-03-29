@@ -12,6 +12,16 @@
     gap: 25px;
 }
 
+.orders-empty {
+    background: #fff;
+    border: 2px dashed #ececec;
+    border-radius: 16px;
+    padding: 24px;
+    color: #555;
+    font-weight: 600;
+    text-align: center;
+}
+
 /* --- TARJETA DE PEDIDO --- */
 .user-order-card {
     background: #fff;
@@ -62,16 +72,160 @@
 .u-order-body {
     padding: 30px;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    gap: 16px;
 }
 
-.u-items-preview { display: flex; align-items: center; gap: 20px; }
-.u-items-preview img {
-    width: 70px;
-    height: 70px;
+.u-items-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+}
+
+.u-order-item {
+    display: grid;
+    grid-template-columns: 56px 1fr auto;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
     background: #fafafa;
     border-radius: 12px;
-    padding: 10px;
+}
+
+.u-order-item img {
+    width: 56px;
+    height: 56px;
+    background: #fafafa;
+    border-radius: 10px;
+    padding: 8px;
     object-fit: contain;
 }
+
+.u-order-item-meta p {
+    margin: 0;
+    font-weight: 700;
+    color: #111;
+}
+
+.u-order-item-meta span {
+    font-size: 13px;
+    color: #666;
+}
+
+.u-order-item strong {
+    font-size: 15px;
+    color: #111;
+}
+
+.u-order-total {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #f0f0f0;
+    padding-top: 8px;
+}
+
+.u-order-total span {
+    color: #555;
+    font-weight: 600;
+}
+
+.u-order-total strong {
+    color: #111;
+    font-size: 18px;
+}
+
+.u-order-empty-items {
+    margin: 0;
+    color: #777;
+    font-weight: 600;
+}
+
+/* ============================================================
+   RESPONSIVE DESIGN (RWD) - ORDER HISTORY
+   Desktop: estilos base (sin media query)
+   Tablet: <= 1024px
+   Móvil: <= 768px
+   ============================================================ */
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .history-title {
+        font-size: 30px;
+        margin-bottom: 34px;
+    }
+
+    .u-order-header {
+        padding: 18px 24px;
+    }
+
+    .u-order-body {
+        padding: 24px;
+    }
+
+    .u-order-item {
+        grid-template-columns: 50px 1fr auto;
+    }
+
+    .u-order-item img {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+/* Móvil */
+@media (max-width: 768px) {
+    .history-title {
+        font-size: 26px;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .orders-empty {
+        padding: 20px;
+        font-size: 14px;
+    }
+
+    .u-order-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        padding: 15px 20px;
+    }
+
+    .u-order-body {
+        padding: 20px;
+    }
+
+    .u-order-item {
+        grid-template-columns: 44px 1fr;
+        gap: 10px;
+    }
+
+    .u-order-item img {
+        width: 44px;
+        height: 44px;
+    }
+
+    .u-order-item strong {
+        grid-column: 1 / -1;
+        justify-self: end;
+        font-size: 14px;
+    }
+
+    .u-order-total strong {
+        font-size: 16px;
+    }
+
+    /* Si en el HTML hay contenedores de acciones, que se adapten bien en móvil */
+    .u-order-body .u-actions {
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+}
+

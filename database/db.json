@@ -1,0 +1,64 @@
+{
+  "$schema": "./node_modules/json-server/schema.json",
+  "products": [
+    {"id":  2, "name":  "Alicates", "price":  1499,
+      "shortDescription": "Alicate de precision para agarre firme",
+      "description": "Alicate de precision ideal para trabajos de bricolaje y ajustes en casa. Ofrece agarre firme, buen control y resistencia para uso frecuente.",
+      "img": "../../../img/alicates.png", "categories": [1, 7]
+    },
+    {"id":  3, "name":  "Bridas", "price":  399,
+      "shortDescription": "Pack de bridas resistentes y versatiles",
+      "description": "Pack de bridas de alta resistencia para organizar cables, sujetar piezas y mantener ordenadas instalaciones domesticas o de taller.",
+      "img": "../../../img/bridas.png",
+      "categories": [3, 5]
+    },
+    {"id":  4, "name":  "Cinta Americana", "price":  999,
+      "shortDescription": "Cinta multiuso de gran adherencia",
+      "description": "Cinta americana de gran adherencia y durabilidad para reparaciones rapidas, sellado temporal y fijaciones en interior y exterior.",
+      "img": "../../../img/cinta_americana.png", "categories": []
+    },
+    {"id":  5, "name":  "Destornillador electrico", "price":  4999,
+      "shortDescription": "Atornillado rapido con control y potencia",
+      "description": "Destornillador electrico compacto y potente, pensado para montar muebles, trabajos de mantenimiento y tareas repetitivas con comodidad.",
+      "img": "../../../img/destornillador_electrico.png", "categories": []
+    },
+    {"id": 6, "name":  "Llave inglesa", "price":  1199,
+      "shortDescription": "Llave ajustable para multiples medidas",
+      "description": "Llave inglesa ajustable para tuercas y tornillos de diferentes medidas. Una herramienta basica y fiable para cualquier caja de herramientas.",
+      "img": "../../../img/llave_inglesa.png", "categories": []
+    },
+    {"id":  7, "name":  "Martillo", "price":  799,
+      "shortDescription": "Martillo equilibrado para uso general",
+      "description": "Martillo de uso general con buen equilibrio y agarre comodo, ideal para tareas de montaje, clavos y pequenas reparaciones en casa.",
+      "img": "../../../img/martillo.png","categories": []
+    }
+  ],
+  "categories" : [
+    {"id": 1, "name":  "Jardinería"},
+    {"id": 2, "name":  "Carpintería"},
+    {"id": 3, "name":  "Fontanería"},
+    {"id": 4, "name":  "Albañilería"},
+    {"id": 5, "name":  "Electricidad"},
+    {"id": 6, "name":  "Tornillería"},
+    {"id": 7, "name":  "Cerrajería"}
+  ],
+  "users": [
+    {
+      "id": 1,
+      "email": "demo@casac.com",
+      "password": "casac123",
+      "name": "Usuario de prueba",
+      "role": "customer"
+    },
+    {
+      "id": 2,
+      "email": "admin@casac.com",
+      "password": "admin123",
+      "name": "Administrador CASAC",
+      "role": "admin"
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

@@ -1,5 +1,14 @@
 /* styles/auth.css */
 
+/* Ocultar icono hamburguesa en página de sign-in */
+.hamburger-mobile {
+    display: none !important;
+}
+
+.mobile-menu-auth {
+    display: none !important;
+}
+
 /* Eliminamos cualquier margen del body para el Full Screen */
 body {
     margin: 0;
@@ -52,6 +61,11 @@ body {
     margin-top: 0; /* Quitamos cualquier margen superior que pueda mover el bloque */
     margin-bottom: 50px;
     color: #111;
+}
+
+.login h1 a {
+    color: inherit;
+    text-decoration: none;
 }
 
 /* Inputs más grandes y espaciosos */
@@ -125,7 +139,14 @@ body {
     display: block;
 }
 
-/* Responsive para que no se rompa en pantallas pequeñas */
+/* ============================================================
+   RESPONSIVE DESIGN (RWD) - AUTH
+   Desktop: estilos base (sin media query)
+   Tablet: <= 1100px
+   Móvil: <= 768px (y ajuste <= 560px)
+   ============================================================ */
+
+/* Tablet */
 @media (max-width: 1100px) {
     .right { display: none; }
     .left { flex: 1; padding: 40px; }
@@ -207,4 +228,96 @@ body {
 /* Ajuste de márgenes para que la posición sea idéntica a los registros */
 .login .forgot {
     margin-top: 15px;
+}
+
+/* =========================
+   HAMBURGER MENU - AUTH PAGE
+   ========================= */
+
+.hamburger-mobile {
+    display: none;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.hamburger-mobile span {
+    width: 24px;
+    height: 2.5px;
+    background-color: #111;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+/* Menú móvil desplegable en auth page */
+.mobile-menu-auth {
+    display: none;
+    position: fixed;
+    top: 60px;
+    right: 20px;
+    background-color: #fff;
+    border: 2px solid #111;
+    border-radius: 8px;
+    z-index: 999;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    min-width: 200px;
+}
+
+.mobile-menu-auth ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 10px 0;
+}
+
+.mobile-menu-auth li {
+    border-bottom: 1px solid #eee;
+}
+
+.mobile-menu-auth li:last-child {
+    border-bottom: none;
+}
+
+.mobile-menu-auth a {
+    display: block;
+    padding: 12px 20px;
+    text-decoration: none;
+    color: #111;
+    font-weight: 500;
+    font-size: 14px;
+    transition: background-color 0.2s;
+}
+
+.mobile-menu-auth a:hover {
+    background-color: #f5f5f5;
+}
+
+.mobile-menu-auth.active {
+    display: block;
+}
+
+/* Móvil */
+@media (max-width: 768px) {
+    .hamburger-mobile {
+        display: flex;
+    }
+}
+
+/* Móvil estrecho */
+@media (max-width: 560px) {
+    .hamburger-mobile {
+        display: flex;
+        top: 16px;
+        right: 16px;
+    }
+
+    .mobile-menu-auth {
+        top: 56px;
+        right: 16px;
+    }
 }
