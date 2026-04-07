@@ -1,3 +1,7 @@
+# Angular
+.angular/
+node_modules/
+
 # Ignore all files in the .idea folder
 .idea/
 
