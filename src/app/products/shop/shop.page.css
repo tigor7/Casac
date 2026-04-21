@@ -1,0 +1,283 @@
+.shop-layout {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    padding: 60px 40px;
+}
+
+.shop-container-xl {
+    width: 100%;
+    max-width: 1500px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+/* Buscador estilo Shop.png */
+.shop-search-bar {
+    display: flex;
+    max-width: 800px;
+    margin: 0 auto 20px;
+    width: 100%;
+}
+
+.shop-search-bar input {
+    flex: 1;
+    padding: 15px 20px;
+    border: 2px solid #eee;
+    border-radius: 10px 0 0 10px;
+    outline: none;
+}
+
+.shop-search-bar button {
+    padding: 0 30px;
+    background: #111;
+    color: #fff;
+    border: none;
+    border-radius: 0 10px 10px 0;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+/* El Grid de 4 que soluciona tu error visual */
+.products-grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+}
+
+.search-empty {
+    grid-column: 1 / -1;
+    margin: 0;
+    background: #fff;
+    border: 2px dashed #ececec;
+    border-radius: 14px;
+    padding: 20px;
+    color: #666;
+    font-weight: 600;
+    text-align: center;
+}
+
+/* Estilo del Artículo Inyectado */
+.shop-card {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.2s;
+}
+
+.shop-card:hover { transform: translateY(-5px); }
+
+.shop-card-img {
+    aspect-ratio: 1/1;
+    background: #fafafa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.shop-card-info { padding: 20px; }
+.shop-desc { font-size: 14px; color: #555; margin-bottom: 10px; height: 40px; }
+.shop-price { font-size: 22px; font-weight: 900; display: block; margin-bottom: 15px; }
+.add-btn { width: 100%; padding: 10px; background: #EDC421; border: none; border-radius: 6px; font-weight: 700; cursor: pointer; }
+
+/* ===== AJUSTES FINALES SHOP ===== */
+
+/* Si los productos vienen inyectados dentro de un div intermedio */
+.products-grid-4 > div[xlu-include-file] {
+    display: contents;
+}
+
+/* Tarjeta */
+.shop-card {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+/* Imagen del producto */
+.shop-card-img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    max-height: 240px;
+    background: #fafafa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* Imagen interna */
+.prod-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+/* Info */
+.shop-card-info {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.shop-desc {
+    font-size: 14px;
+    color: #555;
+    margin: 0;
+    min-height: 36px;
+    line-height: 1.25;
+}
+
+.shop-price {
+    font-size: 22px;
+    font-weight: 900;
+    display: block;
+    margin: 0;
+}
+
+.shop-card-info a {
+    display: block;
+    width: 100%;
+    text-decoration: none;
+}
+
+.add-btn {
+    width: 100%;
+    padding: 10px;
+    background: #EDC421;
+    border: none;
+    border-radius: 6px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* ============================================================
+   RESPONSIVE DESIGN (RWD) - SHOP
+   Desktop: estilos base (sin media query)
+   Tablet: <= 1100px y <= 900px
+   Móvil: <= 600px (y ajuste <= 420px)
+   ============================================================ */
+
+/* Tablet */
+@media (max-width: 1100px) {
+    .shop-layout {
+        padding: 40px 25px;
+    }
+
+    .products-grid-4 {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+
+    .shop-search-bar {
+        max-width: 90%;
+    }
+
+    .shop-card-img {
+        max-height: 210px;
+    }
+}
+
+@media (max-width: 900px) {
+    .products-grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .shop-card-info {
+        padding: 15px;
+    }
+
+    .shop-price {
+        font-size: 20px;
+    }
+
+    .shop-card-img {
+        max-height: 180px;
+    }
+}
+
+/* Móvil */
+@media (max-width: 600px) {
+    .shop-layout {
+        padding: 20px 15px;
+    }
+
+    .shop-search-bar {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .shop-search-bar input {
+        border-radius: 10px;
+        width: 100%;
+    }
+
+    .shop-search-bar button {
+        border-radius: 10px;
+        padding: 15px;
+        width: 100%;
+    }
+
+    .products-grid-4 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .shop-card {
+        border-radius: 14px;
+    }
+
+    .shop-card-img {
+        max-height: 105px;
+    }
+
+    .shop-card-info {
+        padding: 10px;
+        gap: 8px;
+    }
+
+    .shop-desc {
+        font-size: 11px;
+        min-height: auto;
+        margin-bottom: 0;
+    }
+
+    .shop-price {
+        font-size: 15px;
+    }
+
+    .add-btn {
+        padding: 8px;
+        font-size: 11px;
+    }
+}
+
+/* Móvil estrecho (hasta 420px) */
+@media (max-width: 420px) {
+    .products-grid-4 {
+        grid-template-columns: 1fr;
+    }
+
+    .shop-card-img {
+        max-height: 95px;
+    }
+
+    .shop-desc {
+        font-size: 10px;
+    }
+
+    .shop-price {
+        font-size: 14px;
+    }
+
+    .add-btn {
+        font-size: 10px;
+        padding: 7px;
+    }
+}
