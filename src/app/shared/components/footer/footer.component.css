@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;800&display=swap');
+
+body {
+    background-color: #fafafa;
+    color: #333333;
+    min-height: 100vh;
+}
+
+/* En la mayoría de páginas con header/footer usamos un layout de columna.
+  La página de login tiene su propio layout full-screen en auth.css,
+  así que no forzamos display:flex aquí para no deformarla. */
+body.has-layout-header-footer {
+    display: flex;
+    flex-direction: column;
+}
+
+footer {
+    background-color: #edc421;
+    width: 100%;
+    position: relative;
+}
+
+footer h1 {
+    font-size: 36px;
+    font-weight: 800;
+    letter-spacing: -2px;
+    color: #111;
+    text-align: center;
+}
+footer {
+    width: 100%;
+    padding: 50px 5%;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+footer {
+    margin-top: auto;
+    position: relative;
+}
+
+.footer-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #333;
+}
+
+/* ============================================================
+   RESPONSIVE DESIGN (RWD) - GLOBAL
+   Desktop: estilos base (sin media query) + ajuste >= 769px
+   Tablet: 600px - 1024px
+   Móvil: <= 768px (header <= 599px y ajuste <= 400px)
+   ============================================================ */
+
+/* Escritorio */
+@media (min-width: 769px) {
+    .footer-links {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+/* Móvil (hasta 768px) */
+@media (max-width: 768px) {
+    footer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 18px;
+        padding: 24px 16px;
+        text-align: center;
+    }
+
+    footer h1,
+    footer .logo-link,
+    footer a.logo-link h1 {
+        position: static;
+        margin: 0;
+        text-align: center;
+    }
+
+    .footer-links {
+        position: static;
+        transform: none;
+        left: auto;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        align-items: center;
+        text-align: center;
+    }
+
+    footer h1 {
+        font-size: 28px;
+        letter-spacing: -1px;
+        line-height: 1;
+    }
+}
