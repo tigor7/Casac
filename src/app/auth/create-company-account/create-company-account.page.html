@@ -1,0 +1,67 @@
+<div class="frame">
+    <div class="container">
+        <div class="left">
+            <div class="login">
+                <h1><a href="home.html">CASAC</a></h1>
+
+                <form id="company-register-form" action="profile.html">
+                    <div class="row">
+                        <input
+                            class="half"
+                            type="text"
+                            id="cif"
+                            name="cif"
+                            placeholder="CIF"
+                            required
+                            pattern="[A-Za-z][0-9]{7}[0-9A-Za-z]"
+                            title="Introduce un CIF válido (ej: B12345678)"
+                        />
+
+                        <input
+                            class="half"
+                            type="tel"
+                            id="phone"
+                            name="phone"
+                            placeholder="Teléfono"
+                            required
+                            pattern="[0-9]{9}"
+                            title="Introduce un teléfono válido de 9 dígitos"
+                        />
+                    </div>
+
+                    <input
+                        type="text"
+                        id="company-name"
+                        name="company_name"
+                        placeholder="Nombre de la empresa"
+                        required
+                    />
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Correo de contacto"
+                        required
+                    />
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Contraseña"
+                        required
+                        minlength="6"
+                        title="La contraseña debe tener al menos 6 caracteres"
+                    />
+
+                    <button class="login-btn" type="submit">CREAR</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="right">
+            <img src="ferreteria-stock.jpg" alt="Imagen de herramientas" />
+        </div>
+    </div>
+</div>
