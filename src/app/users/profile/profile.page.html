@@ -1,0 +1,44 @@
+<app-header />
+<main class="main-content profile-layout">
+    <div class="profile-container-xl">
+        <aside class="profile-sidebar">
+            <nav class="profile-nav">
+                <a href="profile.html" class="active">Información Personal</a>
+                <a href="security.html">Seguridad</a>
+                <a href="order-history.html">Mis Pedidos</a>
+                <a href="addresses.html">Direcciones</a>
+            </nav>
+        </aside>
+
+        <section class="profile-main-content">
+            <h1>Configuración del Perfil</h1>
+
+            <form class="profile-form">
+                <div class="form-group">
+                    <label>Nombre Completo</label>
+                    <input type="text" value="Juan Pérez" placeholder="Escribe tu nombre" />
+                </div>
+
+                <div class="form-group">
+                    <label>Correo Electrónico</label>
+                    <input type="email" value="juan.perez@email.com" placeholder="tu@email.com" />
+                </div>
+
+                <div class="form-group">
+                    <label>Teléfono de Contacto</label>
+                    <input type="tel" value="+34 600 000 000" placeholder="+34..." />
+                </div>
+
+                <div class="form-group">
+                    <label>Ciudad / Provincia</label>
+                    <input type="text" value="Madrid" placeholder="Tu ciudad" />
+                </div>
+
+                <div class="form-footer">
+                    <button type="submit" class="save-btn">GUARDAR CAMBIOS</button>
+                </div>
+            </form>
+        </section>
+    </div>
+</main>
+<app-footer />
