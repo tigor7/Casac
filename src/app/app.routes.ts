@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { HomePage } from '@app/home/home.page';
 import { ShopPage } from '@app/products/shop/shop.page';
+import { CartPage } from '@app/cart/cart.page';
 import { SignInPage } from '@app/auth/sign-in/sign-in.page';
 import { CreateAccountPage } from '@app/auth/create-account/create-account.page';
 import { CreateCompanyAccountPage } from '@app/auth/create-company-account/create-company-account.page';
@@ -18,6 +19,10 @@ export const routes: Routes = [
     {
         path: 'product/:id',
         component: ProductDetailPage,
+    },
+    {
+        path: 'cart',
+        component: CartPage,
     },
     {
         path: 'signin',

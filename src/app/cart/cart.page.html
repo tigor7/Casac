@@ -1,0 +1,48 @@
+<app-header />
+<main class="main-content cart-layout">
+    <div class="cart-container-xl">
+        <div class="cart-main-panel" id="cart-box">
+            <div class="cart-table-header">
+                <span class="head-prod">Producto</span>
+                <span class="head-del">Eliminar</span>
+                <span class="head-qty">Cantidad</span>
+                <span class="head-price">Precio</span>
+            </div>
+
+            <div id="cart-items-list"></div>
+        </div>
+
+        <aside class="cart-summary-panel">
+            <h2>Resumen</h2>
+
+            <div class="coupon-section">
+                <input type="text" placeholder="Código de descuento" />
+                <button class="apply-btn">Aplicar</button>
+            </div>
+
+            <div class="summary-details">
+                <div class="detail-labels">
+                    <p>Subtotal</p>
+                    <p>Envío</p>
+                    <p>Impuestos</p>
+                </div>
+                <div class="detail-values">
+                    <p id="summary-subtotal">0,00€</p>
+                    <p id="summary-shipping">Gratis</p>
+                    <p id="summary-taxes">0,00€</p>
+                </div>
+            </div>
+
+            <div class="total-box">
+                <span>Total</span>
+                <span id="summary-total">0,00€</span>
+            </div>
+
+            <div class="checkout-footer">
+                <button id="checkout-btn" class="main-pay-btn">FINALIZAR COMPRA</button>
+            </div>
+        </aside>
+    </div>
+</main>
+
+<app-footer />
