@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { HomePage } from '@app/home/home.page';
+import { ProductDetailPage } from './products/detail/product-detail.page';
 import { ShopPage } from '@app/products/shop/shop.page';
 import { CartPage } from '@app/cart/cart.page';
 import { SignInPage } from '@app/auth/sign-in/sign-in.page';
