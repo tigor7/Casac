@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
+import { Product } from '../product.model';
 
 @Component({
     selector: 'app-product-card',
@@ -7,8 +8,6 @@ import { Component } from '@angular/core';
     styleUrl: './product-card.component.css',
 })
 export class ProductCardComponent {
-    id = 1;
-    img = 'alicates.png';
-    shortDescription = 'Alicates';
-    price = 12;
+    product = input<Product>();
+    constructor() {}
 }
