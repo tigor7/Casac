@@ -7,12 +7,9 @@
         </div>
 
         <div class="products-grid-4" id="shop-grid">
-            <app-product-card />
-            <app-product-card />
-            <app-product-card />
-            <app-product-card />
-            <app-product-card />
-            <app-product-card />
+            @for (product of products$ | async; track product.id) {
+                <app-product-card [product]="product" />
+            }
         </div>
     </div>
 </main>
