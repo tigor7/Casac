@@ -1,8 +1,8 @@
-<app-header/>
+<app-header />
 
 <main class="main-content">
     <div class="search-row">
-        <input id="home-search-input" type="text" placeholder="Buscar en la ferretería...">
+        <input id="home-search-input" type="text" placeholder="Buscar en la ferretería..." />
         <button id="home-search-btn">BUSCAR</button>
     </div>
 
@@ -17,14 +17,17 @@
             <a href="shop.html">Cerrajería</a>
         </aside>
         <div class="hero">
-            <img src="imgHome.jpg" alt="Ferretería CASAC">
+            <img src="imgHome.jpg" alt="Ferretería CASAC" />
         </div>
     </div>
 
     <h2 class="section-title">Productos más destacados</h2>
 
     <div class="cards-grid" id="grid-productos">
+        @for (product of products$ | async; track product.id) {
+            <app-product-card [product]="product" />
+        }
     </div>
 </main>
 
-<app-footer/>
+<app-footer />
