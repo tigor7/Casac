@@ -4,7 +4,7 @@
     </div>
     <div class="shop-card-info">
         <p class="shop-desc">{{ product()?.shortDescription }}</p>
-        <span class="shop-price">{{ product()?.price }}€</span>
+        <span class="shop-price">{{ product()?.price ?? 0 | formatCurrency }}</span>
         <a [routerLink]="['/product', product()?.id]">
             <button class="add-btn">Ver producto</button>
         </a>
