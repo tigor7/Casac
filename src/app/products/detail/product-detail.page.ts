@@ -6,9 +6,10 @@ import { ActivatedRoute } from '@angular/router';
 import { Product } from '../product.model';
 import { Observable } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
+import { FormatCurrencyPipe } from '@app/shared/pipes/format-currency.pipe';
 
 @Component({
-    imports: [HeaderComponent, FooterComponent, AsyncPipe],
+    imports: [HeaderComponent, FooterComponent, AsyncPipe, FormatCurrencyPipe],
     templateUrl: './product-detail.page.html',
     styleUrl: './product-detail.page.css',
 })

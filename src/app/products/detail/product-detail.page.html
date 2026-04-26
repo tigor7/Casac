@@ -10,7 +10,7 @@
             <p class="subtitle">{{ (product$ | async)?.description }}</p>
 
             <div class="buy-row">
-                <div class="pack">{{ (product$ | async)?.price }}€</div>
+                <div class="pack">{{ (product$ | async)?.price ?? 0 | formatCurrency }}</div>
 
                 <div class="qty">
                     <button type="button" class="qty-btn" data-qty-action="decrease">-</button>
