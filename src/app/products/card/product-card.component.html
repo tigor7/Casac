@@ -5,7 +5,7 @@
     <div class="shop-card-info">
         <p class="shop-desc">{{ product()?.shortDescription }}</p>
         <span class="shop-price">{{ product()?.price }}€</span>
-        <a href="product.html?id={{ product()?.id }}">
+        <a [routerLink]="['/product', product()?.id]">
             <button class="add-btn">Ver producto</button>
         </a>
     </div>
