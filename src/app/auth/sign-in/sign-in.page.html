@@ -8,7 +8,7 @@
     <ul>
         <li><a href="shop.html">Tienda</a></li>
         <li><a href="cart.html">Carrito</a></li>
-        <li><a href="sign-in.html" data-auth-link>Iniciar sesión</a></li>
+        <li><a href="sign-in.html" data-auth-link>Iniciar sesion</a></li>
     </ul>
 </nav>
 
@@ -16,34 +16,39 @@
     <div class="container">
         <div class="left">
             <div class="login">
-                <h1><a href="home.html">CASAC</a></h1>
+                <h1><a routerLink="/">CASAC</a></h1>
 
-                <form id="login-form" action="profile.html">
+                <form id="login-form" novalidate (submit)="onSubmit($event)">
+                    <div class="form-error" *ngIf="loginForm.email().touched() && loginForm.email().invalid()">
+                        <small>Introduce un email valido.</small>
+                    </div>
                     <input
                         type="email"
                         id="email"
-                        name="email"
                         placeholder="Email"
-                        required
                         autocomplete="email"
+                        [formField]="loginForm.email"
                     />
 
+                    <div class="form-error" *ngIf="loginForm.password().touched() && loginForm.password().invalid()">
+                        <small>La contrasena debe tener al menos 6 caracteres.</small>
+                    </div>
                     <input
                         type="password"
                         id="password"
-                        name="password"
                         placeholder="Password"
-                        required
-                        minlength="6"
                         autocomplete="current-password"
+                        [formField]="loginForm.password"
                     />
 
-                    <button class="login-btn" type="submit">INICIAR SESIÓN</button>
+                    <button class="login-btn" type="submit" [disabled]="loginForm().invalid()">
+                        INICIAR SESION
+                    </button>
                 </form>
                 <p class="small">Cliente: demo@casac.com / casac123</p>
                 <p class="small">Admin: admin@casac.com / admin123</p>
 
-                <a class="forgot" href="#">¿Olvidaste la contraseña?</a>
+                <a class="forgot" href="#">Olvidaste la contrasena?</a>
 
                 <div class="divider">
                     <span class="line"></span>
@@ -52,12 +57,12 @@
                 </div>
 
                 <button class="google-btn" type="button">
-                    <span>Inicia sesión con Google</span>
+                    <span>Inicia sesion con Google</span>
                     <span class="g-icon">G</span>
                 </button>
 
                 <div class="footer-auth">
-                    <p class="small">¿Aún no tienes cuenta?</p>
+                    <p class="small">Aun no tienes cuenta?</p>
                     <a class="create" routerLink="/create-account">Crear cuenta</a>
                 </div>
             </div>

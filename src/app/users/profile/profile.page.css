@@ -222,3 +222,16 @@
         text-align: center;
     }
 }
+
+/* Estilos para mensajes de error en el formulario */
+.form-error {
+    color: #d32f2f;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 6px 0 8px;
+}
+
+.form-error small {
+    font-size: inherit;
+    font-weight: inherit;
+}

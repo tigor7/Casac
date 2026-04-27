@@ -2,58 +2,70 @@
     <div class="container">
         <div class="left">
             <div class="login">
-                <h1><a href="home.html">CASAC</a></h1>
+                <h1><a routerLink="/">CASAC</a></h1>
 
-                <form id="register-form" action="profile.html">
+                <form id="register-form" novalidate (submit)="onSubmit($event)">
                     <div class="row">
+                        <div class="form-error" *ngIf="registrationForm.username().touched() && registrationForm.username().invalid()">
+                            <small>El usuario es obligatorio y debe tener 4 caracteres.</small>
+                        </div>
                         <input
                             class="half"
                             type="text"
                             id="username"
-                            name="username"
                             placeholder="Usuario"
-                            required
-                            minlength="4"
-                            title="El usuario debe tener al menos 4 caracteres"
+                            [formField]="registrationForm.username"
                         />
 
+                        <div class="form-error" *ngIf="registrationForm.phone().touched() && registrationForm.phone().invalid()">
+                            <small>Introduce un telefono valido de 9 digitos.</small>
+                        </div>
                         <input
                             class="half"
                             type="tel"
                             id="phone"
-                            name="phone"
-                            placeholder="Teléfono"
-                            required
-                            pattern="[0-9]{9}"
-                            title="Introduce un número de teléfono válido de 9 dígitos"
+                            placeholder="Telefono"
+                            [formField]="registrationForm.phone"
                         />
                     </div>
 
+                    <div class="form-error" *ngIf="registrationForm.fullname().touched() && registrationForm.fullname().invalid()">
+                        <small>El nombre completo es obligatorio.</small>
+                    </div>
                     <input
                         type="text"
                         id="fullname"
-                        name="fullname"
                         placeholder="Nombre y apellidos"
-                        required
+                        [formField]="registrationForm.fullname"
                     />
 
-                    <input type="email" id="email" name="email" placeholder="Email" required />
+                    <div class="form-error" *ngIf="registrationForm.email().touched() && registrationForm.email().invalid()">
+                        <small>Introduce un email valido.</small>
+                    </div>
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Email"
+                        [formField]="registrationForm.email"
+                    />
 
+                    <div class="form-error" *ngIf="registrationForm.password().touched() && registrationForm.password().invalid()">
+                        <small>La contrasena debe tener al menos 6 caracteres.</small>
+                    </div>
                     <input
                         type="password"
                         id="password"
-                        name="password"
-                        placeholder="Contraseña"
-                        required
-                        minlength="6"
-                        title="La contraseña debe tener al menos 6 caracteres"
+                        placeholder="Contrasena"
+                        [formField]="registrationForm.password"
                     />
 
-                    <button class="login-btn" type="submit">CREAR</button>
+                    <button class="login-btn" type="submit" [disabled]="registrationForm().invalid()">
+                        CREAR
+                    </button>
                 </form>
 
                 <br />
-                <a class="forgot" routerLink="/create-company-account">¿Eres una empresa?</a>
+                <a class="forgot" routerLink="/create-company-account">Eres una empresa?</a>
             </div>
         </div>
 
