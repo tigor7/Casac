@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { CartService } from '@app/cart/cart-service';
 
 @Component({
     selector: 'app-header',
@@ -7,4 +8,7 @@ import { RouterLink } from '@angular/router';
     templateUrl: './header.component.html',
     styleUrl: './header.component.css',
 })
-export class HeaderComponent {}
+export class HeaderComponent {
+    private cartService = inject(CartService);
+    numItems = computed(() => this.cartService.items().length);
+}

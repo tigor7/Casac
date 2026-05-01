@@ -11,7 +11,9 @@
             <li>
                 <a routerLink="/cart" class="cart-link">
                     Carrito
-                    <span class="cart-badge" data-cart-badge>0</span>
+                    @if (numItems() > 0) {
+                        <span class="cart-badge" data-cart-badge>{{ numItems() }}</span>
+                    }
                 </a>
             </li>
             <li><a routerLink="/signin" data-auth-link>Iniciar sesión</a></li>
@@ -25,7 +27,9 @@
             <li>
                 <a href="cart.html" class="cart-link">
                     Carrito
-                    <span class="cart-badge" data-cart-badge>0</span>
+                    @if (numItems() > 0) {
+                        <span class="cart-badge" data-cart-badge>1</span>
+                    }
                 </a>
             </li>
             <li><a href="sign-in.html" data-auth-link>Iniciar sesión</a></li>

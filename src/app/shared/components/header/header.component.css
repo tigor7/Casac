@@ -79,7 +79,7 @@ header nav a:hover {
     text-align: center;
 }
 
-.cart-badge.visible {
+.cart-badge {
     display: inline-flex;
     align-items: center;
     justify-content: center;
