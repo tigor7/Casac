@@ -1,26 +1,34 @@
 <app-header />
-<main class="main-content product-center-layout" id="product-container">
-    <div class="product-card">
-        <div class="img-box">
-            <img [src]="(product$ | async)?.img" alt="Tornillo" />
-        </div>
-
-        <div class="info">
-            <h1>{{ (product$ | async)?.name }}</h1>
-            <p class="subtitle">{{ (product$ | async)?.description }}</p>
-
-            <div class="buy-row">
-                <div class="pack">{{ (product$ | async)?.price ?? 0 | formatCurrency }}</div>
-
-                <div class="qty">
-                    <button type="button" class="qty-btn" data-qty-action="decrease">-</button>
-                    <span class="qty-num" id="product-qty-num">1</span>
-                    <button type="button" class="qty-btn" data-qty-action="increase">+</button>
-                </div>
+@if (product$ | async; as p) {
+    <main class="main-content product-center-layout" id="product-container">
+        <div class="product-card">
+            <div class="img-box">
+                <img [src]="(product$ | async)?.img" alt="Tornillo" />
             </div>
 
-            <button class="add-btn" type="button" id="add-to-cart-btn">Agregar al carrito</button>
+            <div class="info">
+                <h1>{{ p.name }}</h1>
+                <p class="subtitle">{{ p.description }}</p>
+
+                <div class="buy-row">
+                    <div class="pack">{{ p.price ?? 0 | formatCurrency }}</div>
+
+                    <div class="qty">
+                        <button type="button" class="qty-btn" (click)="decreaseQuantity()">
+                            -
+                        </button>
+                        <span class="qty-num" id="product-qty-num">{{ quantity() }}</span>
+                        <button type="button" class="qty-btn" (click)="increaseQuantity()">
+                            +
+                        </button>
+                    </div>
+                </div>
+
+                <button (click)="addItem(p.id)" class="add-btn" type="button" id="add-to-cart-btn">
+                    Agregar al carrito
+                </button>
+            </div>
         </div>
-    </div>
-</main>
+    </main>
+}
 <app-footer />

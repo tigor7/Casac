@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { HeaderComponent } from '@app/shared/components/header/header.component';
 import { FooterComponent } from '@app/shared/components/footer/footer.component';
 import { ProductService } from '../product.service';
@@ -7,6 +7,7 @@ import { Product } from '../product.model';
 import { Observable } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { FormatCurrencyPipe } from '@app/shared/pipes/format-currency.pipe';
+import { CartService } from '@app/cart/cart-service';
 
 @Component({
     imports: [HeaderComponent, FooterComponent, AsyncPipe, FormatCurrencyPipe],
@@ -15,11 +16,27 @@ import { FormatCurrencyPipe } from '@app/shared/pipes/format-currency.pipe';
 })
 export class ProductDetailPage implements OnInit {
     private productService = inject(ProductService);
+    private cartService = inject(CartService);
     private route = inject(ActivatedRoute);
+
     product$ = new Observable<Product>();
+    quantity = signal(1);
     constructor() {}
     ngOnInit(): void {
         const productId = Number(this.route.snapshot.paramMap.get('id'));
         this.product$ = this.productService.getProductById(productId);
+    }
+    increaseQuantity() {
+        this.quantity.update((quantity) => quantity + 1);
+    }
+    decreaseQuantity() {
+        this.quantity.update((quantity) => {
+            if (quantity - 1 > 0) return quantity - 1;
+            return 1;
+        });
+    }
+
+    addItem(id: number) {
+        this.cartService.add(id, this.quantity());
     }
 }
