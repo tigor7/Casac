@@ -1,19 +1,23 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Product } from './product.model';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { collection, collectionData, doc, docData, Firestore } from '@angular/fire/firestore';
 
 @Injectable({
     providedIn: 'root',
 })
 export class ProductService {
-    constructor(private http: HttpClient) {}
+    private firestore = inject(Firestore);
+    private http = inject(HttpClient);
 
-    getProductById(id: number): Observable<Product> {
-        return this.http.get<Product>('http://localhost:3000/products/' + id);
+    getProductById(id: string): Observable<Product> {
+        const ref = doc(this.firestore, `products/${id}`);
+        return docData(ref, { idField: 'id' }) as Observable<Product>;
     }
 
     getProducts(): Observable<Product[]> {
-        return this.http.get<Product[]>('http://localhost:3000/products/');
+        const ref = collection(this.firestore, 'products');
+        return collectionData(ref, { idField: 'id' }) as Observable<Product[]>;
     }
 }
