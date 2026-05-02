@@ -9,7 +9,16 @@
                 <span class="head-price">Precio</span>
             </div>
 
-            <div id="cart-items-list"></div>
+            <div id="cart-items-list">
+                @for (item of items(); track item.productId) {
+                    <app-cart-item
+                        [item]="item"
+                        (decreaseQuantity)="decreaseQuantity($event)"
+                        (increaseQuantity)="increaseQuantity($event)"
+                        (removeItem)="removeItem($event)"
+                    />
+                }
+            </div>
         </div>
 
         <aside class="cart-summary-panel">
@@ -27,15 +36,15 @@
                     <p>Impuestos</p>
                 </div>
                 <div class="detail-values">
-                    <p id="summary-subtotal">0,00€</p>
+                    <p id="summary-subtotal">{{ subtotal() | formatCurrency }}</p>
                     <p id="summary-shipping">Gratis</p>
-                    <p id="summary-taxes">0,00€</p>
+                    <p id="summary-taxes">{{ taxes() | formatCurrency }}</p>
                 </div>
             </div>
 
             <div class="total-box">
                 <span>Total</span>
-                <span id="summary-total">0,00€</span>
+                <span id="summary-total">{{ total() | formatCurrency }}</span>
             </div>
 
             <div class="checkout-footer">

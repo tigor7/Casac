@@ -1,0 +1,23 @@
+@if (item().product; as p) {
+    <div class="cart-product-row" id="{{ p.id }}">
+        <div class="cell-product">
+            <div class="product-img-box">
+                <img src="{{ p.img }}" alt="Producto" />
+            </div>
+            <span class="product-title">{{ p.name }}</span>
+        </div>
+        <div class="cell-delete">
+            <button (click)="removeItem.emit(p.id ?? '')" class="icon-del">✕</button>
+        </div>
+        <div class="cell-qty">
+            <div class="qty-selector">
+                <button (click)="decreaseQuantity.emit(p.id ?? '')" type="button">-</button>
+                <span>{{ item().quantity }}</span>
+                <button (click)="increaseQuantity.emit(p.id ?? '')" type="button">+</button>
+            </div>
+        </div>
+        <div class="cell-price">
+            <span class="price-value">{{ p.price | formatCurrency }}</span>
+        </div>
+    </div>
+}

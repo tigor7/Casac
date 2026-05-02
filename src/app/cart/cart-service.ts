@@ -1,9 +1,6 @@
 import { Injectable, signal } from '@angular/core';
-
-interface CartItem {
-    productId: number;
-    quantity: number;
-}
+import { CartItem } from './cartItem.model';
+import { Product } from '@app/products/product.model';
 
 @Injectable({
     providedIn: 'root',
@@ -11,19 +8,24 @@ interface CartItem {
 export class CartService {
     items = signal<CartItem[]>([]);
 
-    add(productId: number, quantity: number) {
-        this.items.update((items) => {
-            return this.addCartItem(items, productId, quantity);
+    add(productId: string, quantity: number, product: Product) {
+        this.items.update(([...items]) => {
+            return this.addCartItem(items, productId, quantity, product);
         });
     }
-    private addCartItem(items: CartItem[], productId: number, quantity: number): CartItem[] {
+    private addCartItem(
+        items: CartItem[],
+        productId: string,
+        quantity: number,
+        product: Product,
+    ): CartItem[] {
         for (let i = 0; i < items.length; i++) {
             if (items[i].productId == productId) {
                 items[i].quantity += quantity;
                 return items;
             }
         }
-        items.push({ productId: productId, quantity: quantity });
+        items.push({ productId: productId, quantity: quantity, product: product });
         return items;
     }
 }
