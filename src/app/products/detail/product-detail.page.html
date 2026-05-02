@@ -11,7 +11,7 @@
                 <p class="subtitle">{{ p.description }}</p>
 
                 <div class="buy-row">
-                    <div class="pack">{{ p.price ?? 0 | formatCurrency }}</div>
+                    <div class="pack">{{ p.price | formatCurrency }}</div>
 
                     <div class="qty">
                         <button type="button" class="qty-btn" (click)="decreaseQuantity()">
