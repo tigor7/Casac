@@ -20,11 +20,13 @@ export class ProductDetailPage implements OnInit {
     private route = inject(ActivatedRoute);
 
     product$ = new Observable<Product>();
+    product: Product | undefined;
     quantity = signal(1);
-    constructor() {}
+
     ngOnInit(): void {
         const productId = this.route.snapshot.paramMap.get('id');
         this.product$ = this.productService.getProductById(productId ?? '');
+        this.product$.subscribe((product) => (this.product = product));
     }
     increaseQuantity() {
         this.quantity.update((quantity) => quantity + 1);
@@ -37,6 +39,8 @@ export class ProductDetailPage implements OnInit {
     }
 
     addItem(id: string) {
-        this.cartService.add(id, this.quantity());
+        if (this.product) {
+            this.cartService.add(id, this.quantity(), this.product);
+        }
     }
 }
