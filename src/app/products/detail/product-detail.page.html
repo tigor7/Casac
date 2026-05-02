@@ -24,7 +24,12 @@
                     </div>
                 </div>
 
-                <button (click)="addItem(p.id)" class="add-btn" type="button" id="add-to-cart-btn">
+                <button
+                    (click)="addItem(p.id ?? '')"
+                    class="add-btn"
+                    type="button"
+                    id="add-to-cart-btn"
+                >
                     Agregar al carrito
                 </button>
             </div>
