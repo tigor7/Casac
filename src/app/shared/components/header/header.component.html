@@ -16,9 +16,13 @@
                     }
                 </a>
             </li>
-            <li><a routerLink="/signin" data-auth-link>Iniciar sesión</a></li>
+
             <li><a href="../admin/admin-shop.html" data-admin-link hidden>Panel admin</a></li>
-            <li><a href="#" data-logout-link hidden>Cerrar sesión</a></li>
+            @if (user$ | async) {
+                <li><a href="#" (click)="logout()">Cerrar sesión</a></li>
+            } @else {
+                <li><a routerLink="/signin">Iniciar sesión</a></li>
+            }
         </ul>
     </nav>
     <nav class="mobile-menu" id="mobile-menu">
@@ -32,9 +36,13 @@
                     }
                 </a>
             </li>
-            <li><a href="sign-in.html" data-auth-link>Iniciar sesión</a></li>
+
             <li><a href="../admin/admin-shop.html" data-admin-link hidden>Panel admin</a></li>
-            <li><a href="#" data-logout-link hidden>Cerrar sesión</a></li>
+            @if (user$ | async) {
+                <li><a href="#" (click)="logout()">Cerrar sesión</a></li>
+            } @else {
+                <li><a href="sign-in.html" data-auth-link>Iniciar sesión</a></li>
+            }
         </ul>
     </nav>
 </header>
