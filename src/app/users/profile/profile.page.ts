@@ -1,8 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { email, form, FormField, minLength, pattern, required } from '@angular/forms/signals';
 import { FooterComponent } from '@app/shared/components/footer/footer.component';
 import { HeaderComponent } from '@app/shared/components/header/header.component';
+import { UserService } from '../user-service';
+import { AuthService } from '@app/auth/auth.service';
 
 @Component({
     selector: 'app-profile-page',
@@ -10,7 +12,10 @@ import { HeaderComponent } from '@app/shared/components/header/header.component'
     templateUrl: './profile.page.html',
     styleUrl: './profile.page.css',
 })
-export class ProfilePage {
+export class ProfilePage implements OnInit {
+    private userService = inject(UserService);
+    private authService = inject(AuthService);
+
     profileModel = signal({
         fullname: '',
         email: '',
@@ -48,5 +53,11 @@ export class ProfilePage {
         this.profileForm.email().markAsTouched();
         this.profileForm.phone().markAsTouched();
         this.profileForm.city().markAsTouched();
+    }
+
+    ngOnInit() {
+        this.authService.user$.subscribe((user) => {
+            this.profileForm.email().value.set(user?.email ?? '');
+        });
     }
 }
