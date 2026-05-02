@@ -1,7 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { email, form, FormField, minLength, pattern, required } from '@angular/forms/signals';
 import { RouterLink } from '@angular/router';
+import { AuthService } from '../auth.service';
+import { CreateAccountRequest } from '../create-account-request.dto';
+import { UserService } from '@app/users/user-service';
 
 @Component({
     selector: 'app-create-account-page',
@@ -10,6 +13,9 @@ import { RouterLink } from '@angular/router';
     styleUrl: './create-account.page.css',
 })
 export class CreateAccountPage {
+    private userService = inject(UserService);
+    private authService = inject(AuthService);
+
     registrationModel = signal({
         username: '',
         phone: '',
@@ -41,8 +47,17 @@ export class CreateAccountPage {
             this.markAllTouched();
             return;
         }
-
-        console.log('Registro:', this.registrationModel());
+        const { fullname, username, email, password, phone } = this.registrationModel();
+        const createAccountReq: CreateAccountRequest = {
+            fullname: fullname,
+            username: username,
+            email: email,
+            password: password,
+            phone: Number(phone),
+        };
+        this.authService.register(createAccountReq).subscribe((res) => {
+            this.userService.addUser(res.user.uid, createAccountReq);
+        });
     }
 
     private markAllTouched() {

@@ -6,13 +6,13 @@ import {
     browserSessionPersistence,
     createUserWithEmailAndPassword,
     GoogleAuthProvider,
-    setPersistence,
     signInWithEmailAndPassword,
     signInWithPopup,
     signOut,
     user,
     UserCredential,
 } from '@angular/fire/auth';
+import { CreateAccountRequest } from './create-account-request.dto';
 
 @Injectable({
     providedIn: 'root',
@@ -22,7 +22,7 @@ export class AuthService {
     user$ = user(this.auth);
 
     constructor() {
-        setPersistence(this.auth, browserSessionPersistence);
+        this.auth.setPersistence(browserSessionPersistence);
     }
 
     login(email: string, password: string): Observable<UserCredential> {
@@ -30,8 +30,8 @@ export class AuthService {
         return from(promise);
     }
 
-    register(email: string, password: string): Observable<UserCredential> {
-        const promise = createUserWithEmailAndPassword(this.auth, email, password);
+    register(user: CreateAccountRequest): Observable<UserCredential> {
+        const promise = createUserWithEmailAndPassword(this.auth, user.email, user.password);
         return from(promise);
     }
 
