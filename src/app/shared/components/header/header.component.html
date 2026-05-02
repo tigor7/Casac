@@ -16,8 +16,12 @@
                     }
                 </a>
             </li>
-
-            <li><a href="../admin/admin-shop.html" data-admin-link hidden>Panel admin</a></li>
+            @if (user$ | async) {
+                <li>
+                    <a routerLink="/profile">Perfil</a>
+                </li>
+            }
+            <!-- <li><a href="../admin/admin-shop.html" data-admin-link hidden>Panel admin</a></li> -->
             @if (user$ | async) {
                 <li><a href="#" (click)="logout()">Cerrar sesión</a></li>
             } @else {
@@ -36,8 +40,13 @@
                     }
                 </a>
             </li>
+            @if (user$ | async) {
+                <li>
+                    <a routerLink="/profile">Perfil</a>
+                </li>
+            }
 
-            <li><a href="../admin/admin-shop.html" data-admin-link hidden>Panel admin</a></li>
+            <!-- <li><a href="../admin/admin-shop.html" data-admin-link hidden>Panel admin</a></li> -->
             @if (user$ | async) {
                 <li><a href="#" (click)="logout()">Cerrar sesión</a></li>
             } @else {
