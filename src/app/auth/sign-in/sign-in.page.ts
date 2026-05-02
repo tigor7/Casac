@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { form, FormField, email, minLength, required } from '@angular/forms/signals';
 import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '../auth.service';
 
 @Component({
     selector: 'app-sign-in-page',
@@ -10,6 +11,9 @@ import { Router, RouterLink } from '@angular/router';
     styleUrl: './sign-in.page.css',
 })
 export class SignInPage {
+    authService = inject(AuthService);
+    router = inject(Router);
+
     loginModel = signal({
         email: '',
         password: '',
@@ -22,8 +26,6 @@ export class SignInPage {
         minLength(schema.password, 6, { message: 'Minimo 6 caracteres.' });
     });
 
-    constructor(private router: Router) {}
-
     onSubmit(event: Event) {
         event.preventDefault();
 
@@ -33,12 +35,17 @@ export class SignInPage {
         }
 
         const { email, password } = this.loginModel();
-        console.log('Login:', email, password);
-        this.router.navigate(['/profile']);
+        this.authService
+            .login(email, password)
+            .subscribe({ next: () => this.router.navigate(['/profile']) });
     }
 
     private markAllTouched() {
         this.loginForm.email().markAsTouched();
         this.loginForm.password().markAsTouched();
+    }
+
+    googleLogin() {
+        this.authService.googleLogin().then(() => this.router.navigate(['/profile']));
     }
 }

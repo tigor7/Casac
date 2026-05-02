@@ -19,7 +19,10 @@
                 <h1><a routerLink="/">CASAC</a></h1>
 
                 <form id="login-form" novalidate (submit)="onSubmit($event)">
-                    <div class="form-error" *ngIf="loginForm.email().touched() && loginForm.email().invalid()">
+                    <div
+                        class="form-error"
+                        *ngIf="loginForm.email().touched() && loginForm.email().invalid()"
+                    >
                         <small>Introduce un email valido.</small>
                     </div>
                     <input
@@ -30,7 +33,10 @@
                         [formField]="loginForm.email"
                     />
 
-                    <div class="form-error" *ngIf="loginForm.password().touched() && loginForm.password().invalid()">
+                    <div
+                        class="form-error"
+                        *ngIf="loginForm.password().touched() && loginForm.password().invalid()"
+                    >
                         <small>La contrasena debe tener al menos 6 caracteres.</small>
                     </div>
                     <input
@@ -56,7 +62,7 @@
                     <span class="line"></span>
                 </div>
 
-                <button class="google-btn" type="button">
+                <button (click)="googleLogin()" class="google-btn" type="button">
                     <span>Inicia sesion con Google</span>
                     <span class="g-icon">G</span>
                 </button>
