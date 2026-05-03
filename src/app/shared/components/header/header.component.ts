@@ -1,3 +1,4 @@
+import { User as FirebaseUser } from '@angular/fire/auth';
 import { AsyncPipe } from '@angular/common';
 import { Component, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
@@ -21,9 +22,9 @@ export class HeaderComponent {
     role: string | undefined;
 
     constructor() {
-        this.user$.subscribe((user) => {
+        this.user$.subscribe((user: FirebaseUser | null) => {
             if (user) {
-                this.userService.getUserById(user?.uid).subscribe((user_) => {
+                this.userService.getUserById(user.uid).subscribe((user_) => {
                     this.role = user_.role;
                 });
             }

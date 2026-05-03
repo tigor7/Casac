@@ -1,14 +1,17 @@
 import { inject, Injectable } from '@angular/core';
-import { from, Observable } from 'rxjs';
+import { from, Observable, throwError } from 'rxjs';
 
 import {
     Auth,
     browserSessionPersistence,
     createUserWithEmailAndPassword,
+    EmailAuthProvider,
     GoogleAuthProvider,
+    reauthenticateWithCredential,
     signInWithEmailAndPassword,
     signInWithPopup,
     signOut,
+    updatePassword as firebaseUpdatePassword,
     user,
     UserCredential,
 } from '@angular/fire/auth';
@@ -44,6 +47,19 @@ export class AuthService {
         const promise = signOut(this.auth).then(() => {
             sessionStorage.clear();
         });
+        return from(promise);
+    }
+
+    updatePassword(currentPassword: string, newPassword: string): Observable<void> {
+        const user = this.auth.currentUser;
+        if (!user || !user.email) {
+            return throwError(() => new Error('Usuario no autenticado.'));
+        }
+
+        const credential = EmailAuthProvider.credential(user.email, currentPassword);
+        const promise = reauthenticateWithCredential(user, credential).then(() =>
+            firebaseUpdatePassword(user, newPassword),
+        );
         return from(promise);
     }
 }

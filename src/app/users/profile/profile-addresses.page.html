@@ -1,0 +1,40 @@
+<h1 class="profile-section-title">Direcciones</h1>
+
+<form class="profile-form" novalidate (submit)="onSubmit($event)">
+    <div class="form-group">
+        <label>Direccion</label>
+        <div class="form-error" *ngIf="addressForm.street().touched() && addressForm.street().invalid()">
+            <small>Introduce una direccion valida.</small>
+        </div>
+        <input type="text" placeholder="Calle, numero" [formField]="addressForm.street" />
+    </div>
+
+    <div class="form-group">
+        <label>Ciudad</label>
+        <div class="form-error" *ngIf="addressForm.city().touched() && addressForm.city().invalid()">
+            <small>Introduce una ciudad valida.</small>
+        </div>
+        <input type="text" placeholder="Ciudad" [formField]="addressForm.city" />
+    </div>
+
+    <div class="form-group">
+        <label>Codigo Postal</label>
+        <div class="form-error" *ngIf="addressForm.postalCode().touched() && addressForm.postalCode().invalid()">
+            <small>Introduce un codigo postal valido.</small>
+        </div>
+        <input type="text" placeholder="28000" [formField]="addressForm.postalCode" />
+    </div>
+
+    <div class="form-group">
+        <label>Pais</label>
+        <div class="form-error" *ngIf="addressForm.country().touched() && addressForm.country().invalid()">
+            <small>Introduce un pais valido.</small>
+        </div>
+        <input type="text" placeholder="Pais" [formField]="addressForm.country" />
+    </div>
+
+    <div class="form-footer">
+        <button type="submit" class="save-btn" [disabled]="addressForm().invalid()">GUARDAR</button>
+    </div>
+</form>
+

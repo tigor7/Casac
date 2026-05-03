@@ -3,75 +3,17 @@
     <div class="profile-container-xl">
         <aside class="profile-sidebar">
             <nav class="profile-nav">
-                <a href="profile.html" class="active">Información Personal</a>
-                <a href="security.html">Seguridad</a>
-                <a href="order-history.html">Mis Pedidos</a>
-                <a href="addresses.html">Direcciones</a>
+                <a routerLink="/profile/info" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                    Informacion Personal
+                </a>
+                <a routerLink="/profile/security" routerLinkActive="active">Seguridad</a>
+                <a routerLink="/profile/orders" routerLinkActive="active">Mis Pedidos</a>
+                <a routerLink="/profile/addresses" routerLinkActive="active">Direcciones</a>
             </nav>
         </aside>
 
         <section class="profile-main-content">
-            <h1>Configuración del Perfil</h1>
-
-            <form class="profile-form" novalidate (submit)="onSubmit($event)">
-                <div class="form-group">
-                    <label>Nombre Completo</label>
-                    <div
-                        class="form-error"
-                        *ngIf="profileForm.fullname().touched() && profileForm.fullname().invalid()"
-                    >
-                        <small>Introduce un nombre valido.</small>
-                    </div>
-                    <input
-                        type="text"
-                        placeholder="Escribe tu nombre"
-                        [formField]="profileForm.fullname"
-                    />
-                </div>
-
-                <div class="form-group">
-                    <label>Correo Electrónico</label>
-                    <div
-                        class="form-error"
-                        *ngIf="profileForm.email().touched() && profileForm.email().invalid()"
-                    >
-                        <small>Introduce un email valido.</small>
-                    </div>
-                    <input
-                        type="email"
-                        placeholder="tu@email.com"
-                        [formField]="profileForm.email"
-                    />
-                </div>
-
-                <div class="form-group">
-                    <label>Teléfono de Contacto</label>
-                    <div
-                        class="form-error"
-                        *ngIf="profileForm.phone().touched() && profileForm.phone().invalid()"
-                    >
-                        <small>Introduce un telefono valido.</small>
-                    </div>
-                    <input type="tel" placeholder="+34..." [formField]="profileForm.phone" />
-                </div>
-
-                <div class="form-group">
-                    <label>Ciudad / Provincia</label>
-                    <div
-                        class="form-error"
-                        *ngIf="profileForm.city().touched() && profileForm.city().invalid()"
-                    >
-                        <small>La ciudad es obligatoria.</small>
-                    </div>
-                    <input type="text" placeholder="Tu ciudad" [formField]="profileForm.city" />
-                </div>
-
-                <div class="form-footer">
-                    <button type="submit" class="save-btn" [disabled]="profileForm().invalid()">
-                        GUARDAR CAMBIOS
-                    </button>
-                </div>
-            </form>
+            <router-outlet />
         </section>
     </div>
 </main>

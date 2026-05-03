@@ -1,0 +1,41 @@
+<h1 class="profile-section-title">Mis Pedidos</h1>
+
+<form class="profile-form" novalidate (submit)="onSubmit($event)">
+    <div class="form-group">
+        <label>Numero de Pedido</label>
+        <div class="form-error" *ngIf="ordersForm.orderId().touched() && ordersForm.orderId().invalid()">
+            <small>Introduce un numero de pedido valido.</small>
+        </div>
+        <input type="text" placeholder="CASAC-000001" [formField]="ordersForm.orderId" />
+    </div>
+
+    <div class="form-group">
+        <label>Email</label>
+        <div class="form-error" *ngIf="ordersForm.email().touched() && ordersForm.email().invalid()">
+            <small>Introduce un email valido.</small>
+        </div>
+        <input type="email" placeholder="tu@email.com" [formField]="ordersForm.email" />
+    </div>
+
+    <div class="form-group">
+        <label>Estado</label>
+        <select [formField]="ordersForm.status">
+            <option value="pendiente">Pendiente</option>
+            <option value="enviado">Enviado</option>
+            <option value="entregado">Entregado</option>
+        </select>
+    </div>
+
+    <div class="form-footer">
+        <button type="submit" class="save-btn" [disabled]="ordersForm().invalid()">BUSCAR</button>
+    </div>
+</form>
+
+<div class="form-error" *ngIf="orderNotFound()">
+    <small>No se encontro ningun pedido con ese numero.</small>
+</div>
+
+<div *ngIf="orderResult() as order">
+    <h2 class="profile-section-title" style="font-size: 24px; margin-top: 30px;">Resultado</h2>
+    <pre>{{ order | json }}</pre>
+</div>
