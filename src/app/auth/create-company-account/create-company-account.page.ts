@@ -1,6 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { email, form, FormField, minLength, pattern, required } from '@angular/forms/signals';
+import { CreateCompanyAccountRequest } from '../create-company-account-request-dto';
+import { AuthService } from '../auth.service';
+import { UserService } from '@app/users/user-service';
 
 @Component({
     selector: 'app-create-company-account-page',
@@ -9,6 +12,9 @@ import { email, form, FormField, minLength, pattern, required } from '@angular/f
     styleUrl: './create-company-account.page.css',
 })
 export class CreateCompanyAccountPage {
+    private authService = inject(AuthService);
+    private userService = inject(UserService);
+
     companyModel = signal({
         cif: '',
         phone: '',
@@ -41,7 +47,18 @@ export class CreateCompanyAccountPage {
             return;
         }
 
-        console.log('Registro empresa:', this.companyModel());
+        const { companyName, cif, email, password, phone } = this.companyModel();
+        const createCompanyAccountReq: CreateCompanyAccountRequest = {
+            cif: cif,
+            email: email,
+            companyName: companyName,
+            password: password,
+            phone: Number(phone),
+            role: 'business',
+        };
+        this.authService.register(createCompanyAccountReq).subscribe((res) => {
+            this.userService.addCompany(res.user.uid, createCompanyAccountReq);
+        });
     }
 
     private markAllTouched() {

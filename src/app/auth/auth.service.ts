@@ -30,7 +30,7 @@ export class AuthService {
         return from(promise);
     }
 
-    register(user: CreateAccountRequest): Observable<UserCredential> {
+    register(user: { password: string; email: string }): Observable<UserCredential> {
         const promise = createUserWithEmailAndPassword(this.auth, user.email, user.password);
         return from(promise);
     }
