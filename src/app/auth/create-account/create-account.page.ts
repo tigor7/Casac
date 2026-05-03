@@ -54,7 +54,7 @@ export class CreateAccountPage {
             username: username,
             email: email,
             password: password,
-            phone: Number(phone),
+            phone: phone,
         };
         this.authService.register(createAccountReq).subscribe((res) => {
             this.userService

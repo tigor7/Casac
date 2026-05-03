@@ -1,6 +1,6 @@
 export interface CreateAccountRequest {
     username: string;
-    phone: number;
+    phone: string;
     fullname: string;
     email: string;
     password: string;

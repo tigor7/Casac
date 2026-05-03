@@ -55,7 +55,7 @@ export class CreateCompanyAccountPage {
             email: email,
             companyName: companyName,
             password: password,
-            phone: Number(phone),
+            phone: phone,
             role: 'business',
         };
         this.authService.register(createCompanyAccountReq).subscribe((res) => {
