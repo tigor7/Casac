@@ -21,7 +21,10 @@
                     <a routerLink="/profile">Perfil</a>
                 </li>
             }
-            <!-- <li><a href="../admin/admin-shop.html" data-admin-link hidden>Panel admin</a></li> -->
+            @if (role == 'admin') {
+                <li><a routerLink="/admin/shop" data-admin-link>Panel admin</a></li>
+            }
+
             @if (user$ | async) {
                 <li><a href="#" (click)="logout()">Cerrar sesión</a></li>
             } @else {
