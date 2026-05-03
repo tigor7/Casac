@@ -58,6 +58,11 @@ export class ProfilePage implements OnInit {
     ngOnInit() {
         this.authService.user$.subscribe((user) => {
             this.profileForm.email().value.set(user?.email ?? '');
+            this.userService.getUserById(user?.uid ?? '').subscribe((user_) => {
+                console.log(user_);
+                this.profileForm.fullname().value.set(user_.fullname);
+                this.profileForm.phone().value.set(user_.phone);
+            });
         });
     }
 }
