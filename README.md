@@ -2,149 +2,88 @@
 
 Plataforma web e-commerce para la ferretería CASAC con catálogo dinámico, autenticación de usuarios, carrito de compra, perfil de cliente y panel de administración.
 
-<img src="/img/Logo_Casac.png" width="300" alt="Logo CASAC">
+## Sprint 3: Angular + Firebase (requisitos y estado)
 
-## Tecnologías usadas
-- HTML5, CSS3 y JavaScript (vanilla).
-- `json-server` para simular backend API a partir de JSON local.
-- Sistema propio de composición de plantillas con `xlu-include-file.js`.
-- Git, GitHub, WebStorm.
-- Figma y Trello.
+Este Sprint adapta el sitio web a Angular y prepara la migración de datos y usuarios a Firebase. Se permite partir del sitio actual o recrearlo desde cero en Angular, manteniendo el contenido y el diseño.
 
-## Puesta en marcha
+### Requisitos funcionales (Sprint 3)
+
+1) **Contenido dinámico desde JSON con Angular**
+- La mayor parte del contenido debe cargarse de forma dinámica desde un JSON usando un servicio Angular.
+- Se permite contenido estático adicional.
+
+2) **Origen del JSON (local o remoto)**
+- Se permite JSON local en una variable Angular o publicar con JSON-Server.
+- El acceso se hace siempre vía servicios Angular (mismo flujo local o remoto).
+
+3) **Formularios y validación con Angular**
+- Al menos un formulario validado con herramientas de Angular.
+- Obligatorio: registro y autenticación de usuarios, con contenido condicionado por autenticación y rol.
+
+4) **RWD (responsive)**
+- Uso de Flexbox o Bootstrap para adaptar el diseño a distintos dispositivos.
+
+5) **Gestión de usuarios con Firebase**
+- Registro y login contra Firebase Auth.
+- Mantener sesión para mostrar contenido según usuario/rol.
+
+6) **Datos dinámicos desde Firebase**
+- El contenido dinámico debe leerse/escribirse desde Firestore (tiempo real).
+
+7) **Imágenes en Firebase Storage**
+- Subida de imágenes desde el frontend.
+- Guardar URL en Firestore y renderizar desde esa URL.
+
+### Estado en el proyecto (Angular)
+
+- **Rutas SPA y Signal Forms:** `src/app/app.routes.ts` y formularios en `src/app/auth` y `src/app/users/profile`.
+- **Validaciones Angular:** Signal Forms (`@angular/forms/signals`).
+- **Autenticación Firebase:** `AuthService` en `src/app/auth/auth.service.ts`.
+- **Firestore:** `UserService` en `src/app/users/user-service.ts`.
+- **Perfil por secciones:** `/profile/info`, `/profile/security`, `/profile/orders`, `/profile/addresses`.
+- **Guardas por rol:** `src/app/auth/auth.guard.ts`, `src/app/auth/role.guard.ts`.
+
+## Puesta en marcha (Angular)
 
 1. Instalar dependencias:
 
 ```bash
-npm install
+npm install --legacy-peer-deps
 ```
 
-2. Levantar API fake con JSON Server (por defecto en `:3000`):
+2. Arrancar la aplicacion:
 
 ```bash
-npx json-server database/db.json
+npm run start
 ```
 
-Si el puerto `3000` está ocupado, usar otro (ejemplo `3001`):
+3. Abrir en el navegador:
 
-```bash
-npx json-server database/db.json --port 3001
+```
+http://localhost:4200/
 ```
 
-3. Abrir `index.html` en el navegador (redirige automáticamente a `src/pages/user/home.html`).
+### Rutas principales
 
-## Cumplimiento Sprint 2
+- `/signin`
+- `/create-account`
+- `/create-company-account`
+- `/profile/info`
+- `/profile/security`
+- `/profile/orders`
+- `/profile/addresses`
 
-### 1) Contenido final dinámico desde JSON + templates + JavaScript
+### Nota sobre Firebase
 
-Implementado y operativo mediante:
+Los datos de entorno estan en `src/environments/environment.development.ts`.
+Si necesitas cambiar proyecto Firebase, actualiza ese archivo.
 
-- **Fuente de datos estructurada como base de datos:** `database/db.json`
-  - Colecciones: `products`, `categories`, `users`.
-- **Simulación de servidor remoto:** `json-server` sobre `http://localhost:3000`.
-- **Carga dinámica del catálogo y categorías:**
-  - `src/scripts/home.js` (`loadCategories`, `loadProducts`).
-  - `src/scripts/shop.js` (`renderShopProducts`, filtros y búsqueda).
-  - `src/scripts/product.js` (detalle de producto por `id`).
-  - `src/scripts/admin-shop.js` (catálogo de administración dinámico).
-- **Composición de páginas con templates reutilizables:**
-  - Inyección asíncrona de `header` y `footer` con `src/xlu-include-file.js`.
-  - Templates en `src/templates/user/` y `src/templates/admin/`.
-  - Ejemplos: `article-template.html`, `product-template.html`, `cart-item.html`, `order-history-item.html`, `article-template-admin.html`.
-
-Resultado: el contenido de tienda, detalle de producto, carrito y administración se construye dinámicamente desde datos JSON y plantillas reutilizables.
-
-### 2) Formularios + validación cliente (HTML5) + autenticación y roles
-
-Implementado con validación nativa HTML5 y lógica de sesión en cliente:
-
-- **Formulario de inicio de sesión:** `src/pages/user/sign-in.html`
-  - `type="email"`, `required`, `minlength`, `autocomplete`.
-- **Formulario de registro particular:** `src/pages/user/create-account.html`
-  - Validaciones `required`, `pattern`, `minlength`, `title`.
-- **Formulario de registro empresa:** `src/pages/user/create-company-account.html`
-  - Validación de CIF (`pattern`), teléfono y contraseña.
-- **Autenticación, autorización y roles:** `src/scripts/hamburger.js`
-  - Login/logout persistente (`localStorage`/`sessionStorage`).
-  - Gestión de usuarios y sesión (`casacUsers`, `casacAuthSession`).
-  - Protección de rutas de perfil y admin (`enforceRouteGuards`).
-  - Diferenciación de rol `customer` / `admin` para navegación y acceso.
-
-Resultado: usuarios pueden registrarse/iniciar sesión, mantener sesión activa y ver contenido adaptado según autenticación y rol.
-
-### 3) RWD con variantes desktop, tablet y móvil
-
-Implementado mediante media queries y layouts flex/grid en estilos globales y por vista:
-
-- **Global:** `src/styles/styles.css`
-  - Desktop, tablet y móvil para estructura general, header/footer y menú hamburguesa.
-- **Usuario:** `src/styles/user/*.css`
-  - Vistas adaptadas (home, shop, product, cart, profile, addresses, security, auth, order-history).
-- **Admin:** `src/styles/admin/admin.css`
-  - Adaptación de panel admin para tablet y móvil.
-
-Breakpoints usados en el proyecto (según cada hoja de estilo):
-- Desktop/base (estilos por defecto).
-- Tablet (por ejemplo `<= 1024px` o rangos intermedios).
-- Móvil (por ejemplo `<= 768px`, `<= 600px`, `<= 599px`).
-
-Resultado: los templates cambian de distribución y navegación para tamaños grandes, medios y pequeños manteniendo funcionalidad.
-
-## Funcionalidades principales del proyecto
-- Catálogo dinámico con búsqueda y filtros por categorías.
-- Detalle de producto y añadido al carrito con contador (badge).
-- Carrito con ajuste de cantidades, eliminación de líneas y resumen económico.
-- Checkout con alta de pedidos en historial del usuario.
-- Zona de perfil (perfil, seguridad, direcciones, pedidos).
-- Panel de administración con vistas de inventario y pedidos.
-
-## Estructura de páginas HTML
-
-### Usuario
-- `src/pages/user/home.html`
-- `src/pages/user/shop.html`
-- `src/pages/user/product.html`
-- `src/pages/user/cart.html`
-- `src/pages/user/sign-in.html`
-- `src/pages/user/create-account.html`
-- `src/pages/user/create-company-account.html`
-- `src/pages/user/profile.html`
-- `src/pages/user/order-history.html`
-- `src/pages/user/addresses.html`
-- `src/pages/user/security.html`
-
-### Administración
-- `src/pages/admin/admin-shop.html`
-- `src/pages/admin/admin-product.html`
-- `src/pages/admin/admin-orders.html`
-
-## Templates
-
-### Usuario (`src/templates/user/`)
-- `header.html`
-- `footer.html`
-- `article-template.html`
-- `product-template.html`
-- `cart-item.html`
-- `order-history-item.html`
-- `work-address.html`
-- `home-address.html`
-
-### Administración (`src/templates/admin/`)
-- `article-template-admin.html`
-- `admin-editor-template.html`
-- `order-admin-template.html`
-
-## Mockups y Storyboard
-- Mockups en la carpeta `mockups/`.
-- Storyboard en el material del proyecto (según entrega académica).
-
-## Enlaces de gestión del proyecto
+## Enlaces de gestion del proyecto
 - Figma: https://www.figma.com/site/K98fyIQYHsdLJpAOdcwr6R/CASAC?node-id=0-1&t=mZ7nRJfE3sYH67HO-1
 - Trello: https://trello.com/invite/b/699376040c2fd72f9f2c7884/ATTI0b5edf7f9c52446d6ebc2f6603a5eed3067E60B3/casac
 
 ## Autores
-- Javier González Velázquez
-- Pablo Santana González
+- Javier Gonzalez Velazquez
+- Pablo Santana Gonzalez
 - Santiago Manuel Pujol Castellanos
-- Francisco Javier Monleón Peña
+- Francisco Javier Monleon Pena
