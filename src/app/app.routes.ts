@@ -9,6 +9,7 @@ import { CreateCompanyAccountPage } from '@app/auth/create-company-account/creat
 import { ProfilePage } from '@app/users/profile/profile.page';
 import { authGuard } from './auth/auth.guard';
 import { AdminShopPage } from './admin/admin-shop-page/admin-shop.page';
+import { AdminProductPage } from './admin/admin-product-page/admin-product-page';
 
 export const routes: Routes = [
     {
@@ -48,6 +49,16 @@ export const routes: Routes = [
     {
         path: 'admin/shop',
         component: AdminShopPage,
+        canActivate: [authGuard],
+    },
+    {
+        path: 'admin/product/:id',
+        component: AdminProductPage,
+        canActivate: [authGuard],
+    },
+    {
+        path: 'admin/product',
+        component: AdminProductPage,
         canActivate: [authGuard],
     },
 ];

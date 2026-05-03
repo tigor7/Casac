@@ -6,7 +6,13 @@
 
                 <form id="register-form" novalidate (submit)="onSubmit($event)">
                     <div class="row">
-                        <div class="form-error" *ngIf="registrationForm.username().touched() && registrationForm.username().invalid()">
+                        <div
+                            class="form-error"
+                            *ngIf="
+                                registrationForm.username().touched() &&
+                                registrationForm.username().invalid()
+                            "
+                        >
                             <small>El usuario es obligatorio y debe tener 4 caracteres.</small>
                         </div>
                         <input
@@ -17,7 +23,13 @@
                             [formField]="registrationForm.username"
                         />
 
-                        <div class="form-error" *ngIf="registrationForm.phone().touched() && registrationForm.phone().invalid()">
+                        <div
+                            class="form-error"
+                            *ngIf="
+                                registrationForm.phone().touched() &&
+                                registrationForm.phone().invalid()
+                            "
+                        >
                             <small>Introduce un telefono valido de 9 digitos.</small>
                         </div>
                         <input
@@ -29,7 +41,13 @@
                         />
                     </div>
 
-                    <div class="form-error" *ngIf="registrationForm.fullname().touched() && registrationForm.fullname().invalid()">
+                    <div
+                        class="form-error"
+                        *ngIf="
+                            registrationForm.fullname().touched() &&
+                            registrationForm.fullname().invalid()
+                        "
+                    >
                         <small>El nombre completo es obligatorio.</small>
                     </div>
                     <input
@@ -39,7 +57,12 @@
                         [formField]="registrationForm.fullname"
                     />
 
-                    <div class="form-error" *ngIf="registrationForm.email().touched() && registrationForm.email().invalid()">
+                    <div
+                        class="form-error"
+                        *ngIf="
+                            registrationForm.email().touched() && registrationForm.email().invalid()
+                        "
+                    >
                         <small>Introduce un email valido.</small>
                     </div>
                     <input
@@ -49,7 +72,13 @@
                         [formField]="registrationForm.email"
                     />
 
-                    <div class="form-error" *ngIf="registrationForm.password().touched() && registrationForm.password().invalid()">
+                    <div
+                        class="form-error"
+                        *ngIf="
+                            registrationForm.password().touched() &&
+                            registrationForm.password().invalid()
+                        "
+                    >
                         <small>La contrasena debe tener al menos 6 caracteres.</small>
                     </div>
                     <input
@@ -59,7 +88,11 @@
                         [formField]="registrationForm.password"
                     />
 
-                    <button class="login-btn" type="submit" [disabled]="registrationForm().invalid()">
+                    <button
+                        class="login-btn"
+                        type="submit"
+                        [disabled]="registrationForm().invalid()"
+                    >
                         CREAR
                     </button>
                 </form>
