@@ -1,0 +1,25 @@
+<app-header />
+<main class="main-content shop-layout">
+    <div class="shop-container-xl">
+        <div class="admin-top-header">
+            <h1>Gestión de Productos</h1>
+            <a href="admin-product.html" class="add-new-btn">+ Añadir Producto</a>
+        </div>
+
+        <div class="shop-search-bar">
+            <input
+                id="admin-search-input"
+                type="text"
+                placeholder="Buscar por nombre, SKU o categoría..."
+            />
+            <button id="admin-search-btn">FILTRAR</button>
+        </div>
+
+        <div class="products-grid-4" id="admin-products-grid">
+            @for (product of products$ | async; track product.id) {
+                <app-admin-card-product [product]="product" />
+            }
+        </div>
+    </div>
+</main>
+<app-footer />

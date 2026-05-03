@@ -8,6 +8,7 @@ import { CreateAccountPage } from '@app/auth/create-account/create-account.page'
 import { CreateCompanyAccountPage } from '@app/auth/create-company-account/create-company-account.page';
 import { ProfilePage } from '@app/users/profile/profile.page';
 import { authGuard } from './auth/auth.guard';
+import { AdminShopPage } from './admin/admin-shop-page/admin-shop.page';
 
 export const routes: Routes = [
     {
@@ -41,6 +42,12 @@ export const routes: Routes = [
     {
         path: 'profile',
         component: ProfilePage,
+        canActivate: [authGuard],
+    },
+
+    {
+        path: 'admin/shop',
+        component: AdminShopPage,
         canActivate: [authGuard],
     },
 ];

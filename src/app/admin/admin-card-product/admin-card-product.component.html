@@ -1,0 +1,24 @@
+@if (product(); as p) {
+    <article class="shop-card admin-card">
+        <div class="shop-card-img">
+            <img src="{{ p.img }}" alt="Producto Admin" class="prod-img" />
+        </div>
+        <div class="shop-card-info">
+            <p class="shop-desc">{{ p.name }}</p>
+            <div class="admin-actions-row">
+                <span class="shop-price">{{ p.price | formatCurrency }}</span>
+                <div class="admin-icons">
+                    <button
+                        class="action-box edit"
+                        title="Editar Producto"
+                        routerLink="['admin/product/', p.id]"
+                    >
+                        ✎
+                    </button>
+                    <button class="action-box hide" title="Ocultar de la tienda">👁</button>
+                    <button class="action-box delete" title="Eliminar definitivamente">🗑</button>
+                </div>
+            </div>
+        </div>
+    </article>
+}
