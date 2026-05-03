@@ -4,6 +4,7 @@ import { email, form, FormField, minLength, pattern, required } from '@angular/f
 import { CreateCompanyAccountRequest } from '../create-company-account-request-dto';
 import { AuthService } from '../auth.service';
 import { UserService } from '@app/users/user-service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-create-company-account-page',
@@ -12,6 +13,7 @@ import { UserService } from '@app/users/user-service';
     styleUrl: './create-company-account.page.css',
 })
 export class CreateCompanyAccountPage {
+    private router = inject(Router);
     private authService = inject(AuthService);
     private userService = inject(UserService);
 
@@ -57,7 +59,9 @@ export class CreateCompanyAccountPage {
             role: 'business',
         };
         this.authService.register(createCompanyAccountReq).subscribe((res) => {
-            this.userService.addCompany(res.user.uid, createCompanyAccountReq);
+            this.userService
+                .addCompany(res.user.uid, createCompanyAccountReq)
+                .then(() => this.router.navigate(['/profile']));
         });
     }
 

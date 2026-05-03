@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import { email, form, FormField, minLength, pattern, required } from '@angular/forms/signals';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { CreateAccountRequest } from '../create-account-request.dto';
 import { UserService } from '@app/users/user-service';
@@ -13,6 +13,7 @@ import { UserService } from '@app/users/user-service';
     styleUrl: './create-account.page.css',
 })
 export class CreateAccountPage {
+    private router = inject(Router);
     private userService = inject(UserService);
     private authService = inject(AuthService);
 
@@ -56,7 +57,9 @@ export class CreateAccountPage {
             phone: Number(phone),
         };
         this.authService.register(createAccountReq).subscribe((res) => {
-            this.userService.addUser(res.user.uid, createAccountReq);
+            this.userService
+                .addUser(res.user.uid, createAccountReq)
+                .then(() => this.router.navigate(['/profile']));
         });
     }
 
