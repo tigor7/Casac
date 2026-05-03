@@ -1,0 +1,97 @@
+<app-header />
+<main class="main-content admin-layout">
+    <div class="admin-container-xl">
+        <div class="admin-nav-back">
+            <a href="admin-shop.html">← Volver al inventario</a>
+        </div>
+        <form (submit)="onSubmit($event)">
+            <div class="admin-editor-layout">
+                <div class="editor-left">
+                    <div class="image-upload-container">
+                        <div class="upload-placeholder">＋</div>
+                        <button class="btn-mini">Subir Imagen</button>
+                    </div>
+                </div>
+
+                <div class="editor-right">
+                    <div class="input-inline">
+                        @if (productForm.name().touched() && productForm.name().invalid()) {
+                            <div class="form-error">
+                                @for (error of productForm.name().errors(); track error) {
+                                    <small>{{ error.message }}</small>
+                                }
+                            </div>
+                        }
+
+                        <input
+                            type="text"
+                            placeholder="Título del producto"
+                            class="full-input"
+                            [formField]="productForm.name"
+                        />
+                        <button class="btn-mini">Editar</button>
+                    </div>
+                    @if (
+                        productForm.description().touched() && productForm.description().invalid()
+                    ) {
+                        <div class="form-error">
+                            @for (error of productForm.description().errors(); track error) {
+                                <small>{{ error.message }}</small>
+                            }
+                        </div>
+                    }
+
+                    <textarea
+                        placeholder="Descripción del producto..."
+                        class="editor-textarea"
+                        [formField]="productForm.description"
+                    ></textarea>
+
+                    <div class="editor-stats-row">
+                        <div class="stat-item">
+                            @if (productForm.price().touched() && productForm.price().invalid()) {
+                                <div class="form-error">
+                                    @for (error of productForm.price().errors(); track error) {
+                                        <small>{{ error.message }}</small>
+                                    }
+                                </div>
+                            }
+
+                            <div class="inner-input">
+                                <input
+                                    type="text"
+                                    placeholder="Precio"
+                                    [formField]="productForm.price"
+                                />
+                                <button class="btn-mini">Precio</button>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            @if (
+                                productForm.discount().touched() && productForm.discount().invalid()
+                            ) {
+                                <div class="form-error">
+                                    @for (error of productForm.discount().errors(); track error) {
+                                        <small>{{ error.message }}</small>
+                                    }
+                                </div>
+                            }
+
+                            <div class="inner-input">
+                                <input
+                                    type="text"
+                                    placeholder="Descuento"
+                                    [formField]="productForm.discount"
+                                />
+                                <button class="btn-mini">Descuento</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="main-admin-save">GUARDAR PRODUCTO</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</main>
+<app-footer />
