@@ -16,7 +16,13 @@
                         ✎
                     </button>
                     <button class="action-box hide" title="Ocultar de la tienda">👁</button>
-                    <button class="action-box delete" title="Eliminar definitivamente">🗑</button>
+                    <button
+                        (click)="deleteProduct($event)"
+                        class="action-box delete"
+                        title="Eliminar definitivamente"
+                    >
+                        🗑
+                    </button>
                 </div>
             </div>
         </div>

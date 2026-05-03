@@ -1,6 +1,7 @@
-import { Component, input } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Product } from '@app/products/product.model';
+import { ProductService } from '@app/products/product.service';
 import { FormatCurrencyPipe } from '@app/shared/pipes/format-currency.pipe';
 
 @Component({
@@ -10,5 +11,11 @@ import { FormatCurrencyPipe } from '@app/shared/pipes/format-currency.pipe';
     styleUrl: './admin-card-product.component.css',
 })
 export class AdminCardProductComponent {
-    product = input<Product>();
+    private productService = inject(ProductService);
+    product = input.required<Product>();
+
+    deleteProduct(event: Event) {
+        event.preventDefault();
+        this.productService.deleteProduct(this.product().id ?? '');
+    }
 }

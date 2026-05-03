@@ -6,6 +6,7 @@ import {
     addDoc,
     collection,
     collectionData,
+    deleteDoc,
     doc,
     docData,
     Firestore,
@@ -37,5 +38,10 @@ export class ProductService {
     updateProduct(uuid: string, product: Product) {
         const ref = doc(this.firestore, `products/${uuid}`);
         return setDoc(ref, product);
+    }
+
+    deleteProduct(uuid: string) {
+        const ref = doc(this.firestore, `products/${uuid}`);
+        return deleteDoc(ref);
     }
 }
